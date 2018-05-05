@@ -14,13 +14,36 @@
 
   <div class="wrapper clearfix">
     <main id="main" class="main">
+
+      <h2 class="hidden">HOT TOPIC</h2>
+      <a href="#" class="hot-topic clearfix">
+        <img class="image" src="/static/images/hot-topic.jpg" alt="コーディング画面">
+        <div class="content">
+          <h3 class="title">h3タイトルがここに入る</h3>
+          <p class="desc">もにゃもにゃ</p>
+          <time class="date" datetime="2018-05-06">2018.05.06 SUN</time>
+        </div>
+      </a>
+      <div class="hot-topic">
+        ここに HOT TOPIC のコンテンツ内容が入ります
+      </div>
+
+      <h2 class="hidden">NEWS</h2>
+      <div class="news">
+        ここに NEWS のコンテンツ内容が入ります
+      </div>
+
+      <h2 class="hidden">ARTICLES</h2>
       <div id="title" class="title">
         ここはタイトル{{ page.title }}ここはタイトル
       </div>
-      <div id="main-text" class="main-text">
-        {% block maintext %}ここにメインの中身{% endblock maintext %}
+      <div class="articles">
+        ここに ARTICLES のコンテンツ内容が入ります
+        {% block articles %}ここにメインの中身{% endblock articles %}
       </div>
+
     </main>
+
     <div class="sidemenu">
       {% block sidemenu %}ここにサイドメニューの中身{% endblock sidemenu %}
     </div>

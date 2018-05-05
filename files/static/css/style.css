@@ -64,21 +64,76 @@ a:link, a:visited, a:hover, a:active {
     color: #FFFFFF;
 }
 
-.wrapper {
-    width: 970px;
-    margin: 30px auto 40px;
-}
-/* wrapper にも子要素分の高さを持たせる */
+/* 子要素分の高さを持たせる */
 .clearfix::after {  /* 擬似要素 */
     content: '';
     display: block;
     clear: both;
 }
+.wrapper {
+    width: 970px;
+    margin: 30px auto 40px;
+}
+
+/* main 領域 */
 .main {
     display: block;
     float: left;  /* float プロパティを使用した要素は親要素の高さに影響を与えなくなってしまう */
     width: 660px;
 }
+.hidden {
+    display: none;
+}
+
+/* 特集コンテンツ */
+.hot-topic {
+    display: block;  /* ブロックレベルの要素として扱えるようにする */
+    height: 300px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.15);  /* 透明度15% */
+    transition: opacity 0.15s;  /* ふわっとさせる */
+}
+.hot-topic:hover {
+    opacity: 0.85;  /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
+}
+.hot-topic .image {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+.hot-topic .content {
+    position: relative;  /* 親要素に `position: relative` を指定しておく */
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 105px 25px 0;
+    background-color: #2d3d54;
+    line-height: 1.6;
+}
+.hot-topic .title {
+    margin-bottom: 15px;
+    color: #FFFFFF;
+    font-weight: normal;
+    font-size: 2.0rem;
+}
+.hot-topic .desc {
+    color: #ddc;
+}
+.hot-topic .date {
+    position: absolute;  /* 表示位置を見出しの上部に移動 */
+    top: 60px;
+    left: 0;  /* `position: absolute` で配置する場合には親要素のpadding の影響を受けないため、ぴったり左端に配置できる。 */
+    width: 140px;
+    padding: 4px;
+    background-color: #FFFFFF;
+    color: #2d3d54;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
 .sidemenu {
     float: right;
     width: 275px;
