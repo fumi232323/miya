@@ -189,6 +189,58 @@ a:link, a:visited, a:hover, a:active {
     text-overflow: ellipsis;    /* 表示領域からはみ出て見えなくなるテキストの境目の表示方法を指定(...) */
     white-space: nowrap;        /* 親要素をはみ出た部分を折り返し禁止 */
 }
+.article-box {
+    position: relative;
+    display: block;  /* a要素なので `display: block` を指定してから幅を指定する*/
+    width: 315px;
+    height: 360px;
+    margin-bottom: 30px;
+    padding: 210px 15px 0;
+    box-shadow: 6px 6px 8px -4px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.15s;
+}
+.article-box:hover {
+    opacity: 0.8;
+}
+.article-box:nth-of-type(odd) {  /* 偶数個目の記事 */
+    float: left;
+}
+.article-box:nth-of-type(even) {/* 奇数個目の記事 */
+    float: right;
+}
+.article-box .title {
+    margin-top: 30px;
+    color: #555555;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+.article-box .desc {
+    margin-top: 5px;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.article-box .date {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    display: block;
+    width: 160px;
+    padding: 4px;
+    background-color: #b5d264;
+    color: #2d3d54;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.article-box .image {
+    position: absolute;  /* 左上に寄せる */
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 
 .sidemenu {
     float: right;

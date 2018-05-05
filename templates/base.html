@@ -44,12 +44,19 @@
       </ul>
 
       <h2 class="hidden">ARTICLES</h2>
-      <div id="title" class="title">
-        ここはタイトル{{ page.title }}ここはタイトル
-      </div>
-      <div class="articles">
-        ここに ARTICLES のコンテンツ内容が入ります
-        {% block articles %}ここにメインの中身{% endblock articles %}
+      <div class="clearfix">
+        <a href="#" class="article-box">
+          <h3 class="title">たいとるたいとるたいとる1</h3>
+          <p class="desc">ここに説明だよ1</p>
+          <time class="date" datetime="2018-05-05">2018.05.05 SAT</time>
+          <img class="image" src="/static/images/article.jpg" alt="コーディング画面">
+        </a>
+        <a href="#" class="article-box">
+          <h3 class="title">たいとるたいとるたいとる2</h3>
+          <p class="desc">ここに説明だよ2</p>
+          <time class="date" datetime="2018-05-06">2018.05.06 SUN</time>
+          <img class="image" src="/static/images/article.jpg" alt="コーディング画面">
+        </a>
       </div>
 
     </main>
