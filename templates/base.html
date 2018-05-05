@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang }}">
+
+<head>
+  <meta charset="{{ page.charset }}">
+  <title>{{ page.title }}/{{ page.site_title }}</title>
+  <link rel="stylesheet" href="./static/css/reset.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body>
+  <header class="header">
+        {% block header %}ここにヘッダーの中身{% endblock header %}
+  </header>
+
+  <div class="wrapper clearfix">
+    <main id="main" class="main">
+      <div id="title" class="title">
+        ここはタイトル{{ page.title }}ここはタイトル
+      </div>
+      <div id="main-text" class="main-text">
+        {% block maintext %}ここにメインの中身{% endblock maintext %}
+      </div>
+    </main>
+    <div class="sidemenu">
+      {% block sidemenu %}ここにサイドメニューの中身{% endblock sidemenu %}
+    </div>
+  </div>
+
+  <footer class="footer">
+    {% block footer %}ここにフッターの中身{% endblock footer %}
+  </footer>
+</body>
+
+</html>
