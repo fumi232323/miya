@@ -50,13 +50,13 @@ a:link, a:visited, a:hover, a:active {
     display: inline-block;  /* 横に並ぶようにする */
     width: 100px;
     height: 30px;
-    line-height: 30px;  /* テキストの縦方向の中央寄せ */
+    line-height: 30px;      /* テキストの縦方向の中央寄せ */
     text-align: center;
-    border-radius: 8px;  /* ボックスの角を丸める */
+    border-radius: 8px;     /* ボックスの角を丸める */
     color: #666666;
     font-size: 1.3rem;
-    letter-spacing: 1px;  /* 文字の間隔を指定 */
-    transition: 0.15s;  /* スタイルの変化にかかる時間を指定 */
+    letter-spacing: 1px;    /* 文字の間隔を指定 */
+    transition: 0.15s;      /* スタイルの変化にかかる時間を指定 */
 }
 .global-nav .nav-item.active a,  /* nav-item と active の両方のクラスがついた a */
 .global-nav .nav-item a:hover {  /* `;hover` その要素にホバーしたとき */
@@ -122,7 +122,7 @@ a:link, a:visited, a:hover, a:active {
 .hot-topic .date {
     position: absolute;  /* 表示位置を見出しの上部に移動 */
     top: 60px;
-    left: 0;  /* `position: absolute` で配置する場合には親要素のpadding の影響を受けないため、ぴったり左端に配置できる。 */
+    left: 0;  /* `position: absolute` で配置する場合には親要素の padding の影響を受けないため、ぴったり左端に配置できる。 */
     width: 140px;
     padding: 4px;
     background-color: #FFFFFF;
@@ -132,6 +132,62 @@ a:link, a:visited, a:hover, a:active {
     font-weight: bold;
     font-size: 1.1rem;
     line-height: 1;
+}
+.heading {
+    padding: 10px 12px;
+    background: url("/static/images/bg-slash.gif");
+    letter-spacing: 1px;
+    font-size: 1.6rem;
+}
+.scroll-list {
+    max-height: 220px;      /* 中の要素が少ない場合にはその高さに合わせて親要素の高さも縮む */
+    overflow-y: auto;       /* はみ出た領域を縦方向にスクロールして見ることができる */
+    margin-bottom: 30px;
+    list-style-type: none;  /* デフォルトで表示されるリストマークを消す */
+}
+.scroll-list .scroll-item a {
+    display: block;     /* リスト項目全体をリンク領域にする */
+    padding: 10px 15px;
+    color: #333333;
+    font-size: 0;       /* 改行 => 半角スペースのサイズを 0 にする */
+    transition: background-color 0.1s;
+}
+.scroll-list .scroll-item:nth-of-type(even) a {         /* 要素名:nth-of-type(n) で「同じ階層の n 番目の要素」 */
+    background: url("/static/images/bg-slash.gif");     /* 偶数行のリスト項目にストライプの背景 */
+}
+.scroll-list .scroll-item a:hover {
+    background-color: #fafaf8;
+}
+.scroll-list .date {
+    display: inline-block;  /* 横並び */
+    width: 19%;             /* スクロールバーが表示されてリストの横幅が変わっても横並びを維持できるよう、親要素に対する割合で指定 */
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1.0rem;      /* 親要素で `font-size: 0` を指定したので font-size を指定し直す */
+}
+.scroll-list .category {
+    display: inline-block;
+    width: 8%;
+    border-radius: 5px;
+    background-color: #d03c56;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 1.0rem;
+    line-height: 16px;
+}
+.scroll-list .category.news {
+    background-color: #2c3c53;
+}
+.scroll-list .title {
+    display: inline-block;
+    width: 73%;
+    padding-left: 15px;
+    font-size: 1.2rem;
+    /* この3つはセットで覚える */
+    overflow: hidden;           /* 親要素をはみ出た部分を非表示にする */
+    text-overflow: ellipsis;    /* 表示領域からはみ出て見えなくなるテキストの境目の表示方法を指定(...) */
+    white-space: nowrap;        /* 親要素をはみ出た部分を折り返し禁止 */
 }
 
 .sidemenu {
