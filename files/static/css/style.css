@@ -408,3 +408,8 @@ a:link, a:visited, a:hover, a:active {
 .horizontal-list .horizontal-item a:hover {
     color: #DDDDDD;
 }
+.copyright {
+    margin-top: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+}
