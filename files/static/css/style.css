@@ -202,10 +202,10 @@ a:link, a:visited, a:hover, a:active {
 .article-box:hover {
     opacity: 0.8;
 }
-.article-box:nth-of-type(odd) {  /* 偶数個目の記事 */
+.article-box:nth-of-type(odd) {     /* 偶数個目の記事 */
     float: left;
 }
-.article-box:nth-of-type(even) {/* 奇数個目の記事 */
+.article-box:nth-of-type(even) {    /* 奇数個目の記事 */
     float: right;
 }
 .article-box .title {
@@ -242,11 +242,84 @@ a:link, a:visited, a:hover, a:active {
     width: 100%;
 }
 
+/* サイドメニュー 領域 */
 .sidemenu {
     float: right;
     width: 275px;
 }
-
+.ranking {
+    margin-bottom: 30px;
+    list-style-type: none;  /* デフォルトで表示されるリスト番号を消す */
+    counter-reset: ranking;  /* css カウンタの初期化 */
+}
+.ranking .ranking-item {
+    margin-top: 15px;
+}
+.ranking .ranking-item a {
+    display: block;
+    font-size: 0;                /* 中身に隙間が空かないように */
+    transition:  opacity 0.15s;  /* ホバーしたときのエフェクト */
+}
+.ranking .ranking-item a:hover {
+    opacity: 0.8;  /* ホバーしたときのエフェクト */
+}
+.ranking .image {
+    width: 55px;
+    height: 55px;
+}
+.ranking .text {
+    display: inline-block;
+    width: 182px;
+    color: #000000;
+    vertical-align: top;  /* 縦方向の並びを上揃え */
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+/* ランキングのひし形 */
+.ranking .order {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 0 10px;
+    border: 1px solid #CCCCCC;
+    color: #aaaaaa;
+    vertical-align: 20px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 16px;
+    -webkit-transform: rotate(45deg);  /* 四角形を傾けて菱形にするし */
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    /* https://caniuse.com ベンダープレフィックス調べるのに便利 */
+}
+/* ランキング順位1, 2, 3位の分 */
+.ranking .ranking-item:nth-of-type(1) .order,
+.ranking .ranking-item:nth-of-type(2) .order,
+.ranking .ranking-item:nth-of-type(3) .order {
+    border: none;
+    color: #FFFFFF;
+    font-weight: normal;
+    line-height: 18px;  /* 1, 2, 3位は枠線ないので、サイズいっぱい */
+}
+.ranking .ranking-item:nth-of-type(1) .order {
+    background-color: #dab413;
+}
+.ranking .ranking-item:nth-of-type(2) .order {
+    background-color: #6e7b84;
+}
+.ranking .ranking-item:nth-of-type(3) .order {
+    background-color: #a0541a;
+}
+/* ランキング順位の数字 */
+.ranking .order::before {
+    content: counter(ranking);  /* ランキング順位の数字を表示する */
+    counter-increment: ranking;  /* 順位を1ずつインクリメント */
+    display: inline-block;      /* transform プロパティは display が inline の要素にはかけられないため */
+    font-size: 1.0rem;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);  /* 中の数字をまっすぐにする */
+}
 
 .footer {
     width: 100%;
