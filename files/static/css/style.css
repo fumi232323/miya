@@ -321,6 +321,37 @@ a:link, a:visited, a:hover, a:active {
     transform: rotate(-45deg);  /* 中の数字をまっすぐにする */
 }
 
+/* ドキュメントリスト */
+.documents {
+    margin: 10px 10px 30px;
+}
+.documents,
+.documents ul {
+    list-style-type: none;
+}
+.documents > li .title {  /* `>`:documents 直下の第1階層目のliのみを指定できる */
+    margin: 15px 0;
+    padding-left: 8px;
+    border-left: 5px solid #d03c56;
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
+.documents > li + li {  /* `+`:ある要素と隣接して直後に続く要素を表す */
+    margin-top: 25px;
+}
+.documents > li ul {
+    margin: 15px;
+}
+.documents > li ul >li {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    background: url("/static/images/arrow.gif") no-repeat left center;
+}
+.documents a:hover {
+    text-decoration: underline;
+}
+
+/* フッター */
 .footer {
     width: 100%;
 }
