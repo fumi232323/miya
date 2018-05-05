@@ -329,14 +329,14 @@ a:link, a:visited, a:hover, a:active {
 .documents ul {
     list-style-type: none;
 }
-.documents > li .title {  /* `>`:documents 直下の第1階層目のliのみを指定できる */
+.documents > li .title {  /* `>`:子セレクタ。documents 直下の第1階層目のliのみを指定できる。 */
     margin: 15px 0;
     padding-left: 8px;
     border-left: 5px solid #d03c56;
     font-size: 1.4rem;
     line-height: 1.2;
 }
-.documents > li + li {  /* `+`:ある要素と隣接して直後に続く要素を表す */
+.documents > li + li {  /* `+`:隣接セレクタ。ある要素と隣接して直後に続く要素を表す。 */
     margin-top: 25px;
 }
 .documents > li ul {
@@ -381,4 +381,30 @@ a:link, a:visited, a:hover, a:active {
 /* フッター */
 .footer {
     width: 100%;
+    padding: 20px 0 30px;
+    background: #2d3d54 url("/static/images/bg-footer.gif");
+    color: #FFFFFF;
+}
+.horizontal-list {
+    width: 970px;       /* wrapper と同じ幅にする */
+    margin: 0 auto;     /* footer の中央に寄せる */
+    text-align: right;  /* リストの項目を右寄せ */
+    font-size: 0;       /* 改行による隙間をなくす */
+}
+.horizontal-list .horizontal-item {
+    display: inline-block;  /* 横並びにする */
+    padding: 0 15px;
+    letter-spacing: 1px;
+}
+.horizontal-list .horizontal-item + .horizontal-item {
+    border-left: 1px solid #bbbbbb;    /* horizontal-item の直後に置かれた horizontal-item に対して線 */
+}
+.horizontal-list .horizontal-item a {
+    border-bottom: 1px dashed #777777;  /* リンクの下線をステッチみたいにする */
+    color: #bbbbbb;
+    font-size: 1.1rem;
+    transition: color 0.15s;  /* 色がなめらかに変化するよう指定 */
+}
+.horizontal-list .horizontal-item a:hover {
+    color: #DDDDDD;
 }
