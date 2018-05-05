@@ -351,6 +351,33 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: underline;
 }
 
+/* 検索フォーム */
+.search-box {
+    padding: 15px;
+    background-color: #CCCCCC;
+    font-size: 0;  /* display プロパティの初期値が inline-block である input 要素間の空白を消すため */
+}
+.search-box > * {  /* ↑で 0 にした font-size を戻す */
+    font-size: 1.2rem;
+}
+.search-box .search-input {
+    width: 205px;
+    height: 26px;  /* 高さを合わせる */
+    padding: 0 10px;
+    border: none;
+}
+.search-box .search-button {
+    width: 40px;
+    height: 26px;  /* 高さを合わせる */
+    border: none;
+    background-color: #d03c56;
+    color: #FFFFFF;
+    cursor: pointer;  /* マウスポインタが要素に重なった時の形を指定する */
+}
+.search-box .text {
+    margin-top: 12px;
+}
+
 /* フッター */
 .footer {
     width: 100%;
