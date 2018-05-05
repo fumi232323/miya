@@ -4,14 +4,13 @@
 <head>
   <meta charset="{{ page.charset }}">
   <title>{{ page.title }}/{{ page.site_title }}</title>
-  <link rel="stylesheet" href="./static/css/reset.css">
-  <link rel="stylesheet" href="./static/css/style.css">
+  <link rel="stylesheet" href="/static/css/reset.css">
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
-  <header class="header">
-        {% block header %}ここにヘッダーの中身{% endblock header %}
-  </header>
+
+  {% include "/header.html" %}
 
   <div class="wrapper clearfix">
     <main id="main" class="main">

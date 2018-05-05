@@ -5,12 +5,13 @@ html {
 }
 body {
     color: #333;
-    font-size: 1.2rem;
+    font-size: 1.2rem;  /* rem: CSS3から。 root 要素の font-size を 1 とした倍率を指定する。 */
     font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
-*, *::before, *::after {
+*, *::before, *::after {  /* `*`: 全称セレクタといい、すべての要素を表す。 */
     box-sizing: border-box;
 }
+/* リンクの下線を外す */
 a:link, a:visited, a:hover, a:active {
     color: #d03c56;
     text-decoration: none;
@@ -18,25 +19,72 @@ a:link, a:visited, a:hover, a:active {
 
 .header {
     width: 100%;
+    padding: 28px 0 10px;
+    background: url("/static/images/bg-header.gif") repeat-x;
+    box-shadow: 0 0 10px 1px #e3e3e3;
 }
-.clearfix::after {
+.logo {
+    width: 225px;
+    height: 56px;
+    margin: 0 auto;  /* 中央寄せ */
+    background: url("/static/images/logo.png") no-repeat;
+    overflow: hidden;       /* テキストを表示しない */
+    text-indent: 100%;      /* テキストを表示しない */
+    white-space: nowrap;    /* テキストを表示しない */
+}
+.logo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.global-nav {
+    margin-top: 15px;
+    text-align: center;
+}
+.global-nav .nav-item {
+    display: inline-block;  /* 横に並ぶようにする */
+    margin: 0 10px;
+}
+.global-nav .nav-item a {
+    display: inline-block;  /* 横に並ぶようにする */
+    width: 100px;
+    height: 30px;
+    line-height: 30px;  /* テキストの縦方向の中央寄せ */
+    text-align: center;
+    border-radius: 8px;  /* ボックスの角を丸める */
+    color: #666666;
+    font-size: 1.3rem;
+    letter-spacing: 1px;  /* 文字の間隔を指定 */
+    transition: 0.15s;  /* スタイルの変化にかかる時間を指定 */
+}
+.global-nav .nav-item.active a,  /* nav-item と active の両方のクラスがついた a */
+.global-nav .nav-item a:hover {  /* `;hover` その要素にホバーしたとき */
+    background-color: #d03c56;
+    color: #FFFFFF;
+}
+
+.wrapper {
+    width: 970px;
+    margin: 30px auto 40px;
+}
+/* wrapper にも子要素分の高さを持たせる */
+.clearfix::after {  /* 擬似要素 */
     content: '';
     display: block;
     clear: both;
 }
 .main {
     display: block;
-    float: left;
+    float: left;  /* float プロパティを使用した要素は親要素の高さに影響を与えなくなってしまう */
     width: 660px;
 }
 .sidemenu {
     float: right;
     width: 275px;
 }
+
+
 .footer {
     width: 100%;
-}
-.wrapper {
-    width: 970px;
-    margin: 30px auto 40px;
 }
