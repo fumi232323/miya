@@ -1,5 +1,6 @@
 <h2 class="heading">RANKING</h2>
 <ol class="ranking"><!-- ol: 順序に意味のあるリスト -->
+  {% set articles = contents.get_contents() %}
   {% for article in articles %}
     <li class="ranking-item">
       <a href="{{ article.path(article) }}">
@@ -13,35 +14,20 @@
 
 <h2 class="heading">DOCUMENTS</h2>
 <ul class="documents">
-  <li>
-    <h3 class="title">もよよ</h3>
-    <ul><!-- li要素の中になら別のul要素を配置することができる -->
-      <li>
-        <img class="image" src="/static/images/retriever.png" alt="ランキングの画像">
-        <a href="#">追加された要素</a>
-      </li>
-      <li><a href="#">削除された要素</a></li>
-      <li><a href="#">意味が変わった要素</a></li>
-      <li><a href="#">HTML5のコンテンツモデル</a></li>
-    </ul>
-  </li>
-  <li>
-    <h3 class="title">台風</h3>
-    <ul>
-      <li><a href="#">台風の目</a></li>
-      <li><a href="#">台風の気圧</a></li>
-      <li><a href="#">台風の風速</a></li>
-      <li><a href="#">台風の進路</a></li>
-    </ul>
-  </li>
-  <li>
-    <h3 class="title">積乱雲</h3>
-    <p>準備中</p>
-  </li>
-  <li>
-    <h3 class="title">暴風雨</h3>
-    <p>準備中</p>
-  </li>
+  {% set items = contents.group_items(group='category') %}
+  {% for categories, articles in items %}
+    <li>
+      <h3 class="title">{{ categories[0] }}</h3>
+      <ul><!-- li要素の中になら別のul要素を配置することができる -->
+        {% for article in articles %}
+          <li>
+            <img class="image" src="/static/images/retriever.png" alt="ランキングの画像">
+            <a href="{{ article.path(article) }}">{{ article.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
 </ul>
 
 <h2 class="hidden">SEARCH</h2>
