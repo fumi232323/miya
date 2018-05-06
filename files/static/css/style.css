@@ -13,29 +13,43 @@ body {
 }
 /* リンクの下線を外す */
 a:link, a:visited, a:hover, a:active {
-    color: #d03c56;
+    color: #c9171e;
     text-decoration: none;
 }
 
 .header {
     width: 100%;
-    padding: 28px 0 10px;
-    background: url("/static/images/bg-header.gif") repeat-x;
+    padding: 0 0 10px;
+    /* padding: 28px 0 10px; */
+    /* background-color: #0f2350; */
+    /* background: url("/static/images/bg-header.gif") repeat-x; */
+    /* background: url("/static/images/bg-header.png") repeat-x; */
     box-shadow: 0 0 10px 1px #e3e3e3;
 }
 .logo {
-    width: 225px;
-    height: 56px;
-    margin: 0 auto;  /* 中央寄せ */
-    background: url("/static/images/logo.png") no-repeat;
-    overflow: hidden;       /* テキストを表示しない */
-    text-indent: 100%;      /* テキストを表示しない */
-    white-space: nowrap;    /* テキストを表示しない */
+    /* width: 225px; */
+    width: 100%;
+    height: 80px;
+    background-color: #0f2350;
+    /* height: 56px; */
+    /* margin: 0 auto;  /* 中央寄せ */
+    /* background: url("/static/images/logo.png") no-repeat; */
+    /* テキストを表示しない
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    */
 }
 .logo a {
     display: block;
     width: 100%;
     height: 100%;
+    padding-top: 30px;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: normal;
+    font-size: 3.0rem;
 }
 
 .global-nav {
@@ -53,14 +67,14 @@ a:link, a:visited, a:hover, a:active {
     line-height: 30px;      /* テキストの縦方向の中央寄せ */
     text-align: center;
     border-radius: 8px;     /* ボックスの角を丸める */
-    color: #666666;
+    color: #c9171e;
     font-size: 1.3rem;
     letter-spacing: 1px;    /* 文字の間隔を指定 */
     transition: 0.15s;      /* スタイルの変化にかかる時間を指定 */
 }
 .global-nav .nav-item.active a,  /* nav-item と active の両方のクラスがついた a */
 .global-nav .nav-item a:hover {  /* `;hover` その要素にホバーしたとき */
-    background-color: #d03c56;
+    background-color: #c9171e;
     color: #FFFFFF;
 }
 
@@ -107,7 +121,7 @@ a:link, a:visited, a:hover, a:active {
     width: 50%;
     height: 100%;
     padding: 105px 25px 0;
-    background-color: #2d3d54;
+    background-color: #0f2350;
     line-height: 1.6;
 }
 .hot-topic .title {
@@ -126,19 +140,25 @@ a:link, a:visited, a:hover, a:active {
     width: 140px;
     padding: 4px;
     background-color: #FFFFFF;
-    color: #2d3d54;
+    color: #0f2350;
     text-align: center;
     letter-spacing: 1px;
     font-weight: bold;
     font-size: 1.1rem;
     line-height: 1;
 }
+
+/* H2タイトル */
 .heading {
     padding: 10px 12px;
-    background: url("/static/images/bg-slash.gif");
+    background-color: #eaf4fc;
+    /* background: url("/static/images/bg-slash.gif"); */
     letter-spacing: 1px;
     font-size: 1.6rem;
+    /* box-shadow: 0 0 10px 1px #19448e; */
 }
+
+/* NEWS */
 .scroll-list {
     max-height: 220px;      /* 中の要素が少ない場合にはその高さに合わせて親要素の高さも縮む */
     overflow-y: auto;       /* はみ出た領域を縦方向にスクロールして見ることができる */
@@ -153,10 +173,11 @@ a:link, a:visited, a:hover, a:active {
     transition: background-color 0.1s;
 }
 .scroll-list .scroll-item:nth-of-type(even) a {         /* 要素名:nth-of-type(n) で「同じ階層の n 番目の要素」 */
-    background: url("/static/images/bg-slash.gif");     /* 偶数行のリスト項目にストライプの背景 */
+    background-color: #eaf4fc;  /* 偶数行のリスト項目に色付き */
+    /* background: url("/static/images/bg-slash.gif");  偶数行のリスト項目にストライプの背景 */
 }
 .scroll-list .scroll-item a:hover {
-    background-color: #fafaf8;
+    background-color: #89c3eb;
 }
 .scroll-list .date {
     display: inline-block;  /* 横並び */
@@ -167,7 +188,7 @@ a:link, a:visited, a:hover, a:active {
 }
 .scroll-list .category {
     display: inline-block;
-    width: 8%;
+    width: 11%;
     border-radius: 5px;
     background-color: #d03c56;
     color: #FFFFFF;
@@ -181,7 +202,7 @@ a:link, a:visited, a:hover, a:active {
 }
 .scroll-list .title {
     display: inline-block;
-    width: 73%;
+    width: 70%;
     padding-left: 15px;
     font-size: 1.2rem;
     /* この3つはセットで覚える */
@@ -189,6 +210,8 @@ a:link, a:visited, a:hover, a:active {
     text-overflow: ellipsis;    /* 表示領域からはみ出て見えなくなるテキストの境目の表示方法を指定(...) */
     white-space: nowrap;        /* 親要素をはみ出た部分を折り返し禁止 */
 }
+
+/* 記事の箱 */
 .article-box {
     position: relative;
     display: block;  /* a要素なので `display: block` を指定してから幅を指定する*/
@@ -228,8 +251,8 @@ a:link, a:visited, a:hover, a:active {
     display: block;
     width: 160px;
     padding: 4px;
-    background-color: #b5d264;
-    color: #2d3d54;
+    background-color: #0f2350;
+    color: #FFFFFF;
     text-align: center;
     letter-spacing: 1px;
     font-weight: bold;
@@ -332,7 +355,7 @@ a:link, a:visited, a:hover, a:active {
 .documents > li .title {  /* `>`:子セレクタ。documents 直下の第1階層目のliのみを指定できる。 */
     margin: 15px 0;
     padding-left: 8px;
-    border-left: 5px solid #d03c56;
+    border-left: 5px solid #c9171e;
     font-size: 1.4rem;
     line-height: 1.2;
 }
@@ -345,7 +368,11 @@ a:link, a:visited, a:hover, a:active {
 .documents > li ul >li {
     margin-bottom: 15px;
     padding-left: 10px;
-    background: url("/static/images/arrow.gif") no-repeat left center;
+    /* background: url("/static/images/labrador.png") no-repeat left center; */
+}
+.documents > li ul >li > img{
+    width: 7px;
+    height: 7px;
 }
 .documents a:hover {
     text-decoration: underline;
@@ -370,7 +397,7 @@ a:link, a:visited, a:hover, a:active {
     width: 40px;
     height: 26px;  /* 高さを合わせる */
     border: none;
-    background-color: #d03c56;
+    background-color: #c9171e;
     color: #FFFFFF;
     cursor: pointer;  /* マウスポインタが要素に重なった時の形を指定する */
 }
@@ -382,7 +409,7 @@ a:link, a:visited, a:hover, a:active {
 .footer {
     width: 100%;
     padding: 20px 0 30px;
-    background: #2d3d54 url("/static/images/bg-footer.gif");
+    background: #0f2350 /*url("/static/images/bg-footer.gif")*/;
     color: #FFFFFF;
 }
 .horizontal-list {

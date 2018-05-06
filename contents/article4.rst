@@ -1,6 +1,6 @@
 .. article::
-   :date: 2018-05-04
-   :title: 記事1だよ
+   :date: 2018-05-07
+   :title: 記事4だよ
    :category: カテゴリ1
    :tags: タグ1, タグ2
 

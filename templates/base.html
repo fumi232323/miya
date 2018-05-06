@@ -5,138 +5,27 @@
     <meta charset="{{ page.charset }}">
     <title>{{ page.title }}/{{ page.site_title }}</title>
     <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?20180506">
   </head>
 
   <body>
 
-    {% include "/header.html" %}
+    <header class="header">
+      {% include "/header.html" %}
+    </header>
 
     <div class="wrapper clearfix">
       <main id="main" class="main">
-
-        <h2 class="hidden">HOT TOPIC</h2>
-        <a href="#" class="hot-topic clearfix">
-          <img class="image" src="/static/images/hot-topic.jpg" alt="コーディング画面">
-          <div class="content">
-            <h3 class="title">h3タイトルがここに入る</h3>
-            <p class="desc">もにゃもにゃ</p>
-            <time class="date" datetime="2018-05-06">2018.05.06 SUN</time>
-          </div>
-        </a>
-
-        <h2 class="heading">NEWS</h2>
-        <ul class="scroll-list">
-          <li class="scroll-item">
-            <a href="#">
-              <time class="date" datetime="2018-05-05">2018-05-05 SAT</time>
-              <span class="category news">NEWS</span>
-              <span class="title">ごにょごにょ</span>
-            </a>
-          </li>
-          <li class="scroll-item">
-            <a href="#">
-              <time class="date" datetime="2018-05-06">2018-05-06 SUN</time>
-              <span class="category">MOJO</span>
-              <span class="title">もじょもじょもじょもじょもじょもじょもじょもじょもじょもじょもじょもじょもじょもじょ</span>
-            </a>
-          </li>
-        </ul>
-
-        <h2 class="hidden">ARTICLES</h2>
-        <div class="clearfix">
-          <a href="#" class="article-box">
-            <h3 class="title">たいとるたいとるたいとる1</h3>
-            <p class="desc">ここに説明だよ1</p>
-            <time class="date" datetime="2018-05-05">2018.05.05 SAT</time>
-            <img class="image" src="/static/images/article.jpg" alt="コーディング画面">
-          </a>
-          <a href="#" class="article-box">
-            <h3 class="title">たいとるたいとるたいとる2</h3>
-            <p class="desc">ここに説明だよ2</p>
-            <time class="date" datetime="2018-05-06">2018.05.06 SUN</time>
-            <img class="image" src="/static/images/article.jpg" alt="コーディング画面">
-          </a>
-        </div>
-
+        {% block main %}{% endblock main %}
       </main>
-
       <div class="sidemenu">
-
-        <h2 class="heading">RANKING</h2>
-        <ol class="ranking"><!-- 順序に意味のあるリスト -->
-          <li class="ranking-item">
-            <a href="#">
-              <img class="image" src="/static/images/ranking.jpg" alt="グラフの画像">
-              <span class="order"></span>
-              <p class="text">ほにょほにょ1</p>
-            </a>
-          </li>
-          <li class="ranking-item">
-            <a href="#">
-              <img class="image" src="/static/images/ranking.jpg" alt="グラフの画像">
-              <span class="order"></span>
-              <p class="text">ほにょほにょ2</p>
-            </a>
-          </li>
-          <li class="ranking-item">
-            <a href="#">
-              <img class="image" src="/static/images/ranking.jpg" alt="グラフの画像">
-              <span class="order"></span>
-              <p class="text">ほにょほにょ3</p>
-            </a>
-          </li>
-          <li class="ranking-item">
-            <a href="#">
-              <img class="image" src="/static/images/ranking.jpg" alt="グラフの画像">
-              <span class="order"></span>
-              <p class="text">ほにょほにょ4</p>
-            </a>
-          </li>
-        </ol>
-
-        <h2 class="heading">DOCUMENTS</h2>
-        <ul class="documents">
-          <li>
-            <h3 class="title">もよよ</h3>
-            <ul><!-- li要素の中になら別のul要素を配置することができる -->
-              <li><a href="#">追加された要素</a></li>
-              <li><a href="#">削除された要素</a></li>
-              <li><a href="#">意味が変わった要素</a></li>
-              <li><a href="#">HTML5のコンテンツモデル</a></li>
-            </ul>
-          </li>
-          <li>
-            <h3 class="title">台風</h3>
-            <ul>
-              <li><a href="#">台風の目</a></li>
-              <li><a href="#">台風の気圧</a></li>
-              <li><a href="#">台風の風速</a></li>
-              <li><a href="#">台風の進路</a></li>
-            </ul>
-          </li>
-          <li>
-            <h3 class="title">積乱雲</h3>
-            <p>準備中</p>
-          </li>
-          <li>
-            <h3 class="title">暴風雨</h3>
-            <p>準備中</p>
-          </li>
-        </ul>
-
-        <h2 class="hidden">SEARCH</h2>
-        <form class="search-box">
-          <input class="search-input" type="text" name="search" placeholder="SEARCH">
-          <input class="search-button" type="submit" value="検索">
-          <p class="text">サイト内の文章を検索できます。</p>
-        </form>
-
+        {% include "/sidemenu.html" %}
       </div>
-
     </div>
 
-    {% include "/footer.html" %}
+    <footer class="footer">
+      {% include "/footer.html" %}
+    </footer>
 
   </body>
 </html>
