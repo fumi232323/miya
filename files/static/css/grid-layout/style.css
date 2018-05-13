@@ -28,6 +28,55 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* --------------------------------
+ * header
+ * -------------------------------- */
+.header {
+    padding: 25px 0;  /* 上下の余白 */
+    border-bottom: none;
+    text-align: center;
+}
+.logo {
+    width: 136px;
+    height: 136px;
+    transition: transform 0.3s;  /* 回っていることがわかるように、0.3秒かけて変化させる */
+}
+/* ロゴ画像をホバーすると1回転する */
+.logo:hover {
+    transform: rotate(360deg);  /* 360度回転 */
+}
+.nav {
+    margin: 35px auto 10px;  /* nav の上部に間隔をあける */
+}
+.nav-item {
+    margin-top: 20px;   /* リスト項目の間を20pxずつあける。一番上の項目はマージンが相殺されるので空き過ぎないとのこと。 */
+    /* ブロックレベル要素のマージンは相殺される
+     * - 隣接した要素の上下のマージン（マージンの値が異なる場合は大きほうになる）
+     * - 入れ子になった要素の上下のマージン
+     */
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+/* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
+.nav-item a {
+    display: inline-block;  /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
+}
+.nav-item a::after {
+    content: '';
+    display: block;         /* ブロックレベルの::after擬似要素を作る */
+    width: 0;               /* 通常時には見えないように横幅を 0 にする */
+    margin: 6px auto 0;     /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */
+    border-bottom: 1px solid #7C5119;
+    transition: width 0.3s ease-in-out;
+    /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
+    /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
+}
+.nav-item a:hover::after {
+    width: 100%;     /* リンクにホバーしたときの ::after 擬似要素の横幅を指定 */
+}
+
+/* --------------------------------
  * box
  * -------------------------------- */
 .item {
@@ -38,9 +87,11 @@ a:link, a:visited, a:hover, a:active {
     border-radius: 5px;
     background-color: #FFFFFF;
 }
+/* box中 */
 .item-m {
     width: 364px;  /* item * 2 + 間の隙間4 */
 }
+/* box大 */
 .item-l {
     width: 732px;  /* item-m * 2 + 間の隙間4 */
 }
@@ -54,7 +105,8 @@ a:link, a:visited, a:hover, a:active {
     letter-spacing: 1px;
     font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;  /* フォントの種類を変えたいときは先頭に付け足す */
 }
-.item .category::before {   /* カテゴリー名左横の円 */
+/* カテゴリー左横の円 */
+.item .category::before {
     content: '';            /* before擬似要素を表示するために指定 */
     display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
     width: 19px;
@@ -80,6 +132,59 @@ a:link, a:visited, a:hover, a:active {
     box-shadow: 0 0 6px -1px rgba(0, 0, 0, 0.3);  /* ボックスの周りに影を落とす */
     opacity: 0.8;  /* ハイライトのような効果 */
 }
+/* ホバーしたときにだけアニメーションしながら現れるようにする */
+.item {
+    overflow: hidden;  /* ボックスの外側にはみ出ているときは完全に隠す。触れないようにする。 */
+}
+.item .image {
+    position: relative;
+}
+.item .image img {
+    width: 100%;
+}
+/* ホバーしたときに画像部分を暗くする */
+.item > a .image::before {         /* リンクになっているボックスのみに表示したいので、 .item 直下の a 要素の ::before 擬似要素を使用する */
+    content: '';
+    position: absolute;
+    /* Mansonry によって,自動的に .item に position: absolute が指定されているので、
+     * 中の ::before 擬似要素を position: absolute にすると .item を基準として配置される。
+     */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;     /* 普段は非表示 */
+    transition: opacity 0.3s linear;
+}
+.item > a:hover .image::before {
+    opacity: 1;     /* ホバー時は表示 */
+}
+/* MORE の表示 */
+.item > a .image::after {
+    content: 'MORE';
+    position: absolute;
+    top: 50%;
+    left: 150%;     /* 最初はボックスの外にはみ出させておく */
+    display: block;
+    width: 100px;   /* MORE 箱の幅 */
+    margin-top: -19px;
+    margin-left: -50px;
+    padding: 8px;
+    border: 3px solid #FFFFFF;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 1.6rem;
+    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    opacity: 0;     /* 普段は非表示 */
+    transition: all 0.3s ease-in-out;
+}
+.item > a:hover .image::after {
+    left: 50%;      /* ホバー時は真ん中 */
+    opacity: 1;     /* ホバー時は表示 */
+}
+
 /* カテゴリーごとに色分け */
 .item-maindish,
 .item-maindish .category::before {
