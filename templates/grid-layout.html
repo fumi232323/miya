@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/grid-layout/reset.css">
+    <link rel="stylesheet" href="/static/css/grid-layout/style.css?20180513">
+</head>
+<body>
+  <section class="item item-maindish"><!-- sectionタグ: ボックスごとのまとまりを明示的に区切ることができる -->
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_1.jpg" alt="メインディッシュ">
+      <div class="category">MAIN DISH</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
+  <section class="item item-appetizer">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_2.jpg" alt="前菜">
+      <div class="category">APPETIZER</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+      </p>
+    </a>
+  </section>
+  <section class="item item-column">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_3.jpg" alt="コラム">
+      <div class="category">COLUMN</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
+  <section class="item item-breaktime">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_4.jpg" alt="おやつの時間">
+      <div class="category">BREAK TIME</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+      </p>
+    </a>
+  </section>
+  <section class="item item-maindish">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_5.jpg" alt="メインディッシュ">
+      <div class="category">MAIN DISH</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
+    <section class="item item-breaktime">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_6.jpg" alt="おやつの時間">
+      <div class="category">BREAK TIME</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+      </p>
+    </a>
+  </section>
+  <section class="item item-maindish">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_7.jpg" alt="メインディッシュ">
+      <div class="category">MAIN DISH</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
+    <section class="item item-breaktime">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_8.jpg" alt="おやつの時間">
+      <div class="category">BREAK TIME</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+      </p>
+    </a>
+  </section>
+  <section class="item item-column">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_9.jpg" alt="コラム">
+      <div class="category">COLUMN</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
+  <section class="item item-maindish">
+    <a href="#">
+      <img class="image" src="/static/images/grid-layout/image_S_10.jpg" alt="メインディッシュ">
+      <div class="category">MAIN DISH</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
+
+  <!-- CDNからライブラリを読み込み -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.js"></script>
+  <script>
+    new Masonry(
+        // 親要素のセレクタを指定
+        'body', {
+            itemSelector: '.item',  // ボックス要素のセレクタ
+            columnWidth: 180,       // グリッドの横幅
+            gutter: 4               // 左右のボックスとの間隔。上下の間隔はCSSで指定する必要がある。
+        }
+    )
+    /*
+    * - パフォーマンス上の理由により、 JavaScript のファイルやコードはドキュメントの最後で読み込むことが推奨されている。
+    * - HTML の描画が終わる前に実行する必要がある JavaScript 以外はなるべく body 要素の最後に記述することを推奨します。
+    */
+  </script>
+</body>
+</html>

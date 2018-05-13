@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+/* --------------------------------
+ * base
+ * -------------------------------- */
+html {
+    font-size: 62.5%;
+}
+body {
+    padding: 30px;
+    background-color: #f6f7fb;
+    color: #333333;
+    font-size: 1.2rem;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+/*
+    - 擬似要素を存在させるには、 CSS で擬似要素の中身を指定する content プロパティの指定。P.103を見よ。
+    - ::before, ::after 擬似要素の display プロパティの初期値は inline なので、デフォルトではインラインレベルの要素として表示される。
+    - 高さや幅を指定したい場合には、 display プロパティに block や inline-block の指定が必要。
+ */
+*, *::before, *::after {  /* `*`: 全称セレクタといい、すべての要素を表す。 */
+    box-sizing: border-box;  /* padding と border を含めた要素全体のサイズを width と height で指定できるようになる。 */
+}
+a:link, a:visited, a:hover, a:active {
+    color: #7C5119;
+    text-decoration: none;
+}
+
+/* --------------------------------
+ * box
+ * -------------------------------- */
+.item {
+    width: 180px;
+    margin-bottom: 4px;  /* ボックス間の隙間 */
+    padding: 8px;        /* ボックス内の余白 */
+    border-bottom: 3px solid;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+.item .image {
+    display: block;  /* 縦に並ぶブロックレベル要素 */
+    width: 100%      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
+}
+.item .category {
+    margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
+    color: #aaaaaa;
+    letter-spacing: 1px;
+    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;  /* フォントの種類を変えたいときは先頭に付け足す */
+}
+.item .category::before {   /* カテゴリー名左横の円 */
+    content: '';            /* before擬似要素を表示するために指定 */
+    display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
+    width: 19px;
+    height: 19px;
+    margin-right: 5px;
+    border: 2px solid;
+    border-radius: 50%;     /* 50%で円になる */
+    vertical-align: -5px;   /* 縦方向の位置調整 */
+}
+.item .description {  /* 行間と間隔を指定 */
+    margin: 10px;
+    line-height: 1.5;
+}
+.item > a {
+    display: block;
+    margin: -8px -8px -11px;    /* ネガティブマージンを使って a 要素を .item と同じ大きさまで外側に広げる */
+    padding: 8px 8px 11px;      /* 同じ幅の padding を持たせて a 要素と .item をぴったり重ねる */
+    border-radius: inherit;     /* 親要素の値を引き継ぐ。どのCSSプロパティにも指定できる。 */
+    color: #777777;             /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
+    transition: all 0.3s;       /* 0.3秒かけてスムーズに変わるように指定 */
+}
+.item > a:hover {
+    box-shadow: 0 0 6px -1px rgba(0, 0, 0, 0.3);  /* ボックスの周りに影を落とす */
+    opacity: 0.8;  /* ハイライトのような効果 */
+}
+/* カテゴリーごとに色分け */
+.item-maindish,
+.item-maindish .category::before {
+    border-color: #FFC0CB;
+}
+.item-appetizer,
+.item-appetizer .category::before {
+    border-color: #76C047;
+}
+.item-column,
+.item-column .category::before {
+    border-color: #FFF100;
+}
+.item-breaktime,
+.item-breaktime .category::before {
+    border-color: #C1EFFF;
+}
