@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+/* --------------------------------
+ * base
+ * -------------------------------- */
 html {
     font-size: 62.5%;
 }
@@ -17,17 +20,49 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: none;
 }
 
+/* --------------------------------
+ * parts
+ * -------------------------------- */
+/* 子要素分の高さを持たせる */
+.clearfix::after {  /* 擬似要素 */
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* H2タイトル */
+.heading {
+    padding: 10px 12px;
+    letter-spacing: 1px;
+    font-size: 1.6rem;
+    border: solid 1px #2d3d54;
+    /*
+    background-color: #eaf4fc;
+    background-color: #eaf4fc b22222 2d3d54;
+    color: #FFFFFF;
+    background: url("/static/images/bg-slash.gif");
+    opacity: 0.5;
+    box-shadow: 0 0 10px 1px #19448e;
+    */
+}
+.hidden {
+    display: none;
+}
+
+/* --------------------------------
+ * header
+ * -------------------------------- */
 .header {
     width: 100%;
     padding: 0 0 10px;
     /* padding: 28px 0 10px; */
     /* background-color: #2d3d54; */
     /* background: url("/static/images/bg-header.gif") repeat-x; */
-    /* background: url("/static/images/bg-header.png") repeat-x; */
     box-shadow: 0 0 10px 1px #e3e3e3;
 }
+
+/* ロゴ */
 .logo {
-    /* width: 225px; */
     width: 100%;
     height: 80px;
     background-color: #2d3d54;
@@ -52,6 +87,7 @@ a:link, a:visited, a:hover, a:active {
     font-size: 3.0rem;
 }
 
+/* グローバルナビゲーション */
 .global-nav {
     margin-top: 15px;
     text-align: center;
@@ -78,25 +114,21 @@ a:link, a:visited, a:hover, a:active {
     color: #FFFFFF;
 }
 
-/* 子要素分の高さを持たせる */
-.clearfix::after {  /* 擬似要素 */
-    content: '';
-    display: block;
-    clear: both;
-}
+/* --------------------------------
+ * wrapper
+ * -------------------------------- */
 .wrapper {
     width: 970px;
     margin: 30px auto 40px;
 }
 
-/* main 領域 */
+/* --------------------------------
+ * main
+ * -------------------------------- */
 .main {
     display: block;
     float: left;  /* float プロパティを使用した要素は親要素の高さに影響を与えなくなってしまう */
     width: 660px;
-}
-.hidden {
-    display: none;
 }
 
 /* 特集コンテンツ */
@@ -148,23 +180,7 @@ a:link, a:visited, a:hover, a:active {
     line-height: 1;
 }
 
-/* H2タイトル */
-.heading {
-    padding: 10px 12px;
-    letter-spacing: 1px;
-    font-size: 1.6rem;
-    border: solid 1px #2d3d54;
-    /*
-    background-color: #eaf4fc;
-    background-color: #eaf4fc b22222 2d3d54;
-    color: #FFFFFF;
-    background: url("/static/images/bg-slash.gif");
-    opacity: 0.5;
-    box-shadow: 0 0 10px 1px #19448e;
-    */
-}
-
-/* NEWS */
+/* 更新履歴リスト */
 .scroll-list {
     max-height: 220px;      /* 中の要素が少ない場合にはその高さに合わせて親要素の高さも縮む */
     overflow-y: auto;       /* はみ出た領域を縦方向にスクロールして見ることができる */
@@ -271,11 +287,15 @@ a:link, a:visited, a:hover, a:active {
     width: 100%;
 }
 
-/* サイドメニュー 領域 */
+/* --------------------------------
+ * sidemenu
+ * -------------------------------- */
 .sidemenu {
     float: right;
     width: 275px;
 }
+
+/* ランキング */
 .ranking {
     margin-bottom: 30px;
     list-style-type: none;  /* デフォルトで表示されるリスト番号を消す */
@@ -411,13 +431,17 @@ a:link, a:visited, a:hover, a:active {
     margin-top: 12px;
 }
 
-/* フッター */
+/* --------------------------------
+ * footer
+ * -------------------------------- */
 .footer {
     width: 100%;
     padding: 20px 0 30px;
     background: #2d3d54 /*url("/static/images/bg-footer.gif")*/;
     color: #FFFFFF;
 }
+
+/* フッターメニュー */
 .horizontal-list {
     width: 970px;       /* wrapper と同じ幅にする */
     margin: 0 auto;     /* footer の中央に寄せる */
@@ -441,6 +465,8 @@ a:link, a:visited, a:hover, a:active {
 .horizontal-list .horizontal-item a:hover {
     color: #DDDDDD;
 }
+
+/* コピーライト */
 .copyright {
     margin-top: 30px;
     text-align: center;

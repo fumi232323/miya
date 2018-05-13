@@ -17,11 +17,11 @@
   {% set items = contents.group_items(group='category') %}
   {% for categories, articles in items %}
     <li>
-      <h3 class="title">{{ categories[0] }}</h3>
+      <h3 class="title">{{ ', '.join(categories) }}</h3>
       <ul><!-- li要素の中になら別のul要素を配置することができる -->
         {% for article in articles %}
           <li>
-            <img class="image" src="/static/images/retriever.png" alt="ランキングの画像">
+            <img class="image" src="/static/images/retriever.png" alt="ドキュメンツの画像">
             <a href="{{ article.path(article) }}">{{ article.title }}</a>
           </li>
         {% endfor %}
