@@ -38,6 +38,12 @@ a:link, a:visited, a:hover, a:active {
     border-radius: 5px;
     background-color: #FFFFFF;
 }
+.item-m {
+    width: 364px;  /* item * 2 + 間の隙間4 */
+}
+.item-l {
+    width: 732px;  /* item-m * 2 + 間の隙間4 */
+}
 .item .image {
     display: block;  /* 縦に並ぶブロックレベル要素 */
     width: 100%      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
