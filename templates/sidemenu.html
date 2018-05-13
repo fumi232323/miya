@@ -3,7 +3,7 @@
   {% set articles = contents.get_contents() %}
   {% for article in articles %}
     <li class="ranking-item">
-      <a href="{{ article.path(article) }}">
+      <a href="{{ article.path() }}">
         <img class="image" src="/static/images/retriever.png" alt="ランキングの画像">
         <span class="order"></span>
         <p class="text">{{ article.title }}</p>
@@ -22,7 +22,7 @@
         {% for article in articles %}
           <li>
             <img class="image" src="/static/images/retriever.png" alt="ドキュメンツの画像">
-            <a href="{{ article.path(article) }}">{{ article.title }}</a>
+            <a href="{{ article.path() }}">{{ article.title }}</a>
           </li>
         {% endfor %}
       </ul>
