@@ -12,7 +12,7 @@ body {
     font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 *, *::before, *::after {  /* `*`: 全称セレクタといい、すべての要素を表す。 */
-    box-sizing: border-box;
+    box-sizing: border-box;  /* padding と border を含めた要素全体のサイズを width と height で指定できるようになる。 */
 }
 /* リンクの下線を外す */
 a:link, a:visited, a:hover, a:active {
