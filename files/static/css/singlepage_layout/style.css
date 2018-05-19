@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/* --------------------------------
+ * base
+ * -------------------------------- */
+html {
+    font-size: 62.5%;
+}
+*, *::before, *::after { /* `*`: 全称セレクタといい、すべての要素を表す。 */
+    box-sizing: border-box; /* padding と border を含めた要素全体のサイズを width と height で指定できるようになる。 */
+}
+
+/* --------------------------------
+ * body
+ * -------------------------------- */
+body {
+    background:
+        #151515  /* 万が一、画像が表示されなかった場合用に背景色にも黒を指定。 */
+        url("../../images/singlepage_layout/bg.png") no-repeat  /* 黒ベースの背景画像 */
+        fixed  /* 背景画像がスクロールされないように指定。ページをスクロールするごとに文章と背景の位置にズレが生じ、よりシングルレイアウトらしい視覚効果を生み出すことができる。 */
+        left bottom;
+    background-size: cover;  /* 背景に指定した画像で領域全体を覆う */
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1.4rem;
+    font-family: Raleway, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    /* font-family の指定は左から順に適用される */
+    /* Web フォント機能: CSS3 から追加された。 https://fonts.google.com/?selection.family=Raleway:400,700
+     * 使用したいフォントファイルを Web サーバーにアップロードして参照することで、
+     * 閲覧者のデバイスに入っていないフォントでも Web ページのテキストの表示に使用することができる。
+     * 画像と同様に、フォントファイルの読み込み時間に注意すること。 */
+}
+
+/* --------------------------------
+ * header
+ * -------------------------------- */
+.header {
+    padding: 170px 30px 80px;
+}
+.site-title-sub {
+    margin: 0 0 30px;
+    letter-spacing: 1px;
+    font-size: 2.2rem;
+}
+/* テキストの両端に伸びる線 */
+.site-title-sub::before,
+.site-title-sub::after {
+    content: '';
+    display: inline-block;  /* テキストの横に並ばせる */
+    width: 140px;
+    height: 2px;
+    margin: 0 30px;
+    background-color: #FFFFFF;
+    vertical-align: middle;  /* 線が縦方向で文字の中央にくるように */
+}
+.site-title {
+    margin: 50px 0 40px;
+    font-size: 7.6rem;
+}
+.site-description {
+    margin-bottom: 50px;
+    color: #888888;
+    font-size: 1.6rem;
+}
+
+/* ボタン デフォルト*/
+.button {
+    display: inline-block;  /* ボタンは縦横幅を指定しつつ横に文字や要素を並べる場合も多いので、 inline-block にしておく */
+    width: 200px;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #afa58d;
+    color: #FFFFFF;
+    text-decoration: none;  /* リンクの下線を表示しない */
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+}
+.button:hover {
+    opacity: 0.9; /* ホバーしたときに透明度を下げて、触れていることがわかるようにする */
+}
+/* ボタン 通常のボタンよりも注目させるやつ */
+.button-showy {
+    background-color: #f1b400;  /* CSS セレクタの詳細度が同じ場合は後に書かれたスタイルで上書きされていく */
+}
+/* 隣り合ったボタン同士がくっつかないようにする */
+.buttons .button {
+    margin: 10px;
+}
