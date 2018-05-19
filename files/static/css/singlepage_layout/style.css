@@ -86,3 +86,41 @@ body {
 .buttons .button {
     margin: 10px;
 }
+
+/* --------------------------------
+ * section1: ABOUT ME
+ * -------------------------------- */
+.about {
+    padding: 80px 30px;
+    background-color: #FFFFFF;
+    color: #333333;
+}
+/* 見出し */
+.heading {
+    position: relative;  /* 見出しの下線の位置指定ができるように親要素には relative を指定する。 */
+    display: inline-block;
+    margin: 30px 0 15px;
+    padding-bottom: 15px;
+    letter-spacing: 2px;
+    font-size: 4rem;
+}
+/* 見出しの下線 */
+.heading::before,
+.heading::after {
+    content: '';
+    position: absolute;  /* 位置指定を有効にする。 */
+    right: 0;            /* 擬似要素の右端が .heading の右端とぴったり合わさる */
+    bottom: 0;           /* .heading の最下部に配置 */
+    left: 0;             /* 擬似要素の左端が .heading の左端とぴったり合わさる */
+    border-bottom: 1px solid #999999;
+}
+/* 線が重ならないように 5px 上へずらす */
+.heading::before {
+    bottom: 5px;
+}
+
+/* 自己紹介文 */
+.about-text {
+    margin: 30px 0;
+    line-height: 2.5;
+}
