@@ -124,3 +124,94 @@ body {
     margin: 30px 0;
     line-height: 2.5;
 }
+
+/* --------------------------------
+ * section2: WORKS
+ * -------------------------------- */
+.works {
+    background-color: #383634;
+    padding: 80px 0;
+}
+/* table 風レイアウトにする */
+.works-wrapper {
+    display: table;       /* テーブル */
+    width: 100%;
+    margin-top: 60px;     /* 見出しからのマージン */
+    table-layout: fixed;  /* 横幅を均等に */
+}
+.work-box {
+    position: relative;   /* after 擬似要素を absolute で配置するため */
+    display: table-cell;  /* テーブルの中身 */
+    /* position プロパティ: P.170 */
+}
+/* 反転画像 */
+.work-box::after {
+    content: '';
+    position: absolute;  /* デフォルトでは inline の display プロパティが自動的に block になる */
+    top: 50%;            /* 自身が下半分に収まるようにする */
+    left: 0;
+    width: 100%;
+    height: 50%;  /* .work-box の半分の高さにする。* position: absolute の場合は、親要素にheight が指定されていなくても、%指定が有効になる。 */
+    background: no-repeat;  /* 背景に画像を指定 */
+    background-size: 100% 100%;  /* 背景画像の大きさを after 擬似要素とぴったり同じサイズにする */
+    opacity: 0.2;                /* 半透明 */
+    transform: scaleY(-1);       /* 画像を上下反転させる。値をマイナスにすると反転する。縦方向に反転して1倍。 */
+}
+/* 反転画像の URL を指定 */
+.work-box.tree::after {
+    background-image: url("../../images/singlepage_layout/tree.jpg");
+}
+.work-box.building::after {
+    background-image: url("../../images/singlepage_layout/building.jpg");
+}
+.work-box.lake::after {
+    background-image: url("../../images/singlepage_layout/lake.jpg");
+}
+.work-box.sky::after {
+    background-image: url("../../images/singlepage_layout/sky.jpg");
+}
+.work-image {
+    display: block;
+    width: 100%;
+    margin: 0 0 60%;  /* 画像の下方向のマージンを指定。画像と同じ大きさの領域を確保。 */
+}
+.work-description {
+    position: absolute;
+    top: 50%;           /* 上半分に50%の隙間とって、下半分に配置 */
+    left: 0;
+    z-index: 1;         /* 要素の重ね順を変更。値が大きいほど手前に表示される。通常は後に書いた方が手前。 */
+    width: 100%;
+    height: 50%;        /* 親要素の半分の高さ */
+    overflow-y: auto;   /* スクロールする必要がある場合のみスクロールバーを表示 */
+}
+.work-description-inner {
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.work-text {
+    display: table-cell;
+    vertical-align: middle;  /* 縦方向の中央寄せ */
+    font-size: 1.2rem;
+    line-height: 2;
+}
+.work-text .button {
+    width: 60%;
+    margin-top: 20px;
+    padding: 3px;
+}
+/* ゴーストボタン */
+.button-ghost {
+    border: 1px solid #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+/* 画像とテキストの上下を入れ替える */
+/* 奇数番目の .work-box の中の image のした方向の margin を 0 にして、上方向に 60% に指定し直す */
+.work-box:nth-child(odd) .work-image {
+    margin: 60% 0 0;
+}
+.work-box:nth-child(odd) .work-description,  /* テキスト表示領域と反転画像も上寄せにする */
+.work-box:nth-child(odd)::after{
+    top: 0;
+}
