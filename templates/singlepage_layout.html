@@ -128,7 +128,19 @@
       </div>
     </div>
   </section>
-  <section class="contact" id="contact"></section>
+  <section class="contact" id="contact">
+    <h2 class="heading">CONTACT</h2>
+    <form class="contact-form">
+      <input type="text" name="name" placeholder="NAME">
+      <textarea name="message" placeholder="MESSAGE"></textarea>
+      <input type="submit" value="SEMD">
+    </form>
+  </section>
   <footer class="footer"></footer>
+  <script src="lib/placeholders.min.js"></script>
+  <!--
+   IE9 対応。
+   - 新しい機能に対応していないブラウザでもその機能が使えるようにしてくれるライブラリを polyfill と呼ぶ。
+  -->
 </body>
 </html>

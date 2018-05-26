@@ -252,3 +252,49 @@ body {
     margin: 0 20px;
     line-height: 2; /* 行間 */
 }
+
+/* --------------------------------
+ * section4: CONTACT
+ * -------------------------------- */
+.contact {
+    padding: 80px 0 150px;  /* 領域を確保 */
+}
+.contact-form {
+    width: 50%;
+    margin: 50px auto 0;
+}
+.contact-form input[type=text],  /* HTML の属性を CSS セレクタに使用 */
+.contact-form textarea {
+    display: block;         /* input、 textarea 要素のデフォルト値は inline-block だけど、縦に配置したいので block を指定する。 */
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px;          /* 枠と入力テキストの間隔 */
+    outline: none;          /* デフォルトで表示される青いハイライトを消す */
+    border: 1px solid rgba(255, 255, 255, 0.4);     /* すりガラスのような見た目にする */
+    border-radius: 0;       /* 角が丸くならないように、明示的に 0 を指定 */
+    background-color: rgba(255, 255, 255, 0.05);    /* すりガラスのような見た目にする */
+    color: #FFFFFF;         /* 入力テキストの色 */
+}
+/* ハイライト効果 */
+.contact-form input[type=text]:focus,  /* focus: その要素がフォーカスされた状態を指定 */
+.contact-form textarea:focus {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5) inset;  /* 内側に影 */
+}
+.contact-form textarea {
+    height: 150px;
+}
+/*  送信ボタン */
+.contact-form input[type=submit] {
+    display: block;
+    width: 200px;           /* 送信ボタンは幅が狭いので、広げる */
+    margin: 40px auto 0;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    background-color: transparent;  /* 通常時の背景色は透明 */
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;                /* ホバーしたときにマウスカーソルが指の形になる */
+}
+.contact-form input[type=submit]:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
