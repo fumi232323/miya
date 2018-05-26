@@ -298,3 +298,11 @@ body {
 .contact-form input[type=submit]:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
+
+/* --------------------------------
+ * footer
+ * -------------------------------- */
+.footer {
+    padding: 12px 0;    /* テキストの上下に余白 */
+    font-size: 1.3rem;
+}
