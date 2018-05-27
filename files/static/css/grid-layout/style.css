@@ -8,11 +8,11 @@ html {
 }
 body {
     padding: 30px;
-    /* background-color: #f6f7fb; */
+    /* background-color: #f6f7fb; fbfaf5 */
     background-color: #f8f4e6;
     color: #333333;
     font-size: 1.2rem;
-    font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    font-family: Griffy, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 
 /*
@@ -48,7 +48,7 @@ a:link, a:visited, a:hover, a:active {
 .nav {
     margin: 35px auto 10px;  /* nav の上部に間隔をあける */
 }
-.nav-item {
+.nav-category {
     margin-top: 20px;   /* リスト項目の間を20pxずつあける。一番上の項目はマージンが相殺されるので空き過ぎないとのこと。 */
     /* ブロックレベル要素のマージンは相殺される
      * - 隣接した要素の上下のマージン（マージンの値が異なる場合は大きほうになる）
@@ -57,13 +57,13 @@ a:link, a:visited, a:hover, a:active {
     text-align: center;
     letter-spacing: 1px;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 2.0rem;
 }
 /* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
-.nav-item a {
+.nav-category a {
     display: inline-block;  /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
 }
-.nav-item a::after {
+.nav-category a::after {
     content: '';
     display: block;         /* ブロックレベルの::after擬似要素を作る */
     width: 0;               /* 通常時には見えないように横幅を 0 にする */
@@ -73,10 +73,17 @@ a:link, a:visited, a:hover, a:active {
     /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
     /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
 }
-.nav-item a:hover::after {
+.nav-category a:hover::after {
     width: 100%;     /* リンクにホバーしたときの ::after 擬似要素の横幅を指定 */
 }
-
+.nav-article {
+    margin-top: 5px;
+    font-weight: normal;
+    font-size: 1.1rem;
+}
+.nav-article a::after {
+    margin: 3px auto 0;
+}
 /* --------------------------------
  * box
  * -------------------------------- */
@@ -100,14 +107,14 @@ a:link, a:visited, a:hover, a:active {
     display: block;  /* 縦に並ぶブロックレベル要素 */
     width: 100%      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
 }
-.item .category {
+.item .title {
     margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
     color: #aaaaaa;
     letter-spacing: 1px;
-    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;  /* フォントの種類を変えたいときは先頭に付け足す */
+
 }
 /* カテゴリー左横の円 */
-.item .category::before {
+.item .title::before {
     content: '';            /* before擬似要素を表示するために指定 */
     display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
     width: 19px;
@@ -117,7 +124,16 @@ a:link, a:visited, a:hover, a:active {
     border-radius: 50%;     /* 50%で円になる */
     vertical-align: -5px;   /* 縦方向の位置調整 */
 }
-.item .description {  /* 行間と間隔を指定 */
+.item .category {  /* 行間と間隔を指定 */
+    margin: 10px 10px 5px;
+    line-height: 1.5;
+}
+.item .date {  /* 行間と間隔を指定 */
+    display: block;
+    margin: 5px 10px 10px;
+    line-height: 1.5;
+}
+.item .description {
     margin: 10px;
     line-height: 1.5;
 }
@@ -177,7 +193,7 @@ a:link, a:visited, a:hover, a:active {
     text-align: center;
     letter-spacing: 3px;
     font-size: 1.6rem;
-    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+
     opacity: 0;     /* 普段は非表示 */
     transition: all 0.3s ease-in-out;
 }
@@ -188,18 +204,18 @@ a:link, a:visited, a:hover, a:active {
 
 /* カテゴリーごとに色分け */
 .item-maindish,
-.item-maindish .category::before {
+.item-maindish .title::before {
     border-color: #FFC0CB;
 }
 .item-appetizer,
-.item-appetizer .category::before {
+.item-appetizer .title::before {
     border-color: #76C047;
 }
 .item-column,
-.item-column .category::before {
+.item-column .title::before {
     border-color: #FFF100;
 }
 .item-breaktime,
-.item-breaktime .category::before {
+.item-breaktime .title::before {
     border-color: #C1EFFF;
 }

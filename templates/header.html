@@ -1,20 +1,20 @@
 <header class="header item">
   <h1>
-    <a href="#">
+    <a href="/">
       {# TODO: ここはアイコンフォントに変えたい #}
       <img class="logo" src="/static/images/grid-layout/logo.png" alt="SAMPLE SITE 2">
     </a>
   </h1>
   <nav class="nav">
     <ul>
-      <li class="nav-item"><a href="/">HOME</a></li>
+      <li class="nav-category"><a href="/">HOME</a></li>
       {% set items = contents.group_items(group='category') %}
       {% for categories, articles in items %}
-      {# TODO: ここ CSS どうにかする #}
-        <li class="nav-item"><a href="#">{{ ', '.join(categories) }}</a>
+        {% set category = ', '.join(categories) %}
+        <li class="nav-category"><a href="/index_category_category_{{ category }}.html">{{ category }}</a>
           <ul>
             {% for article in articles %}
-              <li>
+              <li class="nav-article">
                 <a href="{{ article.path() }}">{{ article.title }}</a>
               </li>
             {% endfor %}

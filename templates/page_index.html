@@ -1,7 +1,6 @@
 {% extends "./base.html" %}
-{# これは目次ページだよ #}
+
 {% block main %}
-  {# 大きい箱: カテゴリ別一覧 #}
   {# 中くらいの箱: 更新履歴リスト #}
   <section class="item item-l item-maindish">
     <a href="#">
@@ -9,7 +8,7 @@
         {# TODO: シングルLの背景画像が動かないやつやりたい #}
         <img src="/static/images/grid-layout/shibutouge.png" alt="横手山">
       </div>
-      <div class="category">MAIN DISH</div>
+      <div class="title">MAIN DISH</div>
       <p class="description">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
       </p>
@@ -27,14 +26,13 @@
         <div class="image">
           <img src="/static/images/grid-layout/labrador.png" alt="犬">
         </div>
-        <div class="category">{{ article.title }}</div>
-        <p class="description">
-          {# TODO: ここはあとできれいにする #}
+        <div class="title">{{ article.title }}</div>
+        <p class="category">
           {{ article.category }}
-          {{ ', '.join(article.tags) }}
-          {{ article.date.strftime('%Y-%m-%d %a') }}
-          {# TODO: 本文の最初の方だけ出したりできないのかな・・ #}
         </p>
+        <time class="date" datetime="{{ article.date }}">
+          {{ article.date.strftime('%Y-%m-%d %a') }}
+        </time>
       </a>
     </section>
   {% endfor %}
