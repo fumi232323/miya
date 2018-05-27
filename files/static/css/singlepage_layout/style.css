@@ -368,4 +368,22 @@ body {
         background-size: cover; /* 背景画像をその要素を覆う最小サイズまで引き伸ばす */
         transform: none;        /* 画像の上下反転を元に戻す */
     }
+
+    /* MY SKILLS */
+    .skills-wrapper,
+    .skill-box {
+        display: block;     /* アイコンを縦に並べる */
+    }
+    .skill-icon {           /* アイコンサイズを小さくする */
+        width: 100px;
+        height: 100px;
+        font-size: 5rem;
+        line-height: 92px;
+    }
+    .skill-box {
+        margin: 40px auto;  /* 上下の間隔をとる */
+    }
+    .skill-text {
+        margin: 0;          /* 縦並びになったので、横のマージンは不要になった */
+    }
 }
