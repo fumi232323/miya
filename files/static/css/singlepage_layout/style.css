@@ -320,4 +320,23 @@ body {
 @media (max-width: 768px) {
     /* SP と縦向きに持ったタブレット用 */
     /* viewport の幅が 768px 以下の場合に適用される */
+    .header {
+        padding-top: 60px;  /* ヘッダー上部の余白を狭め */
+    }
+    .site-title-sub::before,
+    .site-title-sub::after {
+        display: block;     /* 画面幅が狭い場合は上下に罫線がくるようにする */
+        width: 80%;         /* 罫線のサイズを調整 */
+        margin: 10px auto;  /* 上下に間隔をとる */
+    }
+    .site-title-sub {
+        font-size: 1.7rem;  /* サブタイトル自体も一行に収まるように文字サイズを小さくする */
+    }
+    .site-title {           /* タイトル文字サイズをちょうどよくする */
+        margin-top: 35px;
+        font-size: 5rem;
+    }
+    .button:hover {         /* iOS8 対応 & SPではそもそもホバースタイルは不要のため、無効化する。 */
+        opacity: 1;
+    }
 }
