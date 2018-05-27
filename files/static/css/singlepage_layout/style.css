@@ -317,6 +317,11 @@ body {
  *   - 条件を指定したい CSS を同じファイルに記述し、 メディアクエリの構文で囲む方法
  *     - ↓ これ
  * -------------------------------- */
+@media (max-width: 1024px) {
+    body {
+        background-image: none;     /* タブレットと SP で背景画像を解除 */
+    }
+}
 @media (max-width: 768px) {
     /* SP と縦向きに持ったタブレット用 */
     /* viewport の幅が 768px 以下の場合に適用される */
@@ -385,5 +390,13 @@ body {
     }
     .skill-text {
         margin: 0;          /* 縦並びになったので、横のマージンは不要になった */
+    }
+
+    /* CONTACT */
+    .contact-form {
+        width: 80%;         /* 幅を広げる */
+    }
+    .contact {
+        padding-bottom: 80px;   /* 下部の余白を調節 */
     }
 }
