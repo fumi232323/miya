@@ -1,49 +1,61 @@
 {% extends "./base.html" %}
-
+{# これは目次ページだよ #}
 {% block main %}
+  {# 大きい箱: カテゴリ別一覧 #}
+  {# 中くらいの箱: 更新履歴リスト #}
+  <section class="item item-l item-maindish">
+    <a href="#">
+      <div class="image">
+        {# TODO: シングルLの背景画像が動かないやつやりたい #}
+        <img src="/static/images/grid-layout/shibutouge.png" alt="横手山">
+      </div>
+      <div class="category">MAIN DISH</div>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
+      </p>
+    </a>
+  </section>
 
-  <h2 class="hidden">HOT TOPIC</h2>
-  <a href="{{ articles[0].path() }}" class="hot-topic clearfix">
-    <img class="image" src="/static/images/retriever.png" alt="HOT TOPICの絵">
-    <div class="content">
-      <h3 class="title">{{ articles[0].title }}</h3>
-      <p class="desc">{{ articles[0].category }}</p>
-      <time class="date" datetime="{{ articles[0].date }}">
-        {{ articles[0].date.strftime('%Y-%m-%d %a') }}
-      </time>
-    </div>
-  </a>
-
-  <h2 class="heading">NEWS</h2>
-  <ul class="scroll-list">
-    {% for article in articles %}
-      <li class="scroll-item">
-        <a href="{{ article.path() }}">
-          <time class="date" datetime="{{ article.date }}">
-            {{ article.date.strftime('%Y-%m-%d %a') }}
-          </time>
-          <span class="category news">{{ article.category }}</span>
-          <span class="title">{{ article.title }}</span>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <h2 class="hidden">ARTICLES</h2>
-  <div class="clearfix">
-    {% for article in articles %}
-      <a href="{{ article.path() }}" class="article-box">
-        <h3 class="title">{{ article.title }}</h3>
-        <p class="desc">{{ article.category }}</p>
-        <p class="desc">{{ ', '.join(article.tags) }}</p>
-        <time class="date" datetime="{{ article.date }}">
+  {% for article in articles %}
+    {% if loop.index is divisibleby(3) %}
+      {% set item_size = 'item-m' %}
+    {% else %}
+      {% set item_size='' %}
+    {% endif %}
+    <section class="item {{ item_size }} item-{{ article.category }}"><!-- sectionタグ: ボックスごとのまとまりを明示的に区切ることができる -->
+      <a href="{{ article.path() }}">
+        <div class="image">
+          <img src="/static/images/grid-layout/labrador.png" alt="犬">
+        </div>
+        <div class="category">{{ article.title }}</div>
+        <p class="description">
+          {# TODO: ここはあとできれいにする #}
+          {{ article.category }}
+          {{ ', '.join(article.tags) }}
           {{ article.date.strftime('%Y-%m-%d %a') }}
-        </time>
-        <img class="image" src="/static/images/labrador.png" alt="記事の箱の絵">
+          {# TODO: 本文の最初の方だけ出したりできないのかな・・ #}
+        </p>
       </a>
-    {% endfor %}
-  </div>
+    </section>
+  {% endfor %}
 
+<!-- CDNからライブラリを読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.js"></script>
+  <script>
+    $('#container').imagesLoaded(function(){
+        // 画像読み込みが完了したら、Masonryする
+        new Masonry(
+          // 親要素のセレクタを指定
+            'body', {
+                itemSelector: '.item',  // ボックス要素のセレクタ
+                columnWidth: 180,       // グリッドの横幅
+                gutter: 4               // 左右のボックスとの間隔。上下の間隔はCSSで指定する必要がある。
+            }
+        )
+    });
+  </script>
 {% endblock main %}
 
 

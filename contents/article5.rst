@@ -1,7 +1,7 @@
 .. article::
    :date: 2018-05-08
    :title: 記事5だよ
-   :category: カテゴリ2
+   :category: maindish
    :tags: タグ1, タグ2
 
 これは1番目の記事だよ

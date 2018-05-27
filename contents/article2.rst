@@ -1,7 +1,7 @@
 .. article::
    :date: 2018-05-05
    :title: 記事2だよ
-   :category: カテゴリ2
+   :category: appetizer
    :tags: タグ1, タグ2
 
 これは2番目の記事だよ

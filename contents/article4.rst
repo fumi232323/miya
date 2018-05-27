@@ -1,7 +1,7 @@
 .. article::
    :date: 2018-05-07
    :title: 記事4だよ
-   :category: カテゴリ1
+   :category: breaktime
    :tags: タグ1, タグ2
 
 これは1番目の記事だよ

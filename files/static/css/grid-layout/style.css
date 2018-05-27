@@ -8,7 +8,8 @@ html {
 }
 body {
     padding: 30px;
-    background-color: #f6f7fb;
+    /* background-color: #f6f7fb; */
+    background-color: #f8f4e6;
     color: #333333;
     font-size: 1.2rem;
     font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;

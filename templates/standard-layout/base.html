@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang }}">
+
+  <head>
+    <meta charset="{{ page.charset }}">
+    <title>{{ page.title }}/{{ page.site_title }}</title>
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/style.css?20180506">
+  </head>
+
+  <body>
+
+    <header class="header">
+      {% include "/header.html" %}
+    </header>
+
+    <div class="wrapper clearfix">
+      <main id="main" class="main">
+        {% block main %}{% endblock main %}
+      </main>
+      <div class="sidemenu">
+        {% include "/sidemenu.html" %}
+      </div>
+    </div>
+
+    <footer class="footer">
+      {% include "/footer.html" %}
+    </footer>
+
+  </body>
+</html>

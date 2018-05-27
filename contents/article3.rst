@@ -1,7 +1,7 @@
 .. article::
    :date: 2018-05-06
    :title: 記事3だよ
-   :category: カテゴリ3
+   :category: column
    :tags: タグ1, タグ2
 
 これは3番目の記事だよ

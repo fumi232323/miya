@@ -1,13 +1,26 @@
-<h1 class="logo">
-  <a href="/">{{ page.site_title }}</a>
-</h1>
-<nav class="global-nav">
-  <ul>
-    <li class="nav-item active"><a href="/">HOME</a></li>
-    <li class="nav-item"><a href="/">ABOUT</a></li>
-    <li class="nav-item"><a href="/">NEWS</a></li>
-    <li class="nav-item"><a href="/grid-layout.html">TOPICS</a></li>
-    <li class="nav-item"><a href="/singlepage_layout.html">DOCS</a></li>
-    <li class="nav-item"><a href="/">BLOG</a></li>
-  </ul>
-</nav>
+<header class="header item">
+  <h1>
+    <a href="#">
+      {# TODO: ここはアイコンフォントに変えたい #}
+      <img class="logo" src="/static/images/grid-layout/logo.png" alt="SAMPLE SITE 2">
+    </a>
+  </h1>
+  <nav class="nav">
+    <ul>
+      <li class="nav-item"><a href="/">HOME</a></li>
+      {% set items = contents.group_items(group='category') %}
+      {% for categories, articles in items %}
+      {# TODO: ここ CSS どうにかする #}
+        <li class="nav-item"><a href="#">{{ ', '.join(categories) }}</a>
+          <ul>
+            {% for article in articles %}
+              <li>
+                <a href="{{ article.path() }}">{{ article.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
