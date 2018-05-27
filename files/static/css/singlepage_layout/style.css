@@ -320,6 +320,9 @@ body {
 @media (max-width: 768px) {
     /* SP と縦向きに持ったタブレット用 */
     /* viewport の幅が 768px 以下の場合に適用される */
+    body {
+        font-size: 1.3rem;  /* 画面幅が狭いときは、ベースの文字サイズを 1px 小さくする */
+    }
     .header {
         padding-top: 60px;  /* ヘッダー上部の余白を狭め */
     }
@@ -338,5 +341,13 @@ body {
     }
     .button:hover {         /* iOS8 対応 & SPではそもそもホバースタイルは不要のため、無効化する。 */
         opacity: 1;
+    }
+
+    /* ABOUT ME */
+    .heading {
+        font-size: 2.5rem;
+    }
+    .about-text {
+        line-height: 1.8;   /* 行間を調整 */
     }
 }
