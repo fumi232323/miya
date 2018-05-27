@@ -350,4 +350,22 @@ body {
     .about-text {
         line-height: 1.8;   /* 行間を調整 */
     }
+
+    /* WORKS */
+    .works-wrapper,
+    .work-box {
+        display: block;     /* 縦に並べなおす */
+    }
+    .work-image {
+        display: none;      /* 画像を非表示 */
+    }
+    .work-description {
+        position: relative; /* 説明を通常の位置に配置 */
+    }
+    .work-box::after {          /* 薄く表示されている背景画像を各作品紹介ブロックの大きさいっぱいに伸ばす */
+        top: 0;
+        height: 100%;
+        background-size: cover; /* 背景画像をその要素を覆う最小サイズまで引き伸ばす */
+        transform: none;        /* 画像の上下反転を元に戻す */
+    }
 }
