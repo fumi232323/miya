@@ -1,27 +1,15 @@
 {% extends "./base.html" %}
 
 {% block main %}
-  {# 中くらいの箱: 更新履歴リスト #}
-  <section class="item item-l item-maindish">
-    <a href="#">
-      <div class="image">
-        {# TODO: シングルLの背景画像が動かないやつやりたい #}
-        <img src="/static/images/grid-layout/shibutouge.png" alt="横手山">
-      </div>
-      <div class="title">MAIN DISH</div>
-      <p class="description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidiunt ut labore magna aliqua
-      </p>
-    </a>
-  </section>
-
   {% for article in articles %}
-    {% if loop.index is divisibleby(3) %}
+    {% if loop.first %}
+      {% set item_size = 'item-l' %}
+    {% elif loop.index is divisibleby(3) %}
       {% set item_size = 'item-m' %}
     {% else %}
       {% set item_size='' %}
     {% endif %}
-    <section class="item {{ item_size }} item-{{ article.category }}"><!-- sectionタグ: ボックスごとのまとまりを明示的に区切ることができる -->
+    <section class="item {{ item_size }} item-{{ article.category }}">
       <a href="{{ article.path() }}">
         <div class="image">
           <img src="/static/images/grid-layout/labrador.png" alt="犬">

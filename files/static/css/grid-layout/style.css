@@ -8,7 +8,6 @@ html {
 }
 body {
     padding: 30px;
-    /* background-color: #f6f7fb; fbfaf5 */
     background-color: #f8f4e6;
     color: #333333;
     font-size: 1.2rem;
@@ -113,17 +112,13 @@ a:link, a:visited, a:hover, a:active {
 .item-l {
     width: 732px;  /* item-m * 2 + 間の隙間4 */
 }
-.item .image {
-    display: block;  /* 縦に並ぶブロックレベル要素 */
-    width: 100%      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
-}
 .item .title {
     margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
     color: #aaaaaa;
     letter-spacing: 1px;
 
 }
-/* カテゴリー左横の円 */
+/* タイトル左横の円 */
 .item .title::before {
     content: '';            /* before擬似要素を表示するために指定 */
     display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
@@ -164,13 +159,16 @@ a:link, a:visited, a:hover, a:active {
     overflow: hidden;  /* ボックスの外側にはみ出ているときは完全に隠す。触れないようにする。 */
 }
 .item .image {
+    display: block;  /* 縦に並ぶブロックレベル要素 */
+    width: 100%;      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
     position: relative;
 }
 .item .image img {
     width: 100%;
 }
 /* ホバーしたときに画像部分を暗くする */
-.item > a .image::before {         /* リンクになっているボックスのみに表示したいので、 .item 直下の a 要素の ::before 擬似要素を使用する */
+/* リンクになっているボックスのみに表示したいので、 .item 直下の a 要素の ::before 擬似要素を使用する */
+.item > a .image::before {
     content: '';
     position: absolute;
     /* Mansonry によって,自動的に .item に position: absolute が指定されているので、
@@ -203,7 +201,7 @@ a:link, a:visited, a:hover, a:active {
     text-align: center;
     letter-spacing: 3px;
     font-size: 1.6rem;
-
+/*    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; */
     opacity: 0;     /* 普段は非表示 */
     transition: all 0.3s ease-in-out;
 }
@@ -213,6 +211,9 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* カテゴリーごとに色分け */
+.item-header {
+    border-color: #7C5119;
+}
 .item-maindish,
 .item-maindish .title::before {
     border-color: #FFC0CB;
