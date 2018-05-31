@@ -1,7 +1,16 @@
 {% extends "./base.html" %}
 
 {% block main %}
-  <div id="article-main" class="article-main">
+  <section class="item item-l item-{{ page.category }}">
+    <div class="title">{{ page.title }}</div>
+    <a href="/index_category_category_{{ page.category }}.html">
+      <p class="category">
+        {{ page.category }}
+      </p>
+    </a>
+    <time class="date" datetime="{{ page.date }}">
+      {{ page.date.strftime('%Y-%m-%d %a') }}
+    </time>
     {{ page.html }}
-  </div>
+  </section>
 {% endblock main %}
