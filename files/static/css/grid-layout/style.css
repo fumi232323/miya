@@ -83,7 +83,7 @@ a:link, a:visited, a:hover, a:active {
 .nav-article {
     margin-top: 5px;
     font-weight: normal;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 .nav-article a::after {
     margin: 3px auto 0;
@@ -112,7 +112,6 @@ a:link, a:visited, a:hover, a:active {
     margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
     color: #aaaaaa;
     letter-spacing: 1px;
-
 }
 /* タイトル左横の円 */
 .item .title::before {
@@ -132,10 +131,6 @@ a:link, a:visited, a:hover, a:active {
 .item .date {  /* 行間と間隔を指定 */
     display: block;
     margin: 5px 10px 10px;
-    line-height: 1.5;
-}
-.item .description {
-    margin: 10px;
     line-height: 1.5;
 }
 .item > a {

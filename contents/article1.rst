@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-05-04
-   :title: これは1番目の記事だよ
+   :title: これは1番目の記事だよ、要素名ではなくクラスに対してスタイルを指定する
    :category: maindish
    :tags: タグ1, タグ2
    :canonical_url: /article1.html
