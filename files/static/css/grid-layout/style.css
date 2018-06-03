@@ -111,7 +111,9 @@ a:link, a:visited, a:hover, a:active {
 .item .title {
     margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
     color: #aaaaaa;
+    font-size: 1.4rem;
     letter-spacing: 1px;
+    line-height: 1.5;
 }
 /* タイトル左横の円 */
 .item .title::before {
@@ -122,7 +124,7 @@ a:link, a:visited, a:hover, a:active {
     margin-right: 5px;
     border: 2px solid;
     border-radius: 50%;     /* 50%で円になる */
-    vertical-align: -5px;   /* 縦方向の位置調整 */
+    vertical-align: -4px;   /* 縦方向の位置調整 */
 }
 .item .category {  /* 行間と間隔を指定 */
     margin: 10px 10px 5px;
@@ -201,31 +203,82 @@ a:link, a:visited, a:hover, a:active {
     left: 50%;      /* ホバー時は真ん中 */
     opacity: 1;     /* ホバー時は表示 */
 }
-
 /* カテゴリーごとに色分け */
 .item-header {
     border-color: #7C5119;
 }
 .item-maindish,
-.item-maindish .title::before {
+.item-maindish .title::before,
+.article .item-maindish .title::before {
     border-color: #FFC0CB;
 }
 .item-appetizer,
-.item-appetizer .title::before {
+.item-appetizer .title::before,
+.article .item-appetizer .title::before {
     border-color: #76C047;
 }
 .item-column,
-.item-column .title::before {
+.item-column .title::before,
+.article .item-column .title::before {
     border-color: #FFF100;
 }
 .item-breaktime,
-.item-breaktime .title::before {
+.item-breaktime .title::before,
+.article .item-breaktime .title::before{
     border-color: #C1EFFF;
 }
 
 /* --------------------------------
  * article あとできれいにすること
  * -------------------------------- */
+.article {
+    position: absolute;
+    top: 30px;
+    left: 214px;
+    right: 30px;
+}
+.item-article {
+    width: 100%;        /* 横幅の指定 */
+    padding: 40px;      /* ボックス内の余白を上書き */
+}
+.article .title {
+    margin: auto;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+/* タイトル左横の円 */
+.article .title::before {
+    width: 25px;            /* 大きさを上書き */
+    height: 25px;
+    border: 3px solid;      /* 線の太さを上書き */
+    vertical-align: -3px;   /* 縦方向の位置調整を上書き */
+}
+.article .item > a {
+    display: inline-block;
+    margin: 10px auto 10px;
+    padding: 8px 8px 8px;
+}
+.article .category-article{
+    font-size: 1.4rem;
+}
+.article .date-article{
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.4rem;
+    color: #777777;
+}
+.article .text {
+    line-height: 1.5;
+}
 /* h1 */
+.article h1 {
+    font-size: 1.6rem;
+}
 /* h2 */
+.article h2 {
+    font-size: 1.4rem;
+}
 /* h3 */
+.article h3 {
+    font-size: 1.2rem;
+}

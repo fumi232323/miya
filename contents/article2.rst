@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-05-05
-   :title: 記事2だよ
+   :title: 記事2だよ、春は曙、やうやう白くなりゆく山際すこしあかりて、紫だちたる雲の細くたなびきたる。
    :category: appetizer
    :tags: タグ1, タグ2
 

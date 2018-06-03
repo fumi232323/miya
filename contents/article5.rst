@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-05-08
-   :title: 記事5だよ
+   :title: 記事5だよ、夏は夜、月の頃はさらなり、闇もなほ螢飛びちがひたる、雨などの降るさへをかし。
    :category: maindish
    :tags: タグ1, タグ2
 

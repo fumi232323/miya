@@ -1,16 +1,22 @@
 {% extends "./base.html" %}
 
 {% block main %}
-  <section class="item item-article item-{{ page.category }}">
-    <div class="title">{{ content.title }}</div>
-    <a href="/index_category_category_{{ page.category }}.html">
-      <p class="category">
-        {{ content.category }}
-      </p>
-    </a>
-    <time class="date" datetime="{{ page.date }}">
-      {{ content.date.strftime('%Y-%m-%d %a') }}
-    </time>
-    {{ content.html }}
-  </section>
+  <div class="article">
+    <main class="item item-article item-{{ page.category }}">
+      <time class="date-article" datetime="{{ page.date }}">
+        {{ content.date.strftime('%Y-%m-%d %a') }}
+      </time>
+      <div class="title">{{ content.title }}</div>
+      <a href="/index_category_category_{{ page.category }}.html">
+        <p class="category-article">
+          {{ content.category }}
+        </p>
+      </a>
+
+      <div class="text">
+        {{ content.html }}
+        <a href="#">リンクだよ</a>
+      </div>
+    </main>
+  </div>
 {% endblock main %}
