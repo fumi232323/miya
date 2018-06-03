@@ -7,12 +7,12 @@
 {% block main %}
   <div class="article">
     <main class="item item-article item-{{ page.category }}">
-      <time class="date-article" datetime="{{ page.date }}">
+      <time class="date" datetime="{{ page.date }}">
         {{ content.date.strftime('%Y-%m-%d %a') }}
       </time>
       <div class="title">{{ content.title }}</div>
       <a href="/index_category_category_{{ page.category }}.html">
-        <p class="category-article">
+        <p class="category">
           {{ content.category }}
         </p>
       </a>

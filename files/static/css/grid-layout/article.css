@@ -1,75 +1,72 @@
 /* --------------------------------
  * article
  * -------------------------------- */
+/* article パートの表示位置を指定 */
 .article {
     position: absolute;
     top: 30px;
     left: 214px;
     right: 30px;
 }
+/* article item の大きさを指定 */
 .item-article {
-    width: 100%;        /* 横幅の指定 */
-    padding: 40px;      /* ボックス内の余白を上書き */
+    width: 100%;        /* びよーんと伸び縮みしたい */
+    padding: 40px;      /* ボックス内の余白を普通の item より広くとる */
 }
-.article .title {
-    margin: auto;
-    font-size: 2.4rem;
+.item .title {
+    margin: 20px 0 20px;
+    color: #aaaaaa;
+    font-size: 4rem;
     font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.4;
 }
 /* タイトル左横の円 */
-.article .title::before {
-    width: 25px;            /* 大きさを上書き */
-    height: 25px;
-    border: 3px solid;      /* 線の太さを上書き */
-    vertical-align: -3px;   /* 縦方向の位置調整を上書き */
+.item .title::before {
+    content: '';            /* before擬似要素を表示するために指定 */
+    display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
+    width: 38px;
+    height: 38px;
+    margin-right: 5px;
+    border: 3px solid;
+    border-radius: 50%;     /* 50%で円になる */
+    vertical-align: -3px;   /* 縦方向の位置調整 */
 }
-.article .item > a {
+.item > a {
     display: inline-block;
-    margin: 10px auto 10px;
-    padding: 8px 8px 8px;
+    padding: 8px 10px 8px;
+    border-radius: inherit;     /* 親要素の値を引き継ぐ。どのCSSプロパティにも指定できる。 */
+    color: #777777;             /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
+    transition: all 0.3s;       /* 0.3秒かけてスムーズに変わるように指定 */
+    box-shadow: 0 0 8px -1px rgba(0, 0, 0, 0.3);  /* ボックスの周りに影を落とす */
 }
-.article .category-article{
-    font-size: 1.4rem;
+.item > a:hover {
+    opacity: 0.8;  /* ハイライトのような効果 */
+    background: #777777;
+    color: #FFFFFF;
 }
-.article .date-article{
-    margin-bottom: 10px;
+.item .category{
+    font-size: 2rem;
+}
+.item .date{
     display: block;
-    font-size: 1.4rem;
+    font-size: 2rem;
     color: #777777;
 }
-.article .text {
-    line-height: 1.5;
-}
-/* h1 */
-.article h1 {
+.item .text {
+    margin-top: 56px;
+    line-height: 1.9;
     font-size: 1.6rem;
 }
+/* h1 */
+.item .text h1 {
+    font-size: 1.6em;
+}
 /* h2 */
-.article h2 {
-    font-size: 1.4rem;
+.item .text h2 {
+    font-size: 1.4em;
 }
 /* h3 */
-.article h3 {
-    font-size: 1.2rem;
-}
-
-.item-maindish,
-.item-maindish .title::before,
-.article .item-maindish .title::before {
-    border-color: #FFC0CB;
-}
-.item-appetizer,
-.item-appetizer .title::before,
-.article .item-appetizer .title::before {
-    border-color: #76C047;
-}
-.item-column,
-.item-column .title::before,
-.article .item-column .title::before {
-    border-color: #FFF100;
-}
-.item-breaktime,
-.item-breaktime .title::before,
-.article .item-breaktime .title::before{
-    border-color: #C1EFFF;
+.item .text h3 {
+    font-size: 1.2em;
 }
