@@ -1,5 +1,9 @@
 {% extends "./base.html" %}
 
+{% block head %}
+  <link rel="stylesheet" href="/static/css/grid-layout/index.css?20180603">
+{% endblock head %}
+
 {% block main %}
   {% for article in articles %}
     {% if loop.first %}
