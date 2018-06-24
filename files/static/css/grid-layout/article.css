@@ -1,16 +1,10 @@
 /* --------------------------------
  * article
  * -------------------------------- */
-/* article パートの表示位置を指定 */
-.article {
-    position: absolute;
-    top: 30px;
-    left: 214px;
-    right: 30px;
-}
 /* article item の大きさを指定 */
 .item-article {
     width: 100%;        /* びよーんと伸び縮みしたい */
+    margin-left: 4px;   /* ヘッダーとの隙間をあける */
     padding: 40px;      /* ボックス内の余白を普通の item より広くとる */
 }
 .item .title {

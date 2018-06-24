@@ -28,12 +28,25 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* --------------------------------
+ * flexbox
+ * -------------------------------- */
+.container {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.header {
+    flex-grow: 0;
+}
+.main {
+    flex-grow: 1;
+}
+
+/* --------------------------------
  * header
  * -------------------------------- */
-.header {
-    padding: 25px 0;  /* 上下の余白 */
-    border-bottom: none;
+.item-header {
     text-align: center;
+    border-color: #7C5119;
 }
 .logo {
     width: 140px;       /* 外枠のサイズ。 i 要素の display プロパティの初期値は inline ですが、 Font Awesome の CSS により inline-block になってるので、サイズ指定できる。 */
@@ -100,9 +113,7 @@ a:link, a:visited, a:hover, a:active {
     border-radius: 5px;
     background-color: #FFFFFF;
 }
-.item-header {
-    border-color: #7C5119;
-}
+
 /* カテゴリーごとに色分け TODO: 色がつかなくなったので、あとで考える */
 .item-maindish,
 .item-maindish .title::before {

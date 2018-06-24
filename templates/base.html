@@ -14,8 +14,10 @@
   </head>
 
   <body>
-    {% include "/header.html" %}
-    {% block main %}{% endblock main %}
+    <div class="container">
+      <div class="header">{% include "/header.html" %}</div>
+      <div class="main">{% block main %}{% endblock main %}</div>
+    </div>
   </body>
 
 </html>
