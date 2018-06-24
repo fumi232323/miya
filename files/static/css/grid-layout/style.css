@@ -23,7 +23,7 @@ body {
     box-sizing: border-box;  /* padding と border を含めた要素全体のサイズを width と height で指定できるようになる。 */
 }
 a:link, a:visited, a:hover, a:active {
-    color: #f08300;
+    color: #777777;
     text-decoration: none;
 }
 
@@ -79,6 +79,7 @@ a:link, a:visited, a:hover, a:active {
 /* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
 .nav-category a {
     display: inline-block;  /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
+    color: #7C5119;
 }
 .nav-category a::after {
     content: '';
@@ -114,7 +115,7 @@ a:link, a:visited, a:hover, a:active {
     background-color: #FFFFFF;
 }
 
-/* カテゴリーごとに色分け TODO: 色がつかなくなったので、あとで考える */
+/* カテゴリーごとに色分け */
 .item-maindish,
 .item-maindish .title::before {
     border-color: #FFC0CB;

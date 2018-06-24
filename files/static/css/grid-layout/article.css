@@ -7,7 +7,12 @@
     margin-left: 4px;   /* ヘッダーとの隙間をあける */
     padding: 40px;      /* ボックス内の余白を普通の item より広くとる */
 }
-.item .title {
+.date{
+    display: block;
+    font-size: 2rem;
+    color: #777777;
+}
+.title {
     margin: 20px 0 20px;
     color: #aaaaaa;
     font-size: 4rem;
@@ -16,7 +21,7 @@
     line-height: 1.4;
 }
 /* タイトル左横の円 */
-.item .title::before {
+.title::before {
     content: '';            /* before擬似要素を表示するために指定 */
     display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
     width: 38px;
@@ -26,41 +31,52 @@
     border-radius: 50%;     /* 50%で円になる */
     vertical-align: -3px;   /* 縦方向の位置調整 */
 }
-.item > a {
+.category > a {
     display: inline-block;
     padding: 8px 10px 8px;
-    border-radius: inherit;     /* 親要素の値を引き継ぐ。どのCSSプロパティにも指定できる。 */
+    border-radius: 5px;
     color: #777777;             /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
     transition: all 0.3s;       /* 0.3秒かけてスムーズに変わるように指定 */
     box-shadow: 0 0 8px -1px rgba(0, 0, 0, 0.3);  /* ボックスの周りに影を落とす */
 }
-.item > a:hover {
+.category > a:hover {
     opacity: 0.8;  /* ハイライトのような効果 */
     background: #777777;
     color: #FFFFFF;
 }
-.item .category{
+.category{
     font-size: 2rem;
 }
-.item .date{
-    display: block;
-    font-size: 2rem;
-    color: #777777;
-}
-.item .text {
-    margin-top: 56px;
+
+.text {
     line-height: 1.9;
     font-size: 1.6rem;
 }
+
+.text h1, .text h2, .text h3, .text h4, .text h5, .text h6 {
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 2.2em;
+    margin-bottom: 2.4rem;
+}
 /* h1 */
-.item .text h1 {
-    font-size: 1.6em;
+.text h1 {
+    font-size: 1.8em;
+    border-bottom: 1px solid #aaaaaa;
+    padding-bottom: .1em;
 }
 /* h2 */
-.item .text h2 {
-    font-size: 1.4em;
+.text h2 {
+    font-size: 1.6em;
 }
 /* h3 */
-.item .text h3 {
-    font-size: 1.2em;
+.text h3 {
+    font-size: 1.4em;
 }
+
+/* TODO: あといるもの */
+/* code タグ */
+/* .code-block */
+/* リストいる？ ul li  */
+/* リンク？ a */
+

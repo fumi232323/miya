@@ -9,7 +9,7 @@
 .item-l {
     width: 732px;  /* item-m * 2 + 間の隙間4 */
 }
-.item .title {
+.title {
     margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
     color: #aaaaaa;
     font-size: 1.4rem;
@@ -17,7 +17,7 @@
     line-height: 1.5;
 }
 /* タイトル左横の円 */
-.item .title::before {
+.title::before {
     content: '';            /* before擬似要素を表示するために指定 */
     display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
     width: 19px;
@@ -27,11 +27,11 @@
     border-radius: 50%;     /* 50%で円になる */
     vertical-align: -4px;   /* 縦方向の位置調整 */
 }
-.item .category {  /* 行間と間隔を指定 */
+.category {  /* 行間と間隔を指定 */
     margin: 10px 10px 5px;
     line-height: 1.5;
 }
-.item .date {  /* 行間と間隔を指定 */
+.date {  /* 行間と間隔を指定 */
     display: block;
     margin: 5px 10px 10px;
     line-height: 1.5;
@@ -52,12 +52,12 @@
 .item {
     overflow: hidden;  /* ボックスの外側にはみ出ているときは完全に隠す。触れないようにする。 */
 }
-.item .image {
+.image {
     display: block;  /* 縦に並ぶブロックレベル要素 */
     width: 100%;      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
     position: relative;
 }
-.item .image img {
+.image img {
     width: 100%;
     height: 100%;
 }
