@@ -10,11 +10,11 @@
       {{ content.date.strftime('%Y-%m-%d %a') }}
     </time>
     <div class="title">{{ content.title }}</div>
-    <a href="/index_category_category_{{ page.category }}.html">
-      <p class="category">
-        {{ content.category }}
-      </p>
-    </a>
+    <div class="category">
+      <a href="/index_category_category_{{ page.category }}.html">
+          {{ content.category }}
+      </a>
+    </div>
     <div class="text">
       {{ content.html }}
       <a href="#">リンクだよ</a>
