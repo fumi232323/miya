@@ -8,7 +8,7 @@ html {
 }
 body {
     padding: 30px;
-    background-color: #f8f4e6;
+    background-color: #eaf4fc;
     color: #333333;
     font-size: 1.2rem;
     font-family: Griffy,  "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
@@ -46,13 +46,13 @@ a:link, a:visited, a:hover, a:active {
  * -------------------------------- */
 .item-header {
     text-align: center;
-    border-color: #7C5119;
+    border-color: #0f2350;
 }
 .logo {
     width: 140px;       /* 外枠のサイズ。 i 要素の display プロパティの初期値は inline ですが、 Font Awesome の CSS により inline-block になってるので、サイズ指定できる。 */
     height: 140px;
     border-radius: 50%;     /* 丸型にする */
-    background-color: #7C5119;
+    background-color: #0f2350;
     color: #FFFFFF;         /* アイコンの色を指定 */
     font-size: 8rem;        /* アイコンはアイコンフォントなので、 font-size プロパティで大きさを指定する。 */
     line-height: 140px;     /* 縦方向の中央寄せ。高さの 150px から上下の border4px * 2 分を除いた値。 */
@@ -79,14 +79,14 @@ a:link, a:visited, a:hover, a:active {
 /* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
 .nav-category a {
     display: inline-block;  /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
-    color: #7C5119;
+    color: #0f2350;
 }
 .nav-category a::after {
     content: '';
     display: block;         /* ブロックレベルの::after擬似要素を作る */
     width: 0;               /* 通常時には見えないように横幅を 0 にする */
     margin: 6px auto 0;     /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */
-    border-bottom: 1px solid #7C5119;
+    border-bottom: 1px solid #0f2350;
     transition: width 0.3s ease-in-out;
     /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
     /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
