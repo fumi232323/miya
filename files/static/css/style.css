@@ -116,19 +116,23 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* カテゴリーごとに色分け */
-.item-maindish,
-.item-maindish .title::before {
+.item-blog,
+.item-blog .title::before {
     border-color: #FFC0CB;
 }
 .item-appetizer,
 .item-appetizer .title::before {
     border-color: #76C047;
 }
-.item-column,
-.item-column .title::before {
+.item-css,
+.item-css .title::before {
     border-color: #FFF100;
 }
 .item-breaktime,
 .item-breaktime .title::before {
+    border-color: #C1EFFF;
+}
+.item-sample,
+.item-sample .title::before {
     border-color: #C1EFFF;
 }
