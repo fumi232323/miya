@@ -4,6 +4,7 @@
    :category: maindish
    :tags: タグ1, タグ2
    :canonical_url: /article1.html
+   :draft: false
 
 みかん
 =========================

@@ -3,6 +3,7 @@
    :title: 記事 4 だよ
    :category: breaktime
    :tags: タグ1, タグ2
+   :draft: false
 
 みかん
 =========================

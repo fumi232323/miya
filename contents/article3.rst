@@ -3,6 +3,7 @@
    :title: 記事3だよ
    :category: column
    :tags: タグ1, タグ2
+   :draft: false
 
 これは3番目の記事だよ
 ======================

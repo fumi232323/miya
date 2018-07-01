@@ -3,6 +3,7 @@
    :title: 記事6だよ
    :category: appetizer
    :tags: タグ1, タグ2
+   :draft: false
 
 これは6番目の記事だよ
 ======================
