@@ -75,8 +75,16 @@
 }
 
 /* TODO: あといるもの */
-/* code タグ */
-/* .code-block */
-/* リストいる？ ul li  */
-/* リンク？ a */
-
+/* リスト ol ul li  */
+/* リンク a */
+/*
+    <div class=code-block">
+    <div class="highlight">
+    ...
+*/
+/*
+    <cite>canonical_url</cite>
+*/
+/*
+    web master 登録?
+*/
