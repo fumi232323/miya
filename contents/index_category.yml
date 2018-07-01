@@ -1,0 +1,2 @@
+type: index   # YAMLファイルのタイプを index に指定
+groupby: category  # カテゴリ別のインデックスを作成

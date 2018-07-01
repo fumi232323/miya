@@ -1,0 +1,90 @@
+/* --------------------------------
+ * article
+ * -------------------------------- */
+/* article item の大きさを指定 */
+.item-article {
+    width: 100%;        /* びよーんと伸び縮みしたい */
+    margin-left: 4px;   /* ヘッダーとの隙間をあける */
+    padding: 40px;      /* ボックス内の余白を普通の item より広くとる */
+}
+.date{
+    display: block;
+    font-size: 2rem;
+    color: #777777;
+}
+.title {
+    margin: 20px 0 20px;
+    color: #aaaaaa;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+/* タイトル左横の円 */
+.title::before {
+    content: '';            /* before擬似要素を表示するために指定 */
+    display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
+    width: 38px;
+    height: 38px;
+    margin-right: 8px;
+    border: 3px solid;
+    border-radius: 50%;     /* 50%で円になる */
+    vertical-align: -3px;   /* 縦方向の位置調整 */
+}
+.category > a {
+    display: inline-block;
+    padding: 8px 10px 8px;
+    border-radius: 5px;
+    color: #777777;             /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
+    transition: all 0.3s;       /* 0.3秒かけてスムーズに変わるように指定 */
+    box-shadow: 0 0 8px -1px rgba(0, 0, 0, 0.3);  /* ボックスの周りに影を落とす */
+}
+.category > a:hover {
+    opacity: 0.8;  /* ハイライトのような効果 */
+    background: #777777;
+    color: #FFFFFF;
+}
+.category{
+    font-size: 2rem;
+}
+
+.text {
+    line-height: 1.9;
+    font-size: 1.6rem;
+}
+
+.text h1, .text h2, .text h3, .text h4, .text h5, .text h6 {
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 2.2em;
+    margin-bottom: 2.4rem;
+}
+/* h1 */
+.text h1 {
+    font-size: 1.8em;
+    border-bottom: 1px solid #aaaaaa;
+    padding-bottom: .1em;
+}
+/* h2 */
+.text h2 {
+    font-size: 1.6em;
+}
+/* h3 */
+.text h3 {
+    font-size: 1.4em;
+}
+
+/* TODO: あといるもの */
+/* リスト ol ul li  */
+/* リンク a */
+/*
+    <div class=code-block">
+    <div class="highlight">
+    ...
+*/
+/*
+    <cite>canonical_url</cite>
+*/
+/*
+    web master 登録?
+*/

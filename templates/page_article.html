@@ -1,7 +1,22 @@
 {% extends "./base.html" %}
 
+{% block head %}
+  <link rel="stylesheet" href="/static/css/article.css?20180603">
+{% endblock head %}
+
 {% block main %}
-  <div id="article-main" class="article-main">
-    {{ page.html }}
-  </div>
+  <main class="item item-article item-{{ page.category }}">
+    <time class="date" datetime="{{ page.date }}">
+      {{ content.date.strftime('%Y-%m-%d %a') }}
+    </time>
+    <div class="title">{{ content.title }}</div>
+    <div class="category">
+      <a href="/index_category_category_{{ page.category }}.html">
+          {{ content.category }}
+      </a>
+    </div>
+    <div class="text">
+      {{ content.html }}
+    </div>
+  </main>
 {% endblock main %}

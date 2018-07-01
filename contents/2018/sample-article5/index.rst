@@ -1,8 +1,10 @@
 .. article::
    :date: 2018-05-08
-   :title: 記事5だよ
-   :category: カテゴリ2
+   :title: 記事5だよ、夏は夜、月の頃はさらなり、闇もなほ螢飛びちがひたる、雨などの降るさへをかし。
+   :category: sample
    :tags: タグ1, タグ2
+   :canonical_url: /2018/sample-article5/
+   :draft: false
 
 これは1番目の記事だよ
 ======================

@@ -3,29 +3,21 @@
 
   <head>
     <meta charset="{{ page.charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>{{ page.title }}/{{ page.site_title }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Griffy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/sawarabimincho.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/style.css?20180506">
+    <link rel="stylesheet" href="/static/css/style.css?20180625">
+    {% block head %}{% endblock head %}
   </head>
 
   <body>
-
-    <header class="header">
-      {% include "/header.html" %}
-    </header>
-
-    <div class="wrapper clearfix">
-      <main id="main" class="main">
-        {% block main %}{% endblock main %}
-      </main>
-      <div class="sidemenu">
-        {% include "/sidemenu.html" %}
-      </div>
+    <div class="container">
+      <div class="header">{% include "/header.html" %}</div>
+      <div class="main">{% block main %}{% endblock main %}</div>
     </div>
-
-    <footer class="footer">
-      {% include "/footer.html" %}
-    </footer>
-
   </body>
+
 </html>
