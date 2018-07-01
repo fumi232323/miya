@@ -19,3 +19,5 @@ timezone: Asia/Tokyo
 themes:
   - miyadaiku.themes.sample.blog
 
+# デフォルトは未公開状態にする
+draft: true
