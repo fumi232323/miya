@@ -1,11 +1,12 @@
 .. article::
    :date: 2018-05-06
-   :title: 記事3だよ
-   :category: column
+   :title: 記事7だよ
+   :category: sample
    :tags: タグ1, タグ2
+   :canonical_url: /2018/sample-article7/
    :draft: false
 
-これは3番目の記事だよ
+これは7番目の記事だよ
 ======================
 
 いちご
@@ -16,4 +17,6 @@
   - さちのか
 
   - やよいひめ
+
+  - いちごはおいしい
 
