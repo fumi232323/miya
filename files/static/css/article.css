@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* --------------------------------
  * article
  * -------------------------------- */
@@ -59,29 +60,32 @@
     margin-top: 2.2em;
     margin-bottom: 2.4rem;
 }
-/* h1 */
+
 .text h1 {
     font-size: 1.8em;
     border-bottom: 1px solid #aaaaaa;
     padding-bottom: .1em;
 }
-/* h2 */
 .text h2 {
     font-size: 1.6em;
 }
-/* h3 */
 .text h3 {
     font-size: 1.4em;
+}
+
+/* code-block */
+.text .code-block {
+    line-height: 1.2;
+    font-size: 2.2rem;
+    margin: 1.6rem 0 1.6rem;
+    padding: 24px 40px 24px;
+    background: #364549;
+    color: #f8f8f2;
 }
 
 /* TODO: あといるもの */
 /* リスト ol ul li  */
 /* リンク a */
-/*
-    <div class=code-block">
-    <div class="highlight">
-    ...
-*/
 /*
     <cite>canonical_url</cite>
 */
