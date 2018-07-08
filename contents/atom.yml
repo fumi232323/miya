@@ -1,0 +1,3 @@
+type: feed   # YAMLファイルのタイプを feed に指定
+feedtype: atom  # Atomフィードを作成
+feed_num_articles: 10
