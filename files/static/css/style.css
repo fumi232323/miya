@@ -49,13 +49,9 @@ a:link, a:visited, a:hover, a:active {
     border-color: #0f2350;
 }
 .logo {
-    width: 140px;       /* 外枠のサイズ。 i 要素の display プロパティの初期値は inline ですが、 Font Awesome の CSS により inline-block になってるので、サイズ指定できる。 */
-    height: 140px;
+    width: 100%;
+    height: 164px;
     border-radius: 50%;     /* 丸型にする */
-    background-color: #0f2350;
-    color: #FFFFFF;         /* アイコンの色を指定 */
-    font-size: 8rem;        /* アイコンはアイコンフォントなので、 font-size プロパティで大きさを指定する。 */
-    line-height: 140px;     /* 縦方向の中央寄せ。高さの 150px から上下の border4px * 2 分を除いた値。 */
     transition: transform 0.3s;  /* 回っていることがわかるように、0.3秒かけて変化させる */
 }
 /* ロゴ画像をホバーすると1回転する */
@@ -120,17 +116,13 @@ a:link, a:visited, a:hover, a:active {
 .item-blog .title::before {
     border-color: #FFC0CB;
 }
-.item-appetizer,
-.item-appetizer .title::before {
+.item-miyadaiku,
+.item-miyadaiku .title::before {
     border-color: #76C047;
 }
 .item-css,
 .item-css .title::before {
     border-color: #FFF100;
-}
-.item-breaktime,
-.item-breaktime .title::before {
-    border-color: #C1EFFF;
 }
 .item-sample,
 .item-sample .title::before {
