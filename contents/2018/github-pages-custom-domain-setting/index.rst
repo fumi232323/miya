@@ -3,7 +3,7 @@
    :title: GitHub Pages にカスタムドメインを設定する
    :category: blog
    :tags: タグ1, タグ2
-   :canonical_url: /2018/github-pages-custom-domain/
+   :canonical_url: /2018/github-pages-custom-domain-setting/
    :draft: false
 
 ==================================================
