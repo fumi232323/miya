@@ -111,7 +111,10 @@ a:link, a:visited, a:hover, a:active {
     background-color: #FFFFFF;
 }
 
-/* カテゴリーごとに色分け */
+/* カテゴリーごとに色分け
+    FFC0CB, 76C047, FFF100, C1EFFF,
+    http://www.hp-stylelink.com/news/2013/07/20130708.php
+*/
 .item-blog,
 .item-blog .title::before {
     border-color: #FFC0CB;
@@ -127,4 +130,16 @@ a:link, a:visited, a:hover, a:active {
 .item-sample,
 .item-sample .title::before {
     border-color: #C1EFFF;
+}
+.item-aws,
+.item-aws .title::before {
+    border-color: #e2b2c0;
+}
+.item-vim,
+.item-vim .title::before {
+    border-color: #fff353;
+}
+.item-s3,
+.item-s3 .title::before {
+    border-color: #a5d1f4;
 }
