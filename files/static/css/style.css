@@ -39,6 +39,7 @@ a:link, a:visited, a:hover, a:active {
 }
 .main {
     flex-grow: 1;
+    min-width: 0;
 }
 
 /* --------------------------------
