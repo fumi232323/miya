@@ -90,6 +90,9 @@
 .text li li li{
     list-style-type: square;
 }
+.text li li li li{
+    list-style-type: disc;
+}
 .text .arabic li {
     list-style-type: decimal;
 }
@@ -106,7 +109,7 @@
     overflow: auto;             /* スクロールバー: はみ出したら出す */
     white-space: pre-wrap;        /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
     line-height: 1.3;
-    font-size: 2.2rem;
+    font-size: 2.0rem;
     margin: 1.6rem 0 1.6rem;
     padding: 24px 40px 24px;
     background: #364549;
