@@ -113,7 +113,6 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* カテゴリーごとに色分け
-    FFC0CB, 76C047, FFF100, C1EFFF,
     http://www.hp-stylelink.com/news/2013/07/20130708.php
 */
 .item-sample,
@@ -172,3 +171,9 @@ a:link, a:visited, a:hover, a:active {
 .item-vim .title::before {
     border-color: #e7e0aa;
 }
+.item-pycharm,
+.item-pycharm .title::before {
+    border-color: #d9de84;
+}
+
+/* 色は、16.癒しを感じる柔らかなイメージから選び中 */
