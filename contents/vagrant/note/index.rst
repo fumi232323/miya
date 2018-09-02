@@ -6,6 +6,7 @@
    :canonical_url: /vagrant/note/
    :draft: false
 
+
 synced_folder が効かなくなった
 =================================
 
@@ -54,43 +55,47 @@ https://blog.kazu69.net/2014/07/16/by-vagrant-nfs-exports-error-has-occurred/
     this check before making any changes to the file. Please correct
     the issues below and execute "vagrant reload":
 
-    exports:2: path contains non-directory or non-existent components: /Users/fumi23/booklista-projects/booklista-sales
-    exports:2: path contains non-directory or non-existent components: /Users/fumi23/booklista-projects/booklista-sales-adjustment
+    exports:2: path contains non-directory or non-existent components: /Users/fumi23/apple-projects/apple-apple
+    exports:2: path contains non-directory or non-existent components: /Users/fumi23/apple-projects/apple-apple-apple
     exports:2: no usable directories in export entry
     exports:2: using fallback (marked offline): /
 
 
-- 元の /etc/exports
+- 元の /etc/exports がこれで、
 
   .. code-block:: shell
 
     FumienoMacBook-Pro:ansible fumi23$ cat /etc/exports.bk
     # VAGRANT-BEGIN: 501 e9fe3cbf-63c6-48a1-beca-2702bc2527e4
-    "/Users/fumi23/booklista-projects/booklista-sales" "/Users/fumi23/booklista-projects/booklista-sales-adjustment" 192.168.34.10 -alldirs -mapall=501:20
-    "/Users/fumi23/booklista-sales-maintenance/ansible" 192.168.34.10 -alldirs -mapall=501:20
+    "/Users/fumi23/apple-projects/apple-apple" "/Users/fumi23/apple-projects/apple-apple-apple" 192.168.34.10 -alldirs -mapall=501:20
     # VAGRANT-END: 501 e9fe3cbf-63c6-48a1-beca-2702bc2527e4
 
-- 今の /etc/exports
+- 今の /etc/exports に書き換えた
 
   .. code-block:: shell
 
     FumienoMacBook-Pro:ansible fumi23$ cat /etc/exports
     # VAGRANT-BEGIN: 501 e9fe3cbf-63c6-48a1-beca-2702bc2527e4
-    "/Users/fumi23/bl-sales/booklista-sales" "/Users/fumi23/bl-sales/booklista-sales-adjustment" 192.168.34.10 -alldirs -mapall=501:20
-    "/Users/fumi23/booklista-sales-maintenance/ansible" 192.168.34.10 -alldirs -mapall=501:20
+    "/Users/fumi23/new-apple/apple-apple" "/Users/fumi23/new-apple/apple-apple-apple" 192.168.34.10 -alldirs -mapall=501:20
     # VAGRANT-END: 501 e9fe3cbf-63c6-48a1-beca-2702bc2527e4
 
 
 
-ログを出す
-===========
+ログを詳細に出す
+=================
 
-$ VAGRANT_LOG=DEBUG vagrant [command]
+.. code-block:: shell
+
+  $ VAGRANT_LOG=DEBUG vagrant [command]
 
 
-VirtualBOXの仮想マシンの保存先も変更する。
+VirtualBox の仮想マシンの保存先を変更する
 ========================================================
-VirtualBOXのVMの保存先も変更します。
-環境設定 > 一般 にあるデフォルトの仮想マシンフォルダーを任意のパスに変更すればVMは指定したフォルダーに保存されます。
 
-http://kiraba.jp/change-save-point-vagrant-box-and-virtual-machine/
+::
+
+  VirtualBOXのVMの保存先も変更します。
+  環境設定 > 一般 にあるデフォルトの仮想マシンフォルダーを任意のパスに変更すればVMは指定したフォルダーに保存されます。
+
+- http://kiraba.jp/change-save-point-vagrant-box-and-virtual-machine/
+

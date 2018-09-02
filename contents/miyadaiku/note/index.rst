@@ -14,7 +14,7 @@ Miyadaiku メモ
 ----------
 blogディレクトリの中で、これを実行
 
-.. code-block:: python
+.. code-block:: shell
 
-  miyadaiku-build . --watch --server --port 8181
+  $ miyadaiku-build . --watch --server --port 8181
 
