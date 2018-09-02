@@ -3,14 +3,14 @@
    :title: article の置き方
    :category: miyadaiku
    :tags: タグ1, タグ2
-   :canonical_url: /2018/article-directory-structure/
+   :canonical_url: /miyadaiku/article-directory-structure/
    :draft: false
 
 ===================
 article の置き方
 ===================
 
-note
+article の置き方
 =========================
 - 最初に決めた方がよい。
 - 分けないと後々何が何だかわからなくなるらしい。

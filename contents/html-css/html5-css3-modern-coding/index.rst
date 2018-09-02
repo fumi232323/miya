@@ -3,7 +3,7 @@
    :title: 『HTML5/CSS3モダンコーディング フロントエンドエンジニアが教える3つの本格レイアウト スタンダード・グリッド・シングルページレイアウトの作り方』を読んで気になったことメモ
    :category: css
    :tags: タグ1, タグ2
-   :canonical_url: /2018/html5-css3-modern-coding/
+   :canonical_url: /html-css/html5-css3-modern-coding/
    :draft: false
 
 読んだ本

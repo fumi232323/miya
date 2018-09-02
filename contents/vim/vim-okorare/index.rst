@@ -3,7 +3,7 @@
    :title: vim に怒られていたのでなおした
    :category: vim
    :tags:
-   :canonical_url: /2018/fix-vim-okorare/
+   :canonical_url: /vim/vim-okorare/
    :draft: false
 
 

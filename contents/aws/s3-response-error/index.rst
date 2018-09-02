@@ -1,9 +1,9 @@
 .. article::
    :date: 2018-07-31
    :title: S3ResponseError の原因はなんと時刻ずれだった
-   :category: s3
+   :category: aws
    :tags:
-   :canonical_url: /2018/s3-response-error/
+   :canonical_url: /aws/s3-response-error/
    :draft: false
 
 
