@@ -99,3 +99,31 @@ VirtualBox の仮想マシンの保存先を変更する
 
 - http://kiraba.jp/change-save-point-vagrant-box-and-virtual-machine/
 
+
+VAGRANT_HOME
+========================================================
+
+環境変数: ``VAGRANT_HOME`` を設定すれば、 `~/.vagrant.d` の場所を好きなところに変えられそう
+
+- https://www.vagrantup.com/docs/other/environmental-variables.html#vagrant_home
+
+
+ハイフンふたつの後は、普通にSSHのオプションを指定できる。
+========================================================
+
+.. code-block:: shell
+
+  $ vagrant ssh -- -A
+
+
+VMとboxは違う
+========================================================
+
+::
+
+  vagrant destroy で消えるのは VM 自体、 vagrant box というのは VM 作成の素になるものです。
+  VM がインスタンスだとすると、 box はクラス的な。
+
+調べる
+========
+- Vagrant Userの鍵認証のところがわからない
