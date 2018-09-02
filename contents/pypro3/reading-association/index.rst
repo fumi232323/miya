@@ -3,7 +3,7 @@
    :title: 『Python プロフェッショナル プログラミング 第3版』 読書会のメモ
    :category: book
    :tags:
-   :canonical_url: /pypro3/note/
+   :canonical_url: /pypro3/reading-association/
    :draft: false
 
 
