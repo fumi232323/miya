@@ -16,7 +16,7 @@ https://blog.kazu69.net/2014/07/16/by-vagrant-nfs-exports-error-has-occurred/
 
 - エラー内容
 
-  .. code-block:: vagrant
+  .. code-block:: console
 
     FumienoMacBook-Pro:ansible fumi23$ vagrant reload
     ==> default: Attempting graceful shutdown of VM...
@@ -109,7 +109,7 @@ VAGRANT_HOME
 
 
 ハイフンふたつの後は、普通にSSHのオプションを指定できる。
-========================================================
+======================================================================
 
 .. code-block:: shell
 
