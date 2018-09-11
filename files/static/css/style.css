@@ -112,9 +112,9 @@ a:link, a:visited, a:hover, a:active {
     background-color: #FFFFFF;
 }
 
-/* カテゴリーごとに色分け
-    http://www.hp-stylelink.com/news/2013/07/20130708.php
-*/
+/* --------------------------------
+ * カテゴリーごとに色分け
+ * -------------------------------- */
 .item-sample,
 .item-sample .title::before {
     border-color: #e2b2c0;
@@ -175,5 +175,15 @@ a:link, a:visited, a:hover, a:active {
 .item-pycharm .title::before {
     border-color: #d9de84;
 }
+.item-sql,
+.item-sql .title::before {
+    border-color: #e4bd60;
+}
+.item-python,
+.item-python .title::before {
+    border-color: #9ac29f;
+}
 
-/* 色は、16.癒しを感じる柔らかなイメージから選び中 */
+/* 色は、16.癒しを感じる柔らかなイメージから選び中
+http://www.hp-stylelink.com/news/2013/07/20130708.php
+*/
