@@ -1,2 +1,2 @@
 type: index   # YAMLファイルのタイプを index に指定
-indexpage_max_articles: 30  # 1ページにアーティクルを30件表示
+indexpage_max_articles: 100  # 1ページにアーティクルを 100 件表示
