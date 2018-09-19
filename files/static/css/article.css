@@ -129,22 +129,23 @@
     /*padding: 12px 24px 12px;*/
     padding: 1em 32px;
     border-radius: 2px;
-    background-color: #eee;
+    background-color: #fef4f4;
     color: #777777;
     max-height: 600px;
-}
-.text cite {
-    padding: 1px 3px;
-    border-radius: 2px;
-    background-color: #dfd;
-    color: #777777;
 }
 .text .docutils {
     padding: 1px 3px;
     border-radius: 2px;
-    background-color: #eee;
+    background-color: #fef4f4;
     color: #777777;
 }
+.text cite {
+    padding: 1px 3px;
+    border-radius: 2px;
+    background-color: #ffffdb;
+    color: #777777;
+}
+
 
 /* TODO: あといるもの */
 /*
