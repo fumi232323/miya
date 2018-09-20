@@ -277,3 +277,10 @@ reword: コミットメッセージを変更する
     .. code-block:: console
 
       $ git push -f
+
+
+参考にしたサイト
+------------------
+- これがわかりやすかった
+
+  https://www.karakaram.com/git-rebase-i-usage#whats-rebase-i
