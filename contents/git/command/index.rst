@@ -3,7 +3,7 @@
    :title: Git のコマンドまとめ
    :category: git
    :tags:
-   :canonical_url: /git/command-note/
+   :canonical_url: /git/command/
    :draft: false
 
 ==========================
@@ -193,13 +193,22 @@ stash: コミットはせずに変更を退避したい
 git log
 ==============
 
+- 各コミットを 1 行ずつ表示
+
+  .. code-block:: console
+
+    $ git log --oneline
+
+
+- master と topic の共通の祖先がわかる
+
+  .. code-block:: console
+
+    $ git log -1 $(git merge-base origin/master origin/topic)
+
+
 - 見本がたくさん書いてあって良い
 
   http://yanor.net/wiki/?Git%2Fgit%20log%2F%E6%9D%A1%E4%BB%B6%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%A6%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%82%92%E7%B5%9E%E3%82%8A%E8%BE%BC%E3%82%80
 
 
-- master と topic の共通の祖先がわかるコマンド
-
-  .. code-block:: console
-
-    $ git log -1 $(git merge-base origin/master origin/topic)
