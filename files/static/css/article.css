@@ -65,12 +65,14 @@
 }
 
 .text h1 {
-    font-size: 1.8em;
+    font-size: 1.6em;
     border-bottom: 1px solid #aaaaaa;
     padding-bottom: .1em;
 }
 .text h2 {
-    font-size: 1.6em;
+    font-size: 1.4em;
+    border-bottom: 1px dotted #aaaaaa;
+    padding-bottom: .1em;
 }
 .text h3 {
     font-size: 1.4em;
