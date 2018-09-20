@@ -12,6 +12,7 @@ SQL のメモ
 
 SELECT文の評価順序
 ====================
-これがわかりやすい
 
-- https://qiita.com/suzukito/items/edcd00e680186f2930a8
+- これがわかりやすい
+
+  https://qiita.com/suzukito/items/edcd00e680186f2930a8
