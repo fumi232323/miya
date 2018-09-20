@@ -4,7 +4,7 @@
    :category: css
    :tags:
    :canonical_url: /html-css/css/note/
-   :draft: false
+
 
 
 CSS メモ

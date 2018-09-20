@@ -4,7 +4,7 @@
    :category: mac
    :tags:
    :canonical_url: /mac/note/
-   :draft: false
+
 
 
 環境変数の一覧を表示する

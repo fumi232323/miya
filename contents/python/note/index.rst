@@ -4,7 +4,7 @@
    :category: python
    :tags:
    :canonical_url: /python/note/
-   :draft: false
+
 
 ==================
 Python のメモ

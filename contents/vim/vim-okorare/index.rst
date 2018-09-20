@@ -4,7 +4,7 @@
    :category: vim
    :tags:
    :canonical_url: /vim/vim-okorare/
-   :draft: false
+
 
 
 どういうわけか

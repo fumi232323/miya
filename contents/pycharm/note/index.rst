@@ -4,7 +4,7 @@
    :category: pycharm
    :tags:
    :canonical_url: /pycharm/note/
-   :draft: false
+
 
 
 

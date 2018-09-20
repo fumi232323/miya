@@ -4,7 +4,7 @@
    :category: git
    :tags:
    :canonical_url: /git/note/
-   :draft: false
+
 
 ==================
 Git のメモ

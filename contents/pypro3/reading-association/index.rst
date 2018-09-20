@@ -4,7 +4,7 @@
    :category: book
    :tags:
    :canonical_url: /pypro3/reading-association/
-   :draft: false
+
 
 
 注: 速記みたいなものなので、他人には意味不明だと思います。

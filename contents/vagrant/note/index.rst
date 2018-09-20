@@ -4,8 +4,10 @@
    :category: vagrant
    :tags:
    :canonical_url: /vagrant/note/
-   :draft: false
 
+=================
+Vagrant のメモ
+=================
 
 synced_folder が効かなくなった
 =================================
@@ -127,3 +129,4 @@ VMとboxは違う
 調べる
 ========
 - Vagrant Userの鍵認証のところがわからない
+

@@ -4,7 +4,7 @@
    :category: ssh
    :tags:
    :canonical_url: /ssh/warning-remote-host-identification-has-changed/
-   :draft: false
+
 
 
 何が起こったか

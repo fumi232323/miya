@@ -4,7 +4,6 @@
    :category: redshift
    :tags:
    :canonical_url: /redshift/note/
-   :draft: false
 
 
 diststyle all

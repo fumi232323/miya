@@ -4,7 +4,7 @@
    :category: django
    :tags:
    :canonical_url: /django/note/
-   :draft: false
+
 
 ==================
 Django のメモ
