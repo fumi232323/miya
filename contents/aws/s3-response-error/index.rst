@@ -43,36 +43,36 @@
 =========================
 神々が教えてくれました・・・・
 
-- ここ↓（秒とかはてきとう）
+ここ↓（秒とかはてきとう）
 
-  - エラーメッセージ
+- エラーメッセージ
 
-    .. code-block:: shell
+  .. code-block:: shell
 
-      <Message>The difference between the request time and the current time is too large.</Message>
-      <RequestTime>Tue, 31 Jul 2018 07:40:44 GMT</RequestTime>
-      <ServerTime>2018-07-31T07:58:01Z</ServerTime>
+    <Message>The difference between the request time and the current time is too large.</Message>
+    <RequestTime>Tue, 31 Jul 2018 07:40:00 GMT</RequestTime>
+    <ServerTime>2018-07-31T07:58:01Z</ServerTime>
 
-  - ゲストOSの日時
+- ゲストOSの日時
 
-    .. code-block:: shell
+  .. code-block:: shell
 
-      (venv) [vagrant@localhost mikan]$ date
-      Tue Jul 31 16:40:26 JST 2018
+    (venv) [vagrant@localhost fumi23]$ date
+    Tue Jul 31 16:40:00 JST 2018
 
-  - ホストOSの日時
+- ホストOSの日時
 
-    .. code-block:: shell
+  .. code-block:: shell
 
-      host-machine:mikan fumi23$ date
-      2018年 7月 31日 火曜日 16時58分26秒 JST
+    host-machine:~ fumi23$ date
+    2018年 7月 31日 火曜日 16時58分00秒 JST
 
 時刻のなおしかた
 =========================
 
 .. code-block:: shell
 
-  (venv) [vagrant@localhost mikan]$ sudo date -s "07/31 17:02 2018"
+  (venv) [vagrant@localhost fumi23]$ sudo date -s "07/31 17:02 2018"
   Tue Jul 31 17:02:00 JST 2018
 
 わかったこと

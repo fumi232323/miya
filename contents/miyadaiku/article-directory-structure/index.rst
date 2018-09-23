@@ -1,16 +1,15 @@
 .. article::
    :date: 2018-07-01
-   :title: article の置き方
+   :title: article の置きかた
    :category: miyadaiku
-   :tags: タグ1, タグ2
    :canonical_url: /miyadaiku/article-directory-structure/
    :draft: false
 
 ===================
-article の置き方
+article の置きかた
 ===================
 
-article の置き方
+article の置きかた
 =========================
 - 最初に決めた方がよい。
 - 分けないと後々何が何だかわからなくなるらしい。
