@@ -65,17 +65,17 @@
 }
 
 .text h1 {
-    font-size: 1.6em;
+    font-size: 2.8rem;
     border-bottom: 1px solid #aaaaaa;
     padding-bottom: .1em;
 }
 .text h2 {
-    font-size: 1.4em;
+    font-size: 2.2rem;;
     border-bottom: 1px dotted #aaaaaa;
     padding-bottom: .1em;
 }
 .text h3 {
-    font-size: 1.4em;
+    font-size: 2.0rem;
 }
 
 /* list */
@@ -151,5 +151,6 @@
 
 /* TODO: あといるもの */
 /*
-    web master 登録?
+    - テーブルの CSS 書きたい
+    - web master 登録?
 */
