@@ -2,9 +2,11 @@
    :date: 2018-05-06
    :title: code-block, 引用の sample
    :category: sample
-   :tags: タグ1, タグ2
    :canonical_url: /2018/sample-code-block/
-   :draft: false
+   :draft: true
+
+
+TODO: 引用の要件を満たす
 
 
 code-block, 引用の sample
@@ -30,7 +32,7 @@ literal-block のサンプル
 
 コードブロックのサンプル
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-これはコードブロックだよ
+これはコードブロックだよ (サンプルとして Django のフォームクラスを)
 
   .. code-block:: python
 

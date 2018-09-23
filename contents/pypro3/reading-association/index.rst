@@ -6,8 +6,8 @@
    :canonical_url: /pypro3/reading-association/
 
 
+TODO: 人名が出てくる Warning
 
-注: 速記みたいなものなので、他人には意味不明だと思います。
 
 1章
 ==========

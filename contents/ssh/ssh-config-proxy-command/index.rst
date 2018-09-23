@@ -4,7 +4,16 @@
    :category: ssh
    :tags:
    :canonical_url: /ssh/ssh-config-proxy-command/
-   :draft: false
+
+
+=========================
+ProxyCommand とは何ですか
+=========================
+
+TODO: 引用の要件を満たす
+
+- キーワードやオプションの意味、のところに英語だけじゃなくて、自分の解釈つけとこう
+- host 名とかをもうちょっとわかりやすくしておきたい
 
 
 ある日
