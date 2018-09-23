@@ -183,6 +183,10 @@ a:link, a:visited, a:hover, a:active {
 .item-python .title::before {
     border-color: #9ac29f;
 }
+.item-blog,
+.item-blog .title::before {
+    border-color: #e3be87;
+}
 
 /* 色は、16.癒しを感じる柔らかなイメージから選び中
 http://www.hp-stylelink.com/news/2013/07/20130708.php
