@@ -15,9 +15,5 @@ charset: utf-8
 # Default timezone
 timezone: Asia/Tokyo
 
-# List of site theme
-themes:
-  - miyadaiku.themes.sample.blog
-
 # デフォルトは未公開状態にする
 draft: true
