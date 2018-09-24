@@ -1,13 +1,15 @@
 .. article::
-   :date: 2018-09-02
-   :title: 『Python プロフェッショナル プログラミング 第3版』 読書会のメモ
+   :date: 2018-08-29
+   :title: 『Python プロフェッショナル プログラミング 第3版』 読書会のメモ: 第一回
    :category: book
    :tags:
-   :canonical_url: /pypro3/reading-association/
+   :canonical_url: /pypro3/reading-association/1/
+   :draft: true
 
 
-TODO: 人名が出てくる Warning
-
+============================================================================
+『Python プロフェッショナル プログラミング 第3版』 読書会のメモ: 第一回
+============================================================================
 
 1章
 ==========
