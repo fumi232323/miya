@@ -32,16 +32,16 @@ PyCharm で Amazon Redshift につなぐ
 
       - 末尾は接続先 DB 名 ( ``port番号/`` のあと)
 
-    - URL の右横のプルダウン: URL only
-    - Driver: Amazon Redshift
+    - URL の右横のプルダウン: ``URL only``
+    - Driver: ``Amazon Redshift``
 
 5. SSH/SSL タブ
 
-    - Use SSH tunnel: ON
-    - Proxy host: ゲートウェイ (HostName)
-    - Port: 22 (SSH接続時のPort番号)
-    - Proxy user: www
-    - Auth type: OpenSSH config and authentication agent
+    - Use SSH tunnel: ``ON``
+    - Proxy host: gateway (HostName)
+    - Port: ``22`` (SSH接続時のPort番号)
+    - Proxy user: gateway のユーザー名
+    - Auth type: ``OpenSSH config and authentication agent``
 
 6. Test Connection してみる
 
