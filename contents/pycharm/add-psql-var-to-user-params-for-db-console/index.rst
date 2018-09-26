@@ -28,9 +28,3 @@ PyCharm の Database Console で PostgreSQL の変数を SQL パラメータと�
     .. figure :: user-parameters.png
 
 3. Apply ボタンを押下
-
-
-
-
-
-
