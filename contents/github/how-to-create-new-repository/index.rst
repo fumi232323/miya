@@ -3,7 +3,7 @@
    :title: GitHub に新しいリポジトリを作成して、pushする
    :category: github
    :tags:
-   :canonical_url: /gitHub/how-to-create-new-repository/
+   :canonical_url: /github/how-to-create-new-repository/
    :draft: false
 
 
