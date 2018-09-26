@@ -1,15 +1,15 @@
 .. article::
    :date: 2018-09-25
-   :title: PyCharm で Amazon Redshift につなぐ
+   :title: PyCharm で SSH tunnel して Amazon Redshift につなぐ
    :category: pycharm
    :tags:
-   :canonical_url: /pycharm/connect-db/
+   :canonical_url: /pycharm/connect-db-using-ssh-tunnel/
    :draft: false
 
 
-==========================================
-PyCharm で Amazon Redshift につなぐ
-==========================================
+=======================================================
+PyCharm で SSH tunnel して Amazon Redshift につなぐ
+=======================================================
 
 
 ガイド
