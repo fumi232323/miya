@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-09-20
-   :title: PyConJP 2018 で聞いた講演メモ
+   :title: PyConJP 2018 で聞いた講演
    :category: python
    :tags:
    :canonical_url: /python/pyconjp2018/
@@ -8,7 +8,7 @@
 
 
 ======================================
-PyConJP 2018 で聞いた講演メモ
+PyConJP 2018 で聞いた講演
 ======================================
 
 
