@@ -14,6 +14,7 @@ PyCharm の設定
 ガイド
 ======
 - `PyCharm ヘルプ <https://pleiades.io/help/pycharm/>`_
+- `PyCharm Help <https://www.jetbrains.com/help/pycharm/meet-pycharm.html>`_
 
 
 エディター設定
@@ -37,27 +38,6 @@ PEP 8 警告の色を目立つようにする
 1. Preferences
 2. Editor -> Inspections -> PEP 8 coding style violation
 3. 色変えたりする
-
-
-Django
-==================
-
-Django Support を有効にする
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-1. Preferences
-2. Languages & Frameworks -> Django
-
-    - Enable Django Support: ``ON``
-    - Django project root: ``apps`` ( `settings.py および manage.py ファイルを格納するディレクトリ` を指定するっぽかったので。合っているかどうかわからない。)
-    - Settings: ``settings/_.py`` ( `Djangoプロジェクトルートの下にある名前が *settings*.pyに一致するファイルです` と書いてあったのでたぶんこれだろう。)
-
-
-Template language を設定する
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-1. Preferences
-2. Languages & Frameworks -> Python Template Languages
-
-    - Template language: ``Django``
 
 
 Sources Root
