@@ -132,6 +132,11 @@ UserManager
       objects = MyUserManager()
 
 
+RequestFactory
+-----------------------------------
+https://docs.djangoproject.com/en/2.1/topics/testing/advanced/#django.test.RequestFactory
+
+
 便利さん
 ===========
 
