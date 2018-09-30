@@ -1,14 +1,16 @@
 .. article::
-   :date: 2018-09-09
+   :date: 2018-09-30
    :title: Git のメモ
    :category: git
    :tags:
    :canonical_url: /git/note/
+   :draft: false
 
 
 ==================
 Git のメモ
 ==================
+
 
 GitとGitHubは別物
 ===================
@@ -22,46 +24,20 @@ GitHub
 Gitで作成したリポジトリをホスティングするためのWebサービス。名前の通りGitを使うHub(拠点)になる場所。
 
 
-fetch と pull
-===================
-
-fetch
------------
-リモートリポジトリの最新の履歴の取得だけを行う。
-
-- ``hogehoge`` ブランチをfetchすると、 ローカルの ``origin/hogehoge`` がリモートの ``origin/hogehoge`` リポジトリと同期されて最新状態になる。
-- ローカルの ``hogehoge`` ブランチは、そのまま何にも変更されない。
-
-pull
------------
-fetch + merge
-
-- ``hogehoge`` ブランチを pull すると、 ローカルの ``origin/hogehoge`` も ``hogehoge`` も両方リモートの ``origin/hogehoge`` リポジトリの変更とマージされる。
-- 内部的には、
-
-  1. リモートの ``origin/hogehoge`` と、ローカルの ``origin/hogehoge`` とマージ
-  2. ローカルの ``origin/hogehoge`` と ``hogehoge`` をマージ
-
-- ローカルの ``hogehoge`` に、自分の変更とリモートの変更と両方入った状態になる。
-- 競合があったら自分で解決してコミットする必要がある。
-- 通常、ローカルで触るのは ``origin`` がついてない ``hogehoge`` ブランチ
-
-
 Gitの基本
 ===================
-- https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-Git%E3%81%AE%E5%9F%BA%E6%9C%AC
+`1.3 使い始める - Gitの基本 <https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-Git%E3%81%AE%E5%9F%BA%E6%9C%AC>`_
+
 - スナップショットで、差分ではない
-
-
-3.6 Git のブランチ機能 - リベース
-======================================
-- https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E6%A9%9F%E8%83%BD-%E3%83%AA%E3%83%99%E3%83%BC%E3%82%B9
 
 
 git submodule
 ===================
-- https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%81%95%E3%81%BE%E3%81%96%E3%81%BE%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB-%E3%82%B5%E3%83%96%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB
+`7.11 Git のさまざまなツール - サブモジュール <https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%81%95%E3%81%BE%E3%81%96%E3%81%BE%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB-%E3%82%B5%E3%83%96%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB>`_
 
+::
+
+  サブモジュールを使うと、ある Git リポジトリを別の Git リポジトリのサブディレクトリとして扱うことができるようになります。 これで、別のリポジトリをプロジェクト内にクローンしても自分のコミットは別管理とすることができるようになります。
 
 origin の謎が解けた
 ======================================
