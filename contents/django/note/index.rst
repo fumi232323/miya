@@ -12,35 +12,6 @@ Django のメモ
 ==================
 
 
-Django ORM
-===========
-
-aggregate と annotate の違いがわかりやすい
----------------------------------------------
-- `Djangoの集計について <http://note.crohaco.net/2014/django-aggregate/>`_
-
-
-prefetch_relatedの話
-----------------------------------------
-- `Djangoでprefetch_relatedを使ってクエリ数を減らす <http://tokibito.hatenablog.com/entry/20140718/1405691738>`_
-
-
-Q Object
-----------------------------------------
-クエリの検索条件を作れるやつ
-
-- `Q() objects <https://docs.djangoproject.com/ja/1.11/ref/models/querysets/#q-objects>`_
-
-
-モデルクラス名を全部小文字にしたのに ``_set`` がつく
-------------------------------------------------------------------
-`Related objects reference <https://docs.djangoproject.com/ja/1.11/ref/models/relations/>`_
-
-- ``_set`` というのは子テーブルのデータを参照する django の機能
-- モデルクラス名を全部小文字にしたのに ``_set`` がつく
-
-
-
 template
 ===========
 
@@ -126,9 +97,44 @@ QueryDict オブジェクト
       In an HttpRequest object, the GET and POST attributes are instances of django.http.QueryDict, a dictionary-like class customized to deal with multiple values for the same key. This is necessary because some HTML form elements, notably <select multiple>, pass multiple values for the same key.
 
 
+System check framework を使って、Django プロジェクトの一般的な問題を検査する
+------------------------------------------------------------------------------
+`check <https://docs.djangoproject.com/ja/1.11/ref/django-admin/#check>`_ ,
+`System check framework <https://docs.djangoproject.com/ja/1.11/ref/checks/#system-check-framework>`_
+
+- 使い方 (python2)
+
+  .. code-block:: python
+
+    $ DJANGO_SETTINGS_MODULE=settings.local python -Wd manage.py check
+
+
+  - https://docs.python.org/ja/2.7/using/cmdline.html#cmdoption-w
+
+    ::
+
+      Python 2.7 から、 DeprecationWarning とその子クラスはデフォルトで無視されます。 -Wd オプションを指定して有効にすることができます。
+
+
+UserManager
+--------------------------------------------------
+`マネージャメソッド <https://docs.djangoproject.com/ja/1.11/ref/contrib/auth/#manager-methods>`_
+
+参考 URL
+^^^^^^^^^^
+- https://github.com/django/django/blob/master/django/contrib/auth/models.py#L131
+- https://docs.djangoproject.com/ja/1.11/topics/auth/customizing/#a-full-example
+
+  - こうすると登録できる
+
+    .. code-block:: python
+
+      objects = MyUserManager()
+
+
 便利さん
 ===========
 
 django に便利コマンド追加してくれるさん
 ----------------------------------------
-- https://django-extensions.readthedocs.io/en/latest/
+- `django-extensions <https://django-extensions.readthedocs.io/en/latest/>`_
