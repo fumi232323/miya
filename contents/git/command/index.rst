@@ -73,42 +73,6 @@ Git の絵
     $ git branch -a
 
 
-リベース
-===========
-
-- master ブランチにリベースする
-
-  .. code-block:: console
-
-    $ git rebase master
-
-    # コンフリクトしたらコンフリクトを解消して、
-    $ git add .
-    $ git rebase --continue
-
-    # リベースが終わったらフォースプッシュ
-    $ git push -f
-
-
-- 間違えてリベースして元に戻したい
-
-  - push しちゃった場合
-
-    .. code-block:: console
-
-      $ git reflog
-      $ git reset --hard HEAD@{6}  # 戻りたい番号そのものを書けばよいみたい
-      $ git push -f
-
-
-  - push してない場合
-
-    .. code-block:: console
-
-      # 間違えてリベースしたブランチを origin に戻す
-      $ git checkout -B <branch-you-want-to-restore> origin/<branch-you-want-to-restore>
-
-
 マージする
 ===================
 
@@ -190,6 +154,7 @@ stash: コミットはせずに変更を退避したい
 
   https://qiita.com/chihiro/items/f373873d5c2dfbd03250
 
+
 git log
 ==============
 
@@ -212,75 +177,41 @@ git log
   http://yanor.net/wiki/?Git%2Fgit%20log%2F%E6%9D%A1%E4%BB%B6%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%A6%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%82%92%E7%B5%9E%E3%82%8A%E8%BE%BC%E3%82%80
 
 
-rebase -i
-===========
+リセットする
+==============================
+履歴を全部消して force push する。
 
-squash : 離れたふたつのコミットをまとめる
--------------------------------------------------------
-
-1. くっつけ先のコミット番号を確かめる
-
-    .. code-block:: console
-
-      $ git log --oneline
-
-2. コミットが一覧表示されるので、くっつけ先のコミット番号を控え、 ``:q`` で閉じる
-3. rebase を開始する。
+1. ``.git`` を消す
+2. force push する
 
     .. code-block:: console
 
-      $ git rebase -i <くっつけ先のコミット番号>
-
-4. エディターが開き、 3 で指定したコミット番号より後のコミット一覧が表示されるので、くっつけたいほうの pick を一番上に移動する。
-5. ``pick`` を ``squash`` に書き換える。
-6. ``:wq`` で保存して閉じる
-7. コミットメッセージを書く用？のエディタが開くので、
-
-    ::
-
-      You are currently rebasing branch 'master' on 'リビジョン番号'.
-
-    の次の行のコメントを外して、コミットメッセージを書く。
-
-    (たぶん、その上のほうにあるコミットメッセージも変えたければ編集したほうがよいんだと思う)
-
-8. ``:wq`` で保存して閉じる
-9. リモートリポジトリにフォースプッシュする。
-
-    .. code-block:: console
-
-      $ git push -f
+      $ git add *
+      $ git commit -m 'initialize
+      $ git remote add origin {URL}
+      $ git push origin master --force
 
 
-reword: コミットメッセージを変更する
-------------------------------------
+fetch と pull
+===================
 
-1. コミット一覧を表示し、コミットメッセージを変更したいコミットの一つ前のコミット番号を控える
+fetch
+-----------
+リモートリポジトリの最新の履歴の取得だけを行う。
 
-    .. code-block:: console
+- ``hogehoge`` ブランチをfetchすると、 ローカルの ``origin/hogehoge`` がリモートの ``origin/hogehoge`` リポジトリと同期されて最新状態になる。
+- ローカルの ``hogehoge`` ブランチは、そのまま何にも変更されない。
 
-      $ git log --oneline
+pull
+-----------
+fetch + merge
 
-2. ``:q`` で閉じる
-3. rebase を開始する。
+- ``hogehoge`` ブランチを pull すると、 ローカルの ``origin/hogehoge`` も ``hogehoge`` も両方リモートの ``origin/hogehoge`` リポジトリの変更とマージされる。
+- 内部的には、
 
-    .. code-block:: console
+  1. リモートの ``origin/hogehoge`` と、ローカルの ``origin/hogehoge`` とマージ
+  2. ローカルの ``origin/hogehoge`` と ``hogehoge`` をマージ
 
-      $ git rebase -i <1 で控えたコミット番号>
-
-4. エディターが開き、 3 で指定したコミット番号より後のコミット一覧が表示されるので、コミットメッセージを変更したいコミット番号の ``pick`` を ``reword`` 書き換える。
-5. ``:wq`` で保存して閉じる
-6. コミットメッセージを書く用？のエディタが開くので、コミットメッセージを変更する。
-7. ``:wq`` で保存して閉じる
-8. リモートリポジトリにフォースプッシュする。
-
-    .. code-block:: console
-
-      $ git push -f
-
-
-参考にしたサイト
-------------------
-- これがわかりやすかった
-
-  https://www.karakaram.com/git-rebase-i-usage#whats-rebase-i
+- ローカルの ``hogehoge`` に、自分の変更とリモートの変更と両方入った状態になる。
+- 競合があったら自分で解決してコミットする必要がある。
+- 通常ローカルで触るのは ``origin`` がついていない ``hogehoge`` ブランチ。
