@@ -15,6 +15,7 @@ PyCharm ショートカットと便利メニュー
 ガイド
 ======
 - `PyCharm ヘルプ <https://pleiades.io/help/pycharm/>`_
+- `PyCharm Help <https://www.jetbrains.com/help/pycharm/meet-pycharm.html>`_
 
 
 ショートカット
