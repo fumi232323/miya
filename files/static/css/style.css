@@ -187,6 +187,14 @@ a:link, a:visited, a:hover, a:active {
 .item-blog .title::before {
     border-color: #e3be87;
 }
+.item-docker,
+.item-docker .title::before {
+    border-color: #edef9c;
+}
+.item-test,
+.item-test .title::before {
+    border-color: #dd9b9d;
+}
 
 /* 色は、16.癒しを感じる柔らかなイメージから選び中
 http://www.hp-stylelink.com/news/2013/07/20130708.php
