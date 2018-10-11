@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-09-24
+   :date: 2018-10-11
    :title: Python テストのメモ
    :category: test
    :tags:
@@ -14,6 +14,21 @@ Python テストのメモ
 
 Python テストのメモ
 =======================
+
+例外のテストはこれ
+------------------
+https://docs.pytest.org/en/latest/reference.html#pytest-raises
+
+- ``with pytest.raises(RuntimeError) as excinfo:`` の ``excinfo`` には、 `ExceptionInfo <https://docs.pytest.org/en/latest/reference.html#exceptioninfo>`_ が入ってくる
+- 例外のインスタンスは、 ``value`` フィールドに入っている
+
+  .. code-block:: python
+
+      with pytest.raises(ListFileError) as e:
+          target(list_file).read('201803')
+
+      # assert
+      assert e.value.line == 2
 
 
 parametrize

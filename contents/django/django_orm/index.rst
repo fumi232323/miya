@@ -24,12 +24,14 @@ aggregate と annotate
 
 prefetch_relatedの話
 ----------------------------------------
-- `Djangoでprefetch_relatedを使ってクエリ数を減らす <http://tokibito.hatenablog.com/entry/20140718/1405691738>`_
+`Djangoでprefetch_relatedを使ってクエリ数を減らす <http://tokibito.hatenablog.com/entry/20140718/1405691738>`_
 
 
 Q Object
 ----------------------------------------
 `Q() objects <https://docs.djangoproject.com/ja/1.11/ref/models/querysets/#q-objects>`_
+
+`Q オブジェクトを用いた複雑な検索 <https://docs.djangoproject.com/ja/1.11/topics/db/queries/#complex-lookups-with-q>`_
 
 - クエリの検索条件を作ることができる
 - ``OR`` を表現したいときはこれを使う
