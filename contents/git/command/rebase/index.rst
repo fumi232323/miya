@@ -3,7 +3,7 @@
    :title: git rebase
    :category: git
    :tags:
-   :canonical_url: /git/rebase/
+   :canonical_url: /git/command/rebase/
    :draft: false
 
 ==========================
