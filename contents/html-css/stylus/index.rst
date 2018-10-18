@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-10-15
+   :date: 2018-10-18
    :title: stylus を使う
    :category: css
    :tags:
@@ -42,3 +42,68 @@ http://stylus-lang.com/
       $ stylus -V
       0.54.5
 
+
+使い方
+============
+- ファイルの拡張子は、 ``.styl`` もしくは ``.stylus`` とする。
+- PyCharm の何か (上に出てきた) の ``OK`` を押したら、自動ビルドされた。以降、変更を検知すると勝手にビルドされる。
+
+  .. code-block:: console
+
+    ...
+    2018-10-18 22:14:19,451 INFO Building files/static/css/style-sp.css
+    2018-10-18 22:14:19,454 INFO Building files/static/css/style-sp.styl
+    ...
+
+- PyCharm 上ではこんな風に見える
+
+  .. figure :: stylus-image.png
+
+- HTML の ``<head></head>`` には、こう書く
+
+  .. code-block:: html
+
+    <link rel="stylesheet" href="/static/css/style-sp.css">
+
+  - ``style-sp.styl`` と書いても認識してくれない
+
+- ``.styl`` ファイルに、stylus の書き方とふつうの CSS の書き方を併記できる。
+
+
+  - ``style-sp.styl`` にこう書くと、
+
+    .. code-block:: css
+
+      @charset "UTF-8"
+
+      /* --------------------------------
+       * stylus の書き方
+       * -------------------------------- */
+      body
+        background-color #f8b500
+
+      /* --------------------------------
+       * CSS の書き方
+       * -------------------------------- */
+      body {
+        background-color: #ed6d3d;
+      }
+
+
+  - ``style-sp.css`` にこう出力される
+
+    .. code-block:: css
+
+      @charset "UTF-8";
+      /* --------------------------------
+       * stylus の書き方
+       * -------------------------------- */
+      body {
+        background-color: #f8b500;
+      }
+      /* --------------------------------
+       * CSS の書き方
+       * -------------------------------- */
+      body {
+        background-color: #ed6d3d;
+      }
