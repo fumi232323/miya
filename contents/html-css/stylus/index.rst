@@ -46,14 +46,23 @@ http://stylus-lang.com/
 使い方
 ============
 - ファイルの拡張子は、 ``.styl`` もしくは ``.stylus`` とする。
-- PyCharm の何か (上に出てきた) の ``OK`` を押したら、自動ビルドされた。以降、変更を検知すると勝手にビルドされる。
+- 初めて ``styl`` ファイルを作成すると、 ``File Watchers`` を有効にするか否か聞かれるので (PyCharm の上部に表示される) ``OK`` を押下すると、自動ビルドされる。
 
-  .. code-block:: console
+  以降、変更を検知すると勝手にビルドされる。
 
-    ...
-    2018-10-18 22:14:19,451 INFO Building files/static/css/style-sp.css
-    2018-10-18 22:14:19,454 INFO Building files/static/css/style-sp.styl
-    ...
+  - ログ
+
+    .. code-block:: console
+
+      ...
+      2018-10-18 22:14:19,451 INFO Building files/static/css/style-sp.css
+      2018-10-18 22:14:19,454 INFO Building files/static/css/style-sp.styl
+      ...
+
+  - ``File Watchers`` の設定変更は、こちらで行う。
+
+    .. figure :: file-watchers.png
+
 
 - PyCharm 上ではこんな風に見える
 
