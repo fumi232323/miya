@@ -4,104 +4,116 @@
  * -------------------------------- */
 /* box中 */
 .item-m {
-    width: 364px;  /* item * 2 + 間の隙間4 */
+  width: 364px /* item * 2 + 間の隙間4 */;
+}
+@media (max-width: 768px) {
+  .item-m {
+    width: 100%;
+  }
 }
 /* box大 */
 .item-l {
-    width: 732px;  /* item-m * 2 + 間の隙間4 */
+  width: 732px /* item-m * 2 + 間 の隙間4 */;
+}
+@media (max-width: 768px) {
+  .item-l {
+    width: 100%;
+  }
 }
 .title {
-    margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
-    color: #aaaaaa;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-    line-height: 1.5;
+  margin: 15px 9px 10px; /* 下の margin は p 要素の line-height の分少なくする */
+  color: #aaa;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  line-height: 1.5;
 }
 /* タイトル左横の円 */
 .title::before {
-    content: '';            /* before擬似要素を表示するために指定 */
-    display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
-    width: 19px;
-    height: 19px;
-    margin-right: 5px;
-    border: 2px solid;
-    border-radius: 50%;     /* 50%で円になる */
-    vertical-align: -4px;   /* 縦方向の位置調整 */
+  content: ''; /* before擬似要素を表示するために指定 */
+  display: inline-block; /* 円の横幅と高さを指定したいので。横並び。 */
+  width: 19px;
+  height: 19px;
+  margin-right: 5px;
+  border: 2px solid;
+  border-radius: 50%; /* 50%で円になる */
+  vertical-align: -4px; /* 縦方向の位置調整 */
 }
-.category {  /* 行間と間隔を指定 */
-    margin: 10px 10px 5px;
-    line-height: 1.5;
+.category {
+/* 行間と間隔を指定 */
+  margin: 10px 10px 5px;
+  line-height: 1.5;
 }
-.date {  /* 行間と間隔を指定 */
-    display: block;
-    margin: 5px 10px 10px;
-    line-height: 1.5;
+.date {
+/* 行間と間隔を指定 */
+  display: block;
+  margin: 5px 10px 10px;
+  line-height: 1.5;
 }
 .item > a {
-    display: block;
-    margin: -8px -8px -11px;    /* ネガティブマージンを使って a 要素を .item と同じ大きさまで外側に広げる */
-    padding: 8px 8px 11px;      /* 同じ幅の padding を持たせて a 要素と .item をぴったり重ねる */
-    border-radius: inherit;     /* 親要素の値を引き継ぐ。どのCSSプロパティにも指定できる。 */
-    color: #777777;             /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
-    transition: all 0.3s;       /* 0.3秒かけてスムーズに変わるように指定 */
+  display: block;
+  margin: -8px -8px -11px; /* ネガティブマージンを使って a 要素を .item と同じ大きさまで外側に広げる */
+  padding: 8px 8px 11px; /* 同じ幅の padding を持たせて a 要素と .item をぴったり重ねる */
+  border-radius: inherit; /* 親要素の値を引き継ぐ。どのCSSプロパティにも指定できる。 */
+  color: #777; /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
+  transition: all 0.3s; /* 0.3秒かけてスムーズに変わるように指定 */
 }
 .item > a:hover {
-    box-shadow: 0 0 6px -1px rgba(0, 0, 0, 0.3);  /* ボックスの周りに影を落とす */
-    opacity: 0.8;  /* ハイライトのような効果 */
+  box-shadow: 0 0 6px -1px rgba(0,0,0,0.3); /* ボックスの周りに影を落とす */
+  opacity: 0.8; /* ハイライトのような効果 */
 }
 /* ホバーしたときにだけアニメーションしながら現れるようにする */
 .item {
-    overflow: hidden;  /* ボックスの外側にはみ出ているときは完全に隠す。触れないようにする。 */
+  overflow: hidden; /* ボックスの外側にはみ出ているときは完全に隠す。触れないようにする。 */
 }
 .image {
-    display: block;  /* 縦に並ぶブロックレベル要素 */
-    width: 100%;      /* ボックス内側の padding を除いたエリアいっぱいに表示 */
-    position: relative;
+  display: block; /* 縦に並ぶブロックレベル要素 */
+  width: 100%; /* ボックス内側の padding を除いたエリアいっぱいに表示 */
+  position: relative;
 }
 .image img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 /* ホバーしたときに画像部分を暗くする */
 /* リンクになっているボックスのみに表示したいので、 .item 直下の a 要素の ::before 擬似要素を使用する */
 .item > a .image::before {
-    content: close-quote;
-    position: absolute;
-    /* Mansonry によって,自動的に .item に position: absolute が指定されているので、
-     * 中の ::before 擬似要素を position: absolute にすると .item を基準として配置される。
-     */
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;     /* 普段は非表示 */
-    transition: opacity 0.3s linear;
+  content: close-quote;
+  position: absolute;
+/* Mansonry によって,自動的に .item に position: absolute が指定されているので、
+   * 中の ::before 擬似要素を position: absolute にすると .item を基準として配置される。
+   */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; /* 普段は非表示 */
+  transition: opacity 0.3s linear;
 }
 .item > a:hover .image::before {
-    opacity: 1;     /* ホバー時は表示 */
+  opacity: 1; /* ホバー時は表示 */
 }
 /* MORE の表示 */
 .item > a .image::after {
-    content: 'MORE';
-    position: absolute;
-    top: 50%;
-    left: 150%;     /* 最初はボックスの外にはみ出させておく */
-    display: block;
-    width: 100px;   /* MORE 箱の幅 */
-    margin-top: -19px;
-    margin-left: -50px;
-    padding: 8px;
-    border: 3px solid #FFFFFF;
-    color: #FFFFFF;
-    text-align: center;
-    letter-spacing: 3px;
-    font-size: 1.6rem;
+  content: 'MORE';
+  position: absolute;
+  top: 50%;
+  left: 150%; /* 最初はボックスの外にはみ出させておく */
+  display: block;
+  width: 100px; /* MORE 箱の幅 */
+  margin-top: -19px;
+  margin-left: -50px;
+  padding: 8px;
+  border: 3px solid #fff;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 3px;
+  font-size: 1.6rem;
 /*    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; */
-    opacity: 0;     /* 普段は非表示 */
-    transition: all 0.3s ease-in-out;
+  opacity: 0; /* 普段は非表示 */
+  transition: all 0.3s ease-in-out;
 }
 .item > a:hover .image::after {
-    left: 50%;      /* ホバー時は真ん中 */
-    opacity: 1;     /* ホバー時は表示 */
+  left: 50%; /* ホバー時は真ん中 */
+  opacity: 1; /* ホバー時は表示 */
 }
