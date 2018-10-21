@@ -3,7 +3,7 @@
    :title: ssh のメモ
    :category: ssh
    :tags:
-   :canonical_url: /ssh/command/ssh
+   :canonical_url: /ssh/command/ssh/
    :draft: false
 
 

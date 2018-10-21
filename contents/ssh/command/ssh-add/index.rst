@@ -3,7 +3,7 @@
    :title: ssh-add
    :category: ssh
    :tags:
-   :canonical_url: /ssh/command/ssh-add
+   :canonical_url: /ssh/command/ssh-add/
    :draft: false
 
 
