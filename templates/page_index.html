@@ -1,10 +1,11 @@
 {% extends "./base.html" %}
 
 {% block head %}
-  <link rel="stylesheet" href="/static/css/index.css?20180603">
+  <link rel="stylesheet" href="/static/css/index.css?20181021">
 {% endblock head %}
 
 {% block main %}
+
   {% for article in articles %}
     {% if loop.first %}
       {% set item_size = 'item-l' %}
@@ -28,6 +29,7 @@
       </a>
     </section>
   {% endfor %}
+
   {# CDNからライブラリを読み込み #}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.js"></script>
@@ -45,4 +47,5 @@
         )
     });
   </script>
+
 {% endblock main %}
