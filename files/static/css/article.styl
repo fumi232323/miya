@@ -11,6 +11,7 @@
   @media (max-width: 768px)
     margin-left 0         /* 縦並びにするので、左横の margin はいらない */
     word-wrap break-word  /* 幅が狭いので、単語内でも折り返しを許可する */
+    padding 40px 8px
 
 .date{
   display: block;
@@ -30,7 +31,7 @@
     font-size 3.0rem
 
 /* タイトル左横の円 */
-.title::before {
+.title::before
   content: '';            /* before擬似要素を表示するために指定 */
   display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
   width: 38px;
@@ -39,7 +40,12 @@
   border: 3px solid;
   border-radius: 50%;     /* 50%で円になる */
   vertical-align: -3px;   /* 縦方向の位置調整 */
-}
+
+  @media (max-width: 768px)
+    width: 30px;
+    height: 30px;
+    vertical-align: -4px;   /* 縦方向の位置調整 */
+
 .category > a {
   display: inline-block;
   padding: 6px 10px 6px;
@@ -151,6 +157,11 @@
   background-color: #ffffdb;
   color: #777777;
 }
+
+.text .figure img
+  width 100%
+  height 100%
+
 
 /* TODO: あといるもの */
 /*

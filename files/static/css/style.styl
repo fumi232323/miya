@@ -39,9 +39,12 @@ a:link, a:visited, a:hover, a:active {
   @media (max-width: 768px)
     flex-direction column
 
-.header {
-  flex-grow: 0;
-}
+.header
+  flex-grow 0
+
+  @media (max-width: 768px)
+    order: 1  /* これを書くとなぜか article のときだけ、目次が下に行ってくれる */
+
 .main {
   flex-grow: 1;
   min-width: 0;
