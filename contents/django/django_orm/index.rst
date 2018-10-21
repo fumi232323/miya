@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-09-29
+   :date: 2018-10-21
    :title: Django ORM のメモ
    :category: django
    :tags:
@@ -12,23 +12,59 @@ Django ORM のメモ
 ==================
 
 
-Django ORM
-===========
+リファレンス
+=============
+`QuerySet API reference <https://docs.djangoproject.com/ja/2.1/ref/models/querysets/>`_
+
+
+values() と values_list()
+-------------------------
+values()
+^^^^^^^^^
+辞書のクエリセットで取得できる。
+
+- https://docs.djangoproject.com/ja/2.1/ref/models/querysets/#values
+
+  .. code-block:: python
+
+    >>> Blog.objects.filter(name__startswith='Beatles').values()
+    <QuerySet [{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]>
+
+
+values_list()
+^^^^^^^^^^^^^^
+タプルのリストのクエリセットで取得できる。
+
+- https://docs.djangoproject.com/ja/2.1/ref/models/querysets/#values-list
+
+  .. code-block:: python
+
+    >>> Entry.objects.values_list('id', 'headline')
+    <QuerySet [(1, 'First entry'), ...]>
+
+
+  - 1カラムしか取得しない場合は、 ``flat=True`` をつけると、リストのクエリセットで取得できる。
+
+    .. code-block:: python
+
+      >>> Entry.objects.values_list('id', flat=True).order_by('id')
+      <QuerySet [1, 2, 3, ...]>
+
 
 aggregate と annotate
----------------------------------------------
+---------------------
 ``aggregate`` と ``annotate`` の違いがわかりやすい
 
 - `Djangoの集計について <http://note.crohaco.net/2014/django-aggregate/>`_
 
 
 prefetch_relatedの話
-----------------------------------------
+--------------------
 `Djangoでprefetch_relatedを使ってクエリ数を減らす <http://tokibito.hatenablog.com/entry/20140718/1405691738>`_
 
 
 Q Object
-----------------------------------------
+--------
 `Q() objects <https://docs.djangoproject.com/ja/1.11/ref/models/querysets/#q-objects>`_
 
 `Q オブジェクトを用いた複雑な検索 <https://docs.djangoproject.com/ja/1.11/topics/db/queries/#complex-lookups-with-q>`_
@@ -47,7 +83,7 @@ Q Object
 
 
 モデルクラス名を全部小文字にしたのに ``_set`` がつく
-------------------------------------------------------------------
+----------------------------------------------------
 `Related objects reference <https://docs.djangoproject.com/ja/1.11/ref/models/relations/>`_
 
 - ``_set`` というのは子テーブルのデータを参照する django の機能
@@ -55,7 +91,7 @@ Q Object
 
 
 ForeignKey.on_delete
---------------------------
+--------------------
 `ForeignKey.on_delete <https://docs.djangoproject.com/en/1.11/ref/models/fields/#django.db.models.ForeignKey.on_delete>`_
 
 - 6種類くらいあって、用途に応じて選べる
@@ -73,7 +109,7 @@ ForeignKey.on_delete
 
 
 LEFT OUTER JOIN
-------------------------------------------
+---------------
 Django のクエリセットは LEFT OUTER JOIN を表現できない
 
 - SQLAlchemy でやろう
