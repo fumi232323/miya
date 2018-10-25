@@ -1,35 +1,31 @@
 {% extends "./base.html" %}
 
-{% block head %}
-  <link rel="stylesheet" href="/static/css/index.css?20181021">
-{% endblock head %}
-
 {% block main %}
-
-  {% for article in articles %}
-    {% if loop.first %}
-      {% set item_size = 'item-l' %}
-    {% elif loop.index is divisibleby(3) %}
-      {% set item_size = 'item-m' %}
-    {% else %}
-      {% set item_size='' %}
-    {% endif %}
-    <section class="item {{ item_size }} item-{{ article.category }}">
-      <a href="{{ article.path() }}">
-        <div class="image">
-          <img src="/static/images/labrador.png" alt="犬">
-        </div>
-        <div class="title">{{ article.title }}</div>
-        <p class="category">
-          {{ article.category }}
-        </p>
-        <time class="date" datetime="{{ article.date }}">
-          {{ article.date.strftime('%Y-%m-%d %a') }}
-        </time>
-      </a>
-    </section>
-  {% endfor %}
-
+  <div class="index-content">
+    {% for article in articles %}
+      {% if loop.first %}
+        {% set item_size = 'item-l' %}
+      {% elif loop.index is divisibleby(3) %}
+        {% set item_size = 'item-m' %}
+      {% else %}
+        {% set item_size='' %}
+      {% endif %}
+      <section class="item {{ item_size }} item-{{ article.category }}">
+        <a href="{{ article.path() }}">
+          <div class="image">
+            <img src="/static/images/labrador.png" alt="犬">
+          </div>
+          <div class="title">{{ article.title }}</div>
+          <p class="category">
+            {{ article.category }}
+          </p>
+          <time class="date" datetime="{{ article.date }}">
+            {{ article.date.strftime('%Y-%m-%d %a') }}
+          </time>
+        </a>
+      </section>
+    {% endfor %}
+  </div>
   {# CDNからライブラリを読み込み #}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.js"></script>
@@ -47,5 +43,4 @@
         )
     });
   </script>
-
 {% endblock main %}

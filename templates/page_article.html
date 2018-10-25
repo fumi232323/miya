@@ -1,11 +1,7 @@
 {% extends "./base.html" %}
 
-{% block head %}
-  <link rel="stylesheet" href="/static/css/article.css?20181020">
-  <link rel="stylesheet" href="/static/css/monokai.css">
-{% endblock head %}
-
 {% block main %}
+<div class="article-content">
   <main class="item item-article item-{{ page.category }}">
     <time class="date" datetime="{{ page.date }}">
       {{ content.date.strftime('%Y-%m-%d %a') }}
@@ -20,4 +16,5 @@
       {{ content.html }}
     </div>
   </main>
+</div>
 {% endblock main %}

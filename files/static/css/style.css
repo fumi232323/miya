@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "./reset.css";
 /* --------------------------------
  * base
  * -------------------------------- */
@@ -50,14 +51,26 @@ a:active {
 .header {
   flex-grow: 0;
 }
-@media (max-width: 768px) {
-  .header {
-    order: 1 /* これを書くとなぜか article のときだけ、目次が下に行ってくれる */;
-  }
-}
 .main {
   flex-grow: 1;
   min-width: 0;
+}
+/* --------------------------------
+ * item base
+ * -------------------------------- */
+.item {
+  width: 180px;
+  margin-bottom: 4px /* ボックス間の隙間 */;
+  padding: 8px /* ボックス内の余白 */;
+  border-bottom: 3px solid;
+  border-radius: 5px;
+  background-color: #fff;
+}
+@media (max-width: 768px) {
+  .item {
+    width: 100%;
+    position: static !important;
+  }
 }
 /* --------------------------------
  * header
@@ -117,24 +130,7 @@ a:active {
   margin: 3px auto 0;
 }
 /* --------------------------------
- * item
- * -------------------------------- */
-.item {
-  width: 180px;
-  margin-bottom: 4px /* ボックス間の隙間 */;
-  padding: 8px /* ボックス内の余白 */;
-  border-bottom: 3px solid;
-  border-radius: 5px;
-  background-color: #fff;
-}
-@media (max-width: 768px) {
-  .item {
-    box-sizing: border-box;
-    width: 100%;
-  }
-}
-/* --------------------------------
- * カテゴリーごとに色分け
+ * category colors
  * -------------------------------- */
 .item-sample,
 .item-sample .title::before {
@@ -219,3 +215,491 @@ a:active {
 /* 色は、16.癒しを感じる柔らかなイメージから選び中
 http://www.hp-stylelink.com/news/2013/07/20130708.php
 */
+/* --------------------------------
+ * index page only
+ * -------------------------------- */
+@charset "UTF-8";
+.index-content .item-m {
+  width: 364px /* item * 2 + 間の隙間4 */;
+}
+@media (max-width: 768px) {
+  .index-content .item-m {
+    width: 100%;
+  }
+}
+.index-content .item-l {
+  width: 732px /* item-m * 2 + 間 の隙間4 */;
+}
+@media (max-width: 768px) {
+  .index-content .item-l {
+    width: 100%;
+  }
+}
+.index-content .title {
+  margin: 15px 9px 10px; /* 下の margin は p 要素の line-height の分少なくする */
+  color: #aaa;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+.index-content .title::before {
+  content: ''; /* before擬似要素を表示するために指定 */
+  display: inline-block; /* 円の横幅と高さを指定したいので。横並び。 */
+  width: 19px;
+  height: 19px;
+  margin-right: 5px;
+  border: 2px solid;
+  border-radius: 50%; /* 50%で円になる */
+  vertical-align: -4px; /* 縦方向の位置調整 */
+}
+.index-content .category {
+/* 行間と間隔を指定 */
+  margin: 10px 10px 5px;
+  line-height: 1.5;
+}
+.index-content .date {
+/* 行間と間隔を指定 */
+  display: block;
+  margin: 5px 10px 10px;
+  line-height: 1.5;
+}
+.index-content .item > a {
+  display: block;
+  margin: -8px -8px -11px; /* ネガティブマージンを使って a 要素を .item と同じ大きさまで外側に広げる */
+  padding: 8px 8px 11px; /* 同じ幅の padding を持たせて a 要素と .item をぴったり重ねる */
+  border-radius: inherit; /* 親要素の値を引き継ぐ。どのCSSプロパティにも指定できる。 */
+  color: #777; /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
+  transition: all 0.3s; /* 0.3秒かけてスムーズに変わるように指定 */
+}
+.index-content .item > a:hover {
+  box-shadow: 0 0 6px -1px rgba(0,0,0,0.3); /* ボックスの周りに影を落とす */
+  opacity: 0.8; /* ハイライトのような効果 */
+}
+.index-content .item {
+  overflow: hidden; /* ボックスの外側にはみ出ているときは完全に隠す。触れないようにする。 */
+}
+.index-content .image {
+  display: block; /* 縦に並ぶブロックレベル要素 */
+  width: 100%; /* ボックス内側の padding を除いたエリアいっぱいに表示 */
+  position: relative;
+}
+.index-content .image img {
+  width: 100%;
+  height: 100%;
+}
+.index-content .item > a .image::before {
+  content: close-quote;
+  position: absolute;
+/* Mansonry によって,自動的に .item に position: absolute が指定されているので、
+   * 中の ::before 擬似要素を position: absolute にすると .item を基準として配置される。
+   */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; /* 普段は非表示 */
+  transition: opacity 0.3s linear;
+}
+.index-content .item > a:hover .image::before {
+  opacity: 1; /* ホバー時は表示 */
+}
+.index-content .item > a .image::after {
+  content: 'MORE';
+  position: absolute;
+  top: 50%;
+  left: 150%; /* 最初はボックスの外にはみ出させておく */
+  display: block;
+  width: 100px; /* MORE 箱の幅 */
+  margin-top: -19px;
+  margin-left: -50px;
+  padding: 8px;
+  border: 3px solid #fff;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 3px;
+  font-size: 1.6rem;
+/*    font-family: "Trebuchet MS", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; */
+  opacity: 0; /* 普段は非表示 */
+  transition: all 0.3s ease-in-out;
+}
+.index-content .item > a:hover .image::after {
+  left: 50%; /* ホバー時は真ん中 */
+  opacity: 1; /* ホバー時は表示 */
+}
+/* --------------------------------
+ * article page only
+ * -------------------------------- */
+@charset "UTF-8";
+.article-content .item-article {
+  width: 100% /* びよーんと伸び縮みしたい */;
+  margin-left: 4px /* ヘッダーとの隙間をあける */;
+  padding: 40px /* ボックス内の余白を普通の item より広くとる */;
+}
+@media (max-width: 768px) {
+  .article-content .item-article {
+    margin-left: 0 /* 縦並びにするので、左横の margin はいらない */;
+    word-wrap: break-word /* 幅が狭いので、単語内でも折り返しを許可する */;
+    padding: 40px 8px;
+  }
+}
+.article-content .date {
+  display: block;
+  font-size: 2rem;
+  color: #777;
+}
+.article-content .title {
+  margin: 20px 0 20px;
+  color: #aaa;
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  font-family: "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+@media (max-width: 768px) {
+  .article-content .title {
+    font-size: 3rem;
+  }
+}
+.article-content .title::before {
+  content: ''; /* before擬似要素を表示するために指定 */
+  display: inline-block; /* 円の横幅と高さを指定したいので。横並び。 */
+  width: 38px;
+  height: 38px;
+  margin-right: 8px;
+  border: 3px solid;
+  border-radius: 50%; /* 50%で円になる */
+  vertical-align: -3px; /* 縦方向の位置調整 */
+}
+@media (max-width: 768px) {
+  .article-content .title::before {
+    width: 30px;
+    height: 30px;
+    vertical-align: -4px;
+  }
+}
+.article-content .category > a {
+  display: inline-block;
+  padding: 6px 10px 6px;
+  border-radius: 5px;
+  color: #777; /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
+  transition: all 0.3s; /* 0.3秒かけてスムーズに変わるように指定 */
+  box-shadow: 0 0 8px -1px rgba(0,0,0,0.3); /* ボックスの周りに影を落とす */
+}
+.article-content .category > a:hover {
+  opacity: 0.8; /* ハイライトのような効果 */
+  background: #777;
+  color: #fff;
+}
+.article-content .category {
+  font-size: 2rem;
+}
+.article-content .text {
+  margin-top: 6.6rem;
+  line-height: 1.9;
+  font-size: 1.6rem;
+  font-family: "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+.article-content .text h1,
+.article-content .text h2,
+.article-content .text h3,
+.article-content .text h4,
+.article-content .text h5,
+.article-content .text h6 {
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 2.2em;
+  margin-bottom: 2.4rem;
+}
+.article-content .text h1 {
+  font-size: 2.8rem;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.1em;
+}
+.article-content .text h2 {
+  font-size: 2.2rem;
+  border-bottom: 1px dotted #aaa;
+  padding-bottom: 0.1em;
+}
+.article-content .text h3 {
+  font-size: 2rem;
+}
+.article-content .text ul,
+.article-content .text ol {
+  margin: 16px 0;
+  padding-left: 40px;
+}
+.article-content .text li {
+  list-style-type: disc;
+}
+.article-content .text li li {
+  list-style-type: circle;
+}
+.article-content .text li li li {
+  list-style-type: square;
+}
+.article-content .text li li li li {
+  list-style-type: disc;
+}
+.article-content .text .arabic li {
+  list-style-type: decimal;
+}
+.article-content .text .arabic li li {
+  list-style-type: disc;
+}
+.article-content .text a:hover {
+  opacity: 0.5; /* ハイライトのような効果 */
+  transition: all 0.3s;
+}
+.article-content .text .code-block {
+  overflow: auto; /* スクロールバー: はみ出したら出す */
+  white-space: pre-wrap; /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
+  line-height: 1.3;
+  font-size: 2rem;
+  margin: 1.6rem 0 1.6rem;
+  padding: 0 32px;
+  background: #364549;
+  color: #f8f8f2;
+  max-height: 600px;
+}
+.article-content .text .literal-block {
+  overflow: auto; /* スクロールバー: はみ出したら出す */
+  white-space: pre-wrap; /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
+  line-height: 1.3;
+  font-size: inherit;
+  font-family: inherit;
+  margin: 1.6rem 0 1.6rem;
+  padding: 1em 32px;
+  border-radius: 2px;
+  background-color: #fef4f4;
+  color: #777;
+  max-height: 600px;
+}
+.article-content .text .docutils {
+  padding: 1px 3px;
+  border-radius: 2px;
+  background-color: #fef4f4;
+  color: #777;
+}
+.article-content .text cite {
+  padding: 1px 3px;
+  border-radius: 2px;
+  background-color: #ffffdb;
+  color: #777;
+}
+.article-content .text .figure img {
+  max-width: 100%;
+}
+.article-content .highlight .hll {
+  background-color: #49483e;
+}
+.article-content .highlight {
+  background: #364549;
+  color: #f8f8f2;
+}
+.article-content .highlight .c {
+  color: #75715e;
+}
+.article-content .highlight .err {
+  color: #960050;
+  background-color: #1e0010;
+}
+.article-content .highlight .k {
+  color: #66d9ef;
+}
+.article-content .highlight .l {
+  color: #ae81ff;
+}
+.article-content .highlight .n {
+  color: #f8f8f2;
+}
+.article-content .highlight .o {
+  color: #f92672;
+}
+.article-content .highlight .p {
+  color: #f8f8f2;
+}
+.article-content .highlight .ch {
+  color: #75715e;
+}
+.article-content .highlight .cm {
+  color: #75715e;
+}
+.article-content .highlight .cp {
+  color: #75715e;
+}
+.article-content .highlight .cpf {
+  color: #75715e;
+}
+.article-content .highlight .c1 {
+  color: #75715e;
+}
+.article-content .highlight .cs {
+  color: #75715e;
+}
+.article-content .highlight .gd {
+  color: #f92672;
+}
+.article-content .highlight .ge {
+  font-style: italic;
+}
+.article-content .highlight .gi {
+  color: #a6e22e;
+}
+.article-content .highlight .gs {
+  font-weight: bold;
+}
+.article-content .highlight .gu {
+  color: #75715e;
+}
+.article-content .highlight .kc {
+  color: #66d9ef;
+}
+.article-content .highlight .kd {
+  color: #66d9ef;
+}
+.article-content .highlight .kn {
+  color: #f92672;
+}
+.article-content .highlight .kp {
+  color: #66d9ef;
+}
+.article-content .highlight .kr {
+  color: #66d9ef;
+}
+.article-content .highlight .kt {
+  color: #66d9ef;
+}
+.article-content .highlight .ld {
+  color: #e6db74;
+}
+.article-content .highlight .m {
+  color: #ae81ff;
+}
+.article-content .highlight .s {
+  color: #e6db74;
+}
+.article-content .highlight .na {
+  color: #a6e22e;
+}
+.article-content .highlight .nb {
+  color: #f8f8f2;
+}
+.article-content .highlight .nc {
+  color: #a6e22e;
+}
+.article-content .highlight .no {
+  color: #66d9ef;
+}
+.article-content .highlight .nd {
+  color: #a6e22e;
+}
+.article-content .highlight .ni {
+  color: #f8f8f2;
+}
+.article-content .highlight .ne {
+  color: #a6e22e;
+}
+.article-content .highlight .nf {
+  color: #a6e22e;
+}
+.article-content .highlight .nl {
+  color: #f8f8f2;
+}
+.article-content .highlight .nn {
+  color: #f8f8f2;
+}
+.article-content .highlight .nx {
+  color: #a6e22e;
+}
+.article-content .highlight .py {
+  color: #f8f8f2;
+}
+.article-content .highlight .nt {
+  color: #f92672;
+}
+.article-content .highlight .nv {
+  color: #f8f8f2;
+}
+.article-content .highlight .ow {
+  color: #f92672;
+}
+.article-content .highlight .w {
+  color: #f8f8f2;
+}
+.article-content .highlight .mb {
+  color: #ae81ff;
+}
+.article-content .highlight .mf {
+  color: #ae81ff;
+}
+.article-content .highlight .mh {
+  color: #ae81ff;
+}
+.article-content .highlight .mi {
+  color: #ae81ff;
+}
+.article-content .highlight .mo {
+  color: #ae81ff;
+}
+.article-content .highlight .sa {
+  color: #e6db74;
+}
+.article-content .highlight .sb {
+  color: #e6db74;
+}
+.article-content .highlight .sc {
+  color: #e6db74;
+}
+.article-content .highlight .dl {
+  color: #e6db74;
+}
+.article-content .highlight .sd {
+  color: #e6db74;
+}
+.article-content .highlight .s2 {
+  color: #e6db74;
+}
+.article-content .highlight .se {
+  color: #ae81ff;
+}
+.article-content .highlight .sh {
+  color: #e6db74;
+}
+.article-content .highlight .si {
+  color: #e6db74;
+}
+.article-content .highlight .sx {
+  color: #e6db74;
+}
+.article-content .highlight .sr {
+  color: #e6db74;
+}
+.article-content .highlight .s1 {
+  color: #e6db74;
+}
+.article-content .highlight .ss {
+  color: #e6db74;
+}
+.article-content .highlight .bp {
+  color: #f8f8f2;
+}
+.article-content .highlight .fm {
+  color: #a6e22e;
+}
+.article-content .highlight .vc {
+  color: #f8f8f2;
+}
+.article-content .highlight .vg {
+  color: #f8f8f2;
+}
+.article-content .highlight .vi {
+  color: #f8f8f2;
+}
+.article-content .highlight .vm {
+  color: #f8f8f2;
+}
+.article-content .highlight .il {
+  color: #ae81ff;
+}

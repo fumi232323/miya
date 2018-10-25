@@ -1,8 +1,11 @@
 @charset "UTF-8"
+@import "./reset.css"
 
 /* --------------------------------
  * base
  * -------------------------------- */
+sp-width = 768px
+
 html {
   font-size: 62.5%;
 }
@@ -13,7 +16,7 @@ body
   font-size 1.2rem
   font-family Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif
 
-  @media (max-width: 768px)
+  @media (max-width: sp-width)
     background-color #eb6238
 
 /*
@@ -36,19 +39,30 @@ a:link, a:visited, a:hover, a:active {
   display flex
   flex-flow row nowrap
 
-  @media (max-width: 768px)
+  @media (max-width: sp-width)
     flex-direction column
 
 .header
   flex-grow 0
 
-  @media (max-width: 768px)
-    order: 1  /* これを書くとなぜか article のときだけ、目次が下に行ってくれる */
-
 .main
   flex-grow 1
   min-width 0
 
+/* --------------------------------
+ * item base
+ * -------------------------------- */
+.item
+  width 180px
+  margin-bottom 4px  /* ボックス間の隙間 */
+  padding 8px        /* ボックス内の余白 */
+  border-bottom 3px solid
+  border-radius 5px
+  background-color #FFFFFF
+
+  @media (max-width: sp-width)
+    width 100%
+    position: static !important;
 
 /* --------------------------------
  * header
@@ -109,22 +123,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 /* --------------------------------
- * item
- * -------------------------------- */
-.item
-  width 180px
-  margin-bottom 4px  /* ボックス間の隙間 */
-  padding 8px        /* ボックス内の余白 */
-  border-bottom 3px solid
-  border-radius 5px
-  background-color #FFFFFF
-
-  @media (max-width: 768px)
-    box-sizing border-box
-    width 100%
-
-/* --------------------------------
- * カテゴリーごとに色分け
+ * category colors
  * -------------------------------- */
 .item-sample,
 .item-sample .title::before {
@@ -210,3 +209,15 @@ a:link, a:visited, a:hover, a:active {
 /* 色は、16.癒しを感じる柔らかなイメージから選び中
 http://www.hp-stylelink.com/news/2013/07/20130708.php
 */
+
+/* --------------------------------
+ * index page only
+ * -------------------------------- */
+.index-content
+  @import "./index.styl"
+/* --------------------------------
+ * article page only
+ * -------------------------------- */
+.article-content
+  @import "./article.styl"
+  @import "./monokai.styl"
