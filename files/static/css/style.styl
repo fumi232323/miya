@@ -4,6 +4,8 @@
 /* --------------------------------
  * base
  * -------------------------------- */
+sp-width = 768px
+
 html {
   font-size: 62.5%;
 }
@@ -14,7 +16,7 @@ body
   font-size 1.2rem
   font-family Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif
 
-  @media (max-width: 768px)
+  @media (max-width: sp-width)
     background-color #eb6238
 
 /*
@@ -37,7 +39,7 @@ a:link, a:visited, a:hover, a:active {
   display flex
   flex-flow row nowrap
 
-  @media (max-width: 768px)
+  @media (max-width: sp-width)
     flex-direction column
 
 .header
