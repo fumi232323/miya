@@ -16,25 +16,25 @@ topic ブランチを acceptance ブランチへマージする。
 
 1. acceptance にチェックアウトする
 
-  .. code-block:: console
+    .. code-block:: console
 
-    $ git checkout acceptance
+      $ git checkout acceptance
 
 2. topic をマージします
 
-  .. code-block:: console
+    .. code-block:: console
 
-    $ git merge topic
+      $ git merge topic
 
 3. コンフリクトしたら、解消して、
 
-  .. code-block:: console
+    .. code-block:: console
 
-    $ git add .
-    $ git commit -m "Merge branch 'topic-branch-name' into acceptance"
+      $ git add .
+      $ git commit -m "Merge branch 'topic-branch-name' into acceptance"
 
 4. マージに成功したら、強制push
 
-  .. code-block:: console
+    .. code-block:: console
 
-    $ git push -u origin acceptance -f
+      $ git push -u origin acceptance -f
