@@ -161,7 +161,7 @@ a:active {
   border-color: #7fc2ef;
 }
 .item-mac,
-.item-html .title::before {
+.item-mac .title::before {
   border-color: #c4a6ca;
 }
 .item-miyadaiku,
