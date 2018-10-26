@@ -5,15 +5,18 @@
     {% for article in articles %}
       {% if loop.first %}
         {% set item_size = 'item-l' %}
+        {% set dog = 'robo.jpg' %}
       {% elif loop.index is divisibleby(3) %}
         {% set item_size = 'item-m' %}
+        {% set dog = 'labrador.png' %}
       {% else %}
         {% set item_size='' %}
+        {% set dog = 'nachi.jpg' %}
       {% endif %}
       <section class="item {{ item_size }} item-{{ article.category }}">
         <a href="{{ article.path() }}">
           <div class="image">
-            <img src="/static/images/labrador.png" alt="犬">
+            <img src="/static/images/{{ dog }}" alt="犬">
           </div>
           <div class="title">{{ article.title }}</div>
           <p class="category">
