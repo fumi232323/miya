@@ -6,13 +6,13 @@
    :canonical_url: /git/command/
    :draft: false
 
-==========================
+====================
 Git のコマンドまとめ
-==========================
+====================
 
 
 Git の絵
-===============
+========
 
 .. figure :: areas.png
 
@@ -20,7 +20,10 @@ Git の絵
 
 
 ブランチ操作
-===============
+============
+
+ローカル
+---------
 
 - 新しいブランチを作成して、新しいブランチにチェックアウト
 
@@ -59,6 +62,8 @@ Git の絵
     $ git push -u origin <branch-you-want-to-push>
 
 
+リモート
+---------
 - リモートブランチをチェックアウト
 
   .. code-block:: console
@@ -73,24 +78,8 @@ Git の絵
     $ git branch -a
 
 
-マージする
-===================
-
-- topic ブランチを acceptance ブランチへマージする
-
-  .. code-block:: console
-
-    $ git checkout acceptance
-    $ git merge topic
-    # コンフリクトしたら、解消して、
-    $ git add .
-    $ git commit -m "Merge branch 'topic-branch-name' into acceptance"
-    # マージに成功したら、強制push
-    $ git push -u origin acceptance -f
-
-
 git reset 使い分け
-=========================
+==================
 ちなみに ``git reset`` == ``git reset --mixed`` ですね
 
 
@@ -123,7 +112,7 @@ git reset 使い分け
 
 
 コミット
-===============
+========
 
 - コミットをもう一度やりなおす
 
@@ -148,7 +137,7 @@ git reset 使い分け
 
 
 stash: コミットはせずに変更を退避したい
-=============================================
+=======================================
 
 - これがわかりやすい
 
@@ -156,7 +145,7 @@ stash: コミットはせずに変更を退避したい
 
 
 git log
-==============
+=======
 
 - 各コミットを 1 行ずつ表示
 
@@ -178,7 +167,7 @@ git log
 
 
 リセットする
-==============================
+============
 履歴を全部消して force push する。
 
 1. ``.git`` を消す
@@ -193,17 +182,17 @@ git log
 
 
 fetch と pull
-===================
+=============
 
 fetch
------------
+------
 リモートリポジトリの最新の履歴の取得だけを行う。
 
 - ``hogehoge`` ブランチをfetchすると、 ローカルの ``origin/hogehoge`` がリモートの ``origin/hogehoge`` リポジトリと同期されて最新状態になる。
 - ローカルの ``hogehoge`` ブランチは、そのまま何にも変更されない。
 
 pull
------------
+-----
 fetch + merge
 
 - ``hogehoge`` ブランチを pull すると、 ローカルの ``origin/hogehoge`` も ``hogehoge`` も両方リモートの ``origin/hogehoge`` リポジトリの変更とマージされる。
