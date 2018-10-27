@@ -16,24 +16,25 @@
   @media (max-width: 768px)
     width 100%
 
-.title {
-  margin: 15px 9px 10px;  /* 下の margin は p 要素の line-height の分少なくする */
-  color: #aaaaaa;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-  line-height: 1.5;
-}
+.title
+  margin 15px 9px 10px  /* 下の margin は p 要素の line-height の分少なくする */
+  color #aaaaaa
+  font-size   1.6rem
+  letter-spacing 1px
+  line-height 1.5
+
 /* タイトル左横の円 */
-.title::before {
-  content: '';            /* before擬似要素を表示するために指定 */
-  display: inline-block;  /* 円の横幅と高さを指定したいので。横並び。 */
-  width: 19px;
-  height: 19px;
-  margin-right: 5px;
-  border: 2px solid;
-  border-radius: 50%;     /* 50%で円になる */
-  vertical-align: -4px;   /* 縦方向の位置調整 */
-}
+.title::before
+  content ''            /* before擬似要素を表示するために指定 */
+  display inline-block  /* 円の横幅と高さを指定したいので。横並び。 */
+  width 19px
+  height 19px
+  margin-right 5px
+  border-width 2px
+  border-style solid
+  border-radius 50%       /* 50%で円になる */
+  vertical-align -4px   /* 縦方向の位置調整 */
+
 .category {  /* 行間と間隔を指定 */
   margin: 10px 10px 5px;
   line-height: 1.5;

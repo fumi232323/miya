@@ -15,7 +15,7 @@ body {
 }
 @media (max-width: 768px) {
   body {
-    background-color: #eb6238;
+    padding: 15px;
   }
 }
 /*
@@ -236,21 +236,22 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   }
 }
 .index-content .title {
-  margin: 15px 9px 10px; /* 下の margin は p 要素の line-height の分少なくする */
+  margin: 15px 9px 10px /* 下の margin は p 要素の line-height の分少なくする */;
   color: #aaa;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   letter-spacing: 1px;
   line-height: 1.5;
 }
 .index-content .title::before {
-  content: ''; /* before擬似要素を表示するために指定 */
-  display: inline-block; /* 円の横幅と高さを指定したいので。横並び。 */
+  content: '' /* before擬似要素を表示するために指定 */;
+  display: inline-block /* 円の横幅と高さを指定したいので。横並び。 */;
   width: 19px;
   height: 19px;
   margin-right: 5px;
-  border: 2px solid;
-  border-radius: 50%; /* 50%で円になる */
-  vertical-align: -4px; /* 縦方向の位置調整 */
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50% /* 50%で円になる */;
+  vertical-align: -4px /* 縦方向の位置調整 */;
 }
 .index-content .category {
 /* 行間と間隔を指定 */
@@ -363,20 +364,21 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   }
 }
 .article-content .title::before {
-  content: ''; /* before擬似要素を表示するために指定 */
-  display: inline-block; /* 円の横幅と高さを指定したいので。横並び。 */
+  content: '' /* before擬似要素を表示するために指定 */;
+  display: inline-block /* 円の横幅と高さを指定したいので。横並び。 */;
   width: 38px;
   height: 38px;
   margin-right: 8px;
-  border: 3px solid;
-  border-radius: 50%; /* 50%で円になる */
-  vertical-align: -3px; /* 縦方向の位置調整 */
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 50% /* 50%で円になる */;
+  vertical-align: -5px /* 縦方向の位置調整 */;
 }
 @media (max-width: 768px) {
   .article-content .title::before {
     width: 30px;
     height: 30px;
-    vertical-align: -4px;
+    vertical-align: -4px /* 縦方向の位置調整 */;
   }
 }
 .article-content .category > a {
