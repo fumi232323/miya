@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-09-02
+   :date: 2018-10-29
    :title: CSS のメモ
    :category: css
    :tags:
@@ -10,6 +10,11 @@
 ================
 CSS メモ
 ================
+
+
+CSSの優先順位 がわかりやすい
+=============================
+https://www.slideshare.net/yumi-uniq-ishizaki/css-13918388?ref=https://nelog.jp/specificity-calculator
 
 
 Flexbox がわかりやすい
