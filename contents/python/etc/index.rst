@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-10-11
+   :date: 2018-10-29
    :title: Python いろいろメモ
    :category: python
    :tags:
@@ -10,6 +10,11 @@
 ===================
 Python いろいろメモ
 ===================
+
+
+flake8 3.6 対応がわかりやすい
+=============================
+https://scrapbox.io/shimizukawa/flake8-3.6.0_%E3%81%AB%E6%9B%B4%E6%96%B0%E3%81%97%E3%81%9F%E3%82%89%E8%AD%A6%E5%91%8A%E3%81%9F%E3%81%8F%E3%81%95%E3%82%93%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F
 
 
 wheel
