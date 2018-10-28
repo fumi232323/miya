@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-09-03
+   :date: 2018-10-28
    :title: Django のメモ
    :category: django
    :tags:
@@ -11,19 +11,92 @@
 Django のメモ
 ==================
 
+django-admin と manage.py
+==========================
+
+リファレンス
+------------
+https://docs.djangoproject.com/ja/2.1/ref/django-admin/#cmdoption-shell-command
+
+
+Django をインタラクティブモードで実行する
+-----------------------------------------
+
+使い方
+^^^^^^^
+
+.. code-block:: console
+
+  # こうとか
+  $ DJANGO_SETTINGS_MODULE=settings._ python manage.py shell
+  # こう
+  $ python manage.py shell --settings=settings._
+
+
+使用例
+^^^^^^^
+
+.. code-block:: console
+
+  (venv) [vagrant@localhost apps]$ python manage.py shell --settings=settings._
+  Python 2.7.7 (default, Dec 11 2017, 18:45:38)
+  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)] on linux2
+  Type "help", "copyright", "credits" or "license" for more information.
+  (InteractiveConsole)
+  >>> from myapp.models import Entry
+  >>> from django.db.models import Q
+  >>> target_entry_id = None
+  >>> Entry.objects.filter(
+  ...     Q(expiration_year_month__gte=target_entry_id) |
+  ...     Q(expiration_year_month__isnull=True)
+  ... )
+
+
+Django の DBシェルでローカルDBにつなぐ
+--------------------------------------
+
+使い方
+^^^^^^
+.. code-block:: console
+
+  $ python manage.py dbshell --settings=settings.local
+
+ガイド
+^^^^^^
+https://docs.djangoproject.com/ja/2.1/ref/django-admin/#dbshell
+
+
+System check framework を使って、Django プロジェクトの一般的な問題を検査する
+------------------------------------------------------------------------------
+`check <https://docs.djangoproject.com/ja/1.11/ref/django-admin/#check>`_ ,
+`System check framework <https://docs.djangoproject.com/ja/1.11/ref/checks/#system-check-framework>`_
+
+- 使い方 (python2)
+
+  .. code-block:: python
+
+    $ DJANGO_SETTINGS_MODULE=settings.local python -Wd manage.py check
+
+
+  - https://docs.python.org/ja/2.7/using/cmdline.html#cmdoption-w
+
+    ::
+
+      Python 2.7 から、 DeprecationWarning とその子クラスはデフォルトで無視されます。 -Wd オプションを指定して有効にすることができます。
+
 
 template
-===========
+========
 
 独自のテンプレートタグとフィルタ
---------------------------------------------------
+--------------------------------
 カスタムタグやカスタムフィルタをつくることができる。
 
 - `独自のテンプレートタグとフィルタ <https://docs.djangoproject.com/ja/1.11/howto/custom-template-tags/#custom-template-tags-and-filters>`_
 
 
 Class-based views
-==========================
+=================
 
 ::
 
@@ -32,28 +105,28 @@ Class-based views
 
 
 FormView
--------------
+--------
 - ``genericview`` はたくさん種類がある。
 - 何らかの登録・更新処理で ``form`` を使ったバリデーションが必要なら 大体 ``FormView`` を使う
 
 
 as_view
--------------
+-------
 - as_view は view関数を生成して返している
 - 実際の処理は self.dispatch で クラスベースビューに処理を委譲してるんだと思います
 - ソースコード URL: https://github.com/django/django/blob/master/django/views/generic/base.py#L49
 
 
 get_context_data
---------------------------
+----------------
 - 大抵の場合、ビューというのはレンダリングに必要なコンテキストを組み立てるものなので 大体の処理は ``get_context_data`` というメソッドに書く。
 
 
 こんなのある
-===================
+============
 
 インラインフォームセット
-----------------------------------------
+------------------------
 使い方はよくわかっていない
 
 - https://docs.djangoproject.com/ja/1.11/topics/forms/modelforms/#inline-formsets
@@ -61,7 +134,7 @@ get_context_data
 
 
 MultiValueDict
------------------------
+--------------
 なにがうれしいのかさっぱりわからない => `MultiValueDict を継承してる QueryDict とか見るとユースケースはなんとなく想像つくと思います` と教えて頂いた。
 
 - https://docs.djangoproject.com/ja/2.1/_modules/django/utils/datastructures/
@@ -87,7 +160,7 @@ MultiValueDict
 
 
 QueryDict オブジェクト
-----------------------------------------
+----------------------
 `In an HttpRequest object, the GET and POST attributes are instances of django.http.QueryDict` だそうです。
 
   - `QueryDict オブジェクト <https://docs.djangoproject.com/ja/2.1/ref/request-response/#querydict-objects>`_
@@ -97,27 +170,8 @@ QueryDict オブジェクト
       In an HttpRequest object, the GET and POST attributes are instances of django.http.QueryDict, a dictionary-like class customized to deal with multiple values for the same key. This is necessary because some HTML form elements, notably <select multiple>, pass multiple values for the same key.
 
 
-System check framework を使って、Django プロジェクトの一般的な問題を検査する
-------------------------------------------------------------------------------
-`check <https://docs.djangoproject.com/ja/1.11/ref/django-admin/#check>`_ ,
-`System check framework <https://docs.djangoproject.com/ja/1.11/ref/checks/#system-check-framework>`_
-
-- 使い方 (python2)
-
-  .. code-block:: python
-
-    $ DJANGO_SETTINGS_MODULE=settings.local python -Wd manage.py check
-
-
-  - https://docs.python.org/ja/2.7/using/cmdline.html#cmdoption-w
-
-    ::
-
-      Python 2.7 から、 DeprecationWarning とその子クラスはデフォルトで無視されます。 -Wd オプションを指定して有効にすることができます。
-
-
 UserManager
---------------------------------------------------
+-----------
 `マネージャメソッド <https://docs.djangoproject.com/ja/1.11/ref/contrib/auth/#manager-methods>`_
 
 参考 URL
@@ -133,12 +187,12 @@ UserManager
 
 
 RequestFactory
------------------------------------
+--------------
 https://docs.djangoproject.com/en/2.1/topics/testing/advanced/#django.test.RequestFactory
 
 
 便利さん
-===========
+========
 
 django に便利コマンド追加してくれるさん
 ----------------------------------------
