@@ -64,9 +64,9 @@ http://stylus-lang.com/
     .. figure :: file-watchers.png
 
 
-- PyCharm 上ではこんな風に見える
+  - PyCharm 上ではこんな風に見える
 
-  .. figure :: stylus-image.png
+    .. figure :: stylus-image.png
 
 - HTML の ``<head></head>`` には、こう書く
 
@@ -116,3 +116,4 @@ http://stylus-lang.com/
       body {
         background-color: #ed6d3d;
       }
+
