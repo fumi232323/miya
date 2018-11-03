@@ -8,7 +8,7 @@ html {
 }
 body {
   padding: 30px;
-  background-color: #f0f8ff;
+  background-color: #f0f335;
   color: #333;
   font-size: 1.2rem;
   font-family: Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
@@ -16,6 +16,7 @@ body {
 @media (max-width: 768px) {
   body {
     padding: 15px;
+    background-color: #f23337;
   }
 }
 /*f0f8ff eaf4fc
