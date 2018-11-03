@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-10-18
-   :title: stylus を使う
+   :title: Stylus を使う
    :category: css
    :tags:
    :canonical_url: /html-css/stylus/
@@ -8,7 +8,7 @@
 
 
 =============
-stylus を使う
+Stylus を使う
 =============
 
 
@@ -76,7 +76,7 @@ http://stylus-lang.com/
 
   - ``style-sp.styl`` と書いても認識してくれない
 
-- ``.styl`` ファイルに、stylus の書き方とふつうの CSS の書き方を併記できる。
+- ``.styl`` ファイルに、Stylus の書き方とふつうの CSS の書き方を併記できる。
 
 
   - ``style-sp.styl`` にこう書くと、
@@ -86,7 +86,7 @@ http://stylus-lang.com/
       @charset "UTF-8"
 
       /* --------------------------------
-       * stylus の書き方
+       * Stylus の書き方
        * -------------------------------- */
       body
         background-color #f8b500
@@ -105,7 +105,7 @@ http://stylus-lang.com/
 
       @charset "UTF-8";
       /* --------------------------------
-       * stylus の書き方
+       * Stylus の書き方
        * -------------------------------- */
       body {
         background-color: #f8b500;
