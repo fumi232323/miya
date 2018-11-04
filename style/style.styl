@@ -11,7 +11,7 @@ html {
 }
 body
   padding 30px
-  background-color #f0f8ff
+  background-color #FDF5E6
   color #333333
   font-size 1.2rem
   font-family Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif
@@ -71,10 +71,12 @@ a:link, a:visited, a:hover, a:active {
 /* --------------------------------
  * header
  * -------------------------------- */
-.item-header {
-  text-align: center;
-  border-color: #0f2350;
-}
+color-header = #6C3A24
+
+.item-header
+  text-align center
+  border-color color-header
+
 .logo {
   width: 100%;
   height: 100%
@@ -88,43 +90,42 @@ a:link, a:visited, a:hover, a:active {
 .nav {
   margin: 35px auto 10px;  /* nav の上部に間隔をあける */
 }
-.nav-category {
-  margin-top: 20px;   /* リスト項目の間を20pxずつあける。一番上の項目はマージンが相殺されるので空き過ぎないとのこと。 */
+.nav-category
+  margin-top 20px   /* リスト項目の間を20pxずつあける。一番上の項目はマージンが相殺されるので空き過ぎないとのこと。 */
   /* ブロックレベル要素のマージンは相殺される
    * - 隣接した要素の上下のマージン（マージンの値が異なる場合は大きほうになる）
    * - 入れ子になった要素の上下のマージン
    */
-  text-align: center;
-  letter-spacing: 1px;
-  font-weight: bold;
-  font-size: 2.0rem;
-}
-/* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
-.nav-category a {
-  display: inline-block;  /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
-  color: #0f2350;
-}
-.nav-category a::after {
-  content: '';
-  display: block;         /* ブロックレベルの::after擬似要素を作る */
-  width: 0;               /* 通常時には見えないように横幅を 0 にする */
-  margin: 6px auto 0;     /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */
-  border-bottom: 1px solid #0f2350;
-  transition: width 0.3s ease-in-out;
-  /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
-  /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
-}
-.nav-category a:hover::after {
-  width: 100%;     /* リンクにホバーしたときの ::after 擬似要素の横幅を指定 */
-}
-.nav-article {
-  margin-top: 5px;
-  font-weight: normal;
-  font-size: 1.2rem;
-}
-.nav-article a::after {
-  margin: 3px auto 0;
-}
+  text-align center
+  letter-spacing 1px
+  font-weight bold
+  font-size 2.0rem
+
+  /* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
+  a
+    display: inline-block  /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
+    color: color-header
+
+  a::after
+    content ''
+    display block         /* ブロックレベルの::after擬似要素を作る */
+    width 0               /* 通常時には見えないように横幅を 0 にする */
+    margin 6px auto 0     /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */
+    border-bottom 1px solid color-header
+    transition width 0.3s ease-in-out
+    /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
+    /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
+
+  a:hover::after
+    width 100%     /* リンクにホバーしたときの ::after 擬似要素の横幅を指定 */
+
+.nav-article
+  margin-top 5px
+  font-weight normal
+  font-size 1.2rem
+
+  a::after
+    margin 3px auto 0
 
 /* --------------------------------
  * category colors
