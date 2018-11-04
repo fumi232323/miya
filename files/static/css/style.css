@@ -524,11 +524,13 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   transition: all 0.3s;
 }
 .article-content table {
+  margin-top: 3rem;
   border: 1px solid #bbb;
 }
 .article-content table caption {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.8rem;
+  padding: 2px 5px;
 }
 .article-content table th {
   border: 1px solid #bbb;
