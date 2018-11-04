@@ -63,131 +63,150 @@
   font-size: 2rem;
 }
 
-.text {
-  margin-top: 6.6rem;
-  line-height: 1.9;
-  font-size: 1.6rem;
-  font-family: "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", sans-serif;
-}
+/* --------------------------------
+ * article 本文
+* -------------------------------- */
+.text
+  margin-top 6.6rem
+  line-height 1.9
+  font-size 1.6rem
+  font-family "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", sans-serif
 
-.text h1, .text h2, .text h3, .text h4, .text h5, .text h6 {
-  font-weight: 700;
-  line-height: 1.5;
-  margin-top: 2.2em;
-  margin-bottom: 2.4rem;
-}
+  h1, h2, h3, h4, h5, h6
+    font-weight 700
+    line-height 1.5
+    margin-top 2.2em
+    margin-bottom 2.4rem
 
-.text h1 {
-  font-size: 2.8rem;
-  border-bottom: 1px solid #aaaaaa;
-  padding-bottom: 0.1em;
-}
-.text h2 {
-  font-size: 2.2rem;
-  border-bottom: 1px dotted #aaaaaa;
-  padding-bottom: 0.1em;
-}
-.text h3 {
-  font-size: 2.0rem;
-}
+  h1
+    font-size 2.8rem
+    border-bottom 1px solid #aaaaaa
+    padding-bottom 0.1em
 
-/* list */
-.text ul, .text ol {
-  margin:16px 0;
-  padding-left:40px;
-}
-.text li {
-  list-style-type: disc;
-}
-.text li li{
-  list-style-type: circle;
-}
-.text li li li{
-  list-style-type: square;
-}
-.text li li li li{
-  list-style-type: disc;
-}
-.text .arabic li {
-  list-style-type: decimal;
-}
-.text .arabic li li{
-  list-style-type: disc;
-}
+  h2
+    font-size 2.2rem
+    border-bottom 1px dotted #aaaaaa
+    padding-bottom 0.1em
 
-.text a:hover {
-  opacity: 0.5;  /* ハイライトのような効果 */
-  transition: all 0.3s;
-}
+  h3
+    font-size 2.0rem
 
-.text .code-block {
-  overflow: auto;             /* スクロールバー: はみ出したら出す */
-  white-space: pre-wrap;        /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
-  line-height: 1.3;
-  font-size: 2.0rem;
-  margin: 1.6rem 0 1.6rem;
-  padding: 0 32px;
-  background: #364549;
-  color: #f8f8f2;
-  max-height: 600px;
-}
+  ul, ol
+    margin 16px 0
+    padding-left 40px
 
-.text .literal-block {
-  overflow: auto;               /* スクロールバー: はみ出したら出す */
-  white-space: pre-wrap;        /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
-  line-height: 1.3;
-  font-size: inherit;
-  font-family: inherit;
-  margin: 1.6rem 0 1.6rem;
-  padding: 1em 32px;
-  border-radius: 2px;
-  background-color: #fef4f4;
-  color: #777777;
-  max-height: 600px;
-}
-.text .docutils {
-  padding: 1px 3px;
-  border-radius: 2px;
-  background-color: #fef4f4;
-  color: #777777;
-}
-.text cite {
-  padding: 1px 3px;
-  border-radius: 2px;
-  background-color: #ffffdb;
-  color: #777777;
-}
+    li
+      list-style-type disc
 
-.text .figure img
-  max-width 100%
+      li
+        list-style-type: circle;
+
+        li
+          list-style-type square
+
+          li
+            list-style-type disc
+
+  .arabic li
+    list-style-type decimal
+
+    li
+      list-style-type disc
+
+  a:hover
+    opacity 0.5           /* ハイライトのような効果 */
+    transition all 0.3s   /* 0.3sec かけて変化する */
+
+  .code-block,
+  .literal-block
+    overflow auto          /* スクロールバー: はみ出したら出す */
+    white-space pre-wrap   /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
+    margin 1.6rem 0 1.6rem
+    line-height 1.3
+    max-height 600px
+
+  .code-block
+    padding 0 32px
+    font-size 2.0rem
+    background-color #364549
+    color #f8f8f2
+
+  .literal-block
+    padding 1em 32px
+    font-size inherit
+    font-family inherit
+    border-radius 2px
+    background-color #FDF5E6
+    color #777777
+
+  .docutils
+    padding 1px 3px
+    border-radius 2px
+    background-color #FDF5E6
+    color #777777
+
+  cite
+    padding 1px 3px
+    border-radius 2px
+    background-color #ffffdb
+    color: #777777
+
+  .figure img
+    max-width 100%
 
 /* --------------------------------
- * field-list simple
+ * field-list
  * -------------------------------- */
-.field-list
-  display flex
-  flex-wrap wrap
-  border 1px solid #bbb
-  border-top none
+  dl
+    display flex
+    flex-wrap wrap
+    border 1px solid #bbb
+    border-top none
 
-dt
-  padding 2px 5px
-  width 30%
-  border-top 1px solid #bbb
-  font-weight bold;
-  //background-color #eeeeee
-  background-color #f0f8ff/*cce7ff*//*3498db*//*#3db1ff*/
-  //#cce7ff
-  //color #FFFFFF
+    dt
+      padding 2px 5px
+      flex-basis 30%
+      border-top 1px solid #bbb
+      font-weight bold
+      background-color #fef4f4
 
-dd
-  padding 2px 5px
-  width 70%
-  border-left 1px solid #bbb
-  border-top 1px solid #bbb
+    dd
+      padding 2px 5px
+      flex-basis 70%
+      border-left 1px solid #bbb
+      border-top 1px solid #bbb
+
+    dt:hover,
+    dd:hover
+      opacity: 0.7;  /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
+      background-color #EFBAA8
+      transition all 0.3s
+
+/* --------------------------------
+ * table
+ * -------------------------------- */
+  table
+    border 1px solid #bbb
+
+    caption
+      font-weight bold
+      font-size 1.2em
+
+    th
+      border 1px solid #bbb
+      background-color #fef4f4
+      padding 2px 5px
+
+    td
+      border 1px solid #bbb
+      padding 2px 5px
+
+    td:hover
+      opacity 0.7  /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
+      background-color #EFBAA8
+      transition all 0.3s
 
 /* TODO: あといるもの */
 /*
-  - テーブルの CSS 書きたい
   - web master 登録?
 */
