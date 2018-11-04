@@ -1,17 +1,16 @@
 .. article::
-   :title: field-list の sample
-   :date: 2018-10-29
+   :title: table の sample
+   :date: 2018-11-03
    :category: sample
    :tags:
    :canonical_url: /2018/sample-table/
-   :draft: true
+   :draft: false
 
 
 ===============
 table の sample
 ===============
 
-TODO: list-table の CSS を書く
 
 field-list のサンプル
 =====================
@@ -27,26 +26,54 @@ field-list のサンプル
 :行をコピーして貼り付け: ``yy`` -> ``p``
 
 
-list-table
-==========
+list-table のサンプル
+=====================
 
-.. list-table:: Frozen Delights!
+.. list-table:: アップルパイ (直径23cmのパイ皿1枚分)
    :widths: 15 10 30
    :header-rows: 1
 
-   * - Treat
-     - Quantity
+   * - 材料
+     - 分量
      - Description
-   * - Albatross
-     - 2.99
-     - On a stick!
-   * - Crunchy Frog
-     - 1.49
-     - If we took the bones out, it wouldn't be
-       crunchy, now would it?
-   * - Gannet Ripple
-     - 1.99
-     - On a stick!
+   * - りんご
+     - 4コ
+     - 紅玉 (手に入らなければ、ジョナゴールド、あかねなど)
+   * - バター （食塩不使用）
+     - 30g
+     - 有塩バターでも問題なくおいしい。
+   * - グラニュー糖
+     - 80～90g
+     - らかんとでも大丈夫。すこしざくざくする。
+   * - レモン汁
+     - 小さじ2
+     -
+   * - 薄力粉
+     - 110g
+     - めんどうくさいので、薄力粉 or 強力粉のみでも OK。
+   * - 強力粉
+     - 110g
+     - めんどうくさいので、薄力粉 or 強力粉のみでも OK。
+   * - 強力粉
+     - 110g
+     -
+   * - 塩
+     - 3g
+     -
+   * - グラニュー糖
+     - 5g
+     -
+   * - バター （食塩不使用）
+     - 185g
+     - 有塩バターでも問題なくおいしい。
+   * - 牛乳
+     - 28g
+     -
+   * - 水
+     - 28g
+     -
+   * - シナモン （粉末）
+     - 28g
+     -
 
-http://docutils.sourceforge.net/docs/ref/rst/directives.html#list-table
-
+- このレシピが好き: https://www.kyounoryouri.jp/recipe/3633_%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB%E3%83%91%E3%82%A4.html
