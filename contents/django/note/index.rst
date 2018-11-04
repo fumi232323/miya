@@ -11,6 +11,40 @@
 Django のメモ
 ==================
 
+
+マイグレーションを間違えたときのリカバリ方法
+=============================================
+1. DjangoのDBシェルでローカルのポスグレにつなぐ
+
+    .. code-block:: console
+
+      $ python manage.py dbshell --settings=settings.local
+
+
+2. django_migrations テーブルから該当アプリのレコードを削除する
+
+    .. code-block:: sql
+
+      SELECT * FROM django_migrations WHERE app like '%{application_name}%';
+      DELETE FROM django_migrations WHERE id={該当のID};
+
+3. 該当テーブルやカラムも DROP する
+
+    .. code-block:: sql
+
+      DROP TABLE {table_name};
+      ALTER TABLE {table_name} DROP COLUMN {column_name};
+
+4. 該当のマイグレーションファイルも削除しておく
+
+5. もう一回最初からマイグレーションする
+
+    .. code-block:: console
+
+      $ python manage.py makemigrations {application_name} --settings=settings.local
+      $ python manage.py migrate {application_name} --settings=settings.local
+
+
 django-admin と manage.py
 ==========================
 
