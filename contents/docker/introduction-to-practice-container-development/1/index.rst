@@ -4,7 +4,7 @@
    :category: docker
    :tags:
    :canonical_url: /docker/introduction-to-practice-container-development/1/
-   :draft: true
+   :draft: false
 
 
 ================
@@ -256,51 +256,55 @@ Docker のコンテナオーケストレーションシステム
 
 1.3.3 Docker for Mac の基本設定
 -------------------------------
-- 設定画面の出し方
 
-  - ステータスバーの Docker アイコンをクリック -> Settings... -> Preference
+設定画面の出し方:
 
-- Docker の自動起動
+- ステータスバーの Docker アイコンをクリック -> Settings... -> Preference
 
-  - General -> Start docker when you log in: ON
-  - OS ログイン時 Docker を起動する
 
-- 自動更新のチェック
+.. list-table:: 設定画面
+  :widths: auto
+  :header-rows: 1
 
-  - General -> Automatically check for updates: ON
+  * - 項目
+    - タブ
+    - 説明
 
-- ホスト OS 側のディレクトリマウント
+  * - Docker の自動起動
+    - General -> Start docker when you log in: ON
+    - OS ログイン時 Docker を起動する
 
-  - File Sharing タブ
-  - Docker コンテナにマウントを許可するホスト側のディレクトリを設定できる
-  - Docker はホストとゲスト (コンテナ) 間でファイルをやり取りするためにディレクトリをマウントして共有する状態を作る
+  * - 自動更新のチェック
+    - General -> Automatically check for updates: ON
+    -
 
-- 仮想ディスクサイズの設定
+  * - ホスト OS 側のディレクトリマウント
+    - File Sharing
+    - - Docker コンテナにマウントを許可するホスト側のディレクトリを設定できる
+      - Docker はホストとゲスト (コンテナ) 間でファイルをやり取りするためにディレクトリをマウントして共有する状態を作る
 
-  - Disk タブ
-  - Docker for Mac を実行している仮想ディスクのサイズを調整できる
-  - macOS の場合、仮想ディスクのパスは、 ~/Library/Containers/com.docker.docker/Data/vms/0/Docker.qcow2
+  * - 仮想ディスクサイズの設定
+    - Disk
+    - - Docker for Mac を実行している仮想ディスクのサイズを調整できる
+      - macOS の場合、仮想ディスクのパスは、 ~/Library/Containers/com.docker.docker/Data/vms/0/Docker.qcow2
 
-- CPU/メモリの割り当て
+  * - CPU/メモリの割り当て
+    - Advanced
+    - ホスト OS のどれだけの CPU・メモリリソースを割り当てるか設定できる
 
-  - Advanced タブ
-  - ホスト OS のどれだけの CPU・メモリリソースを割り当てるか設定できる
+  * - プロキシ
+    - Proxies
+    - Docker イメージをリモートの Docker レジストリから pull してくる際に、 HTTP/HTTPS プロキシを利用するかどうかを設定できる
 
-- プロキシ
+  * - Docker の設定ファイル
+    - Daemon -> Advanced
+    - - Docker の設定ファイルを JSON 形式で設定できる
+      - 設定画面にない設定値を変更したい場合はこの JSON 文字列を更新する
 
-  - Proxies タブ
-  - Docker イメージをリモートの Docker レジストリから pull してくる際に、 HTTP/HTTPS プロキシを利用するかどうかを設定できる
-
-- Daemon タブ
-
-  - Advanced
-  - Docker の設定ファイルを JSON 形式で設定できる
-  - 設定画面にない設定値を変更したい場合はこの JSON 文字列を更新する
-
-- Kubernetes タブ
-
-  - 実行する Kubernetes の設定ができる
-  - Enable Kubernetes をチェックすると、 Kubernetes が有効になる
+  * - Kubernetes の設定
+    - Kubernetes
+    - - 実行する Kubernetes の設定ができる
+      - Enable Kubernetes をチェックすると、 Kubernetes が有効になる
 
 - Docker EE
 
