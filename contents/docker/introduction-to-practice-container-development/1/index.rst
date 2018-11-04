@@ -4,7 +4,7 @@
    :category: docker
    :tags:
    :canonical_url: /docker/introduction-to-practice-container-development/1/
-   :draft: false
+   :draft: true
 
 
 ================
