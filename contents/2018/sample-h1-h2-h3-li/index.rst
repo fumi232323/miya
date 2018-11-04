@@ -41,5 +41,11 @@
 手順(数字のリスト)
 =========================
 1. みかんを購入する
+
+    - みかん
+
 2. みかんを食べまくる
+
+    - みかんみかん
+
 3. `みかんのリンク <https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-github-pages-site/>`_ を見る
