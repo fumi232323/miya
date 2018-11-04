@@ -352,6 +352,22 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   font-size: 2rem;
   color: #777;
 }
+.article-content .category {
+  font-size: 2rem;
+}
+.article-content .category > a {
+  display: inline-block;
+  padding: 6px 10px 6px;
+  border-radius: 5px;
+  color: #777 /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */;
+  transition: all 0.3s /* 0.3秒かけてスムーズに変わるように指定 */;
+  box-shadow: 0 0 8px -1px rgba(0,0,0,0.3) /* ボックスの周りに影を落とす */;
+}
+.article-content .category > a:hover {
+  opacity: 0.8 /* ハイライトのような効果 */;
+  background: #777;
+  color: #fff;
+}
 .article-content .title {
   margin: 20px 0 20px;
   color: #aaa;
@@ -359,7 +375,7 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   font-weight: bold;
   letter-spacing: 1px;
   line-height: 1.4;
-  font-family: "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", sans-serif;
+  font-family: 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", serif;
 }
 @media (max-width: 768px) {
   .article-content .title {
@@ -384,27 +400,11 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
     vertical-align: -4px /* 縦方向の位置調整 */;
   }
 }
-.article-content .category > a {
-  display: inline-block;
-  padding: 6px 10px 6px;
-  border-radius: 5px;
-  color: #777; /* a 要素の中はリンクテキストとして文字色が変わってしまうので、文字色を指定しなおす。 */
-  transition: all 0.3s; /* 0.3秒かけてスムーズに変わるように指定 */
-  box-shadow: 0 0 8px -1px rgba(0,0,0,0.3); /* ボックスの周りに影を落とす */
-}
-.article-content .category > a:hover {
-  opacity: 0.8; /* ハイライトのような効果 */
-  background: #777;
-  color: #fff;
-}
-.article-content .category {
-  font-size: 2rem;
-}
 .article-content .text {
   margin-top: 6.6rem;
   line-height: 1.9;
   font-size: 1.6rem;
-  font-family: "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", sans-serif;
+  font-family: 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", serif;
 }
 .article-content .text h1,
 .article-content .text h2,
