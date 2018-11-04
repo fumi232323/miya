@@ -8,7 +8,7 @@ html {
 }
 body {
   padding: 30px;
-  background-color: #f0f8ff;
+  background-color: #fdf5e6;
   color: #333;
   font-size: 1.2rem;
   font-family: Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
@@ -82,7 +82,7 @@ a:active {
  * -------------------------------- */
 .item-header {
   text-align: center;
-  border-color: #0f2350;
+  border-color: #6c3a24;
 }
 .logo {
   width: 100%;
@@ -98,7 +98,7 @@ a:active {
   margin: 35px auto 10px; /* nav の上部に間隔をあける */
 }
 .nav-category {
-  margin-top: 20px; /* リスト項目の間を20pxずつあける。一番上の項目はマージンが相殺されるので空き過ぎないとのこと。 */
+  margin-top: 20px /* リスト項目の間を20pxずつあける。一番上の項目はマージンが相殺されるので空き過ぎないとのこと。 */;
 /* ブロックレベル要素のマージンは相殺される
    * - 隣接した要素の上下のマージン（マージンの値が異なる場合は大きほうになる）
    * - 入れ子になった要素の上下のマージン
@@ -107,24 +107,24 @@ a:active {
   letter-spacing: 1px;
   font-weight: bold;
   font-size: 2rem;
-}
 /* リンクをホバーしたときに、下線が中央から両側に伸びて表示されるような動きをつける。 */
+}
 .nav-category a {
-  display: inline-block; /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */
-  color: #0f2350;
+  display: inline-block /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */;
+  color: #6c3a24;
 }
 .nav-category a::after {
   content: '';
-  display: block; /* ブロックレベルの::after擬似要素を作る */
-  width: 0; /* 通常時には見えないように横幅を 0 にする */
-  margin: 6px auto 0; /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */
-  border-bottom: 1px solid #0f2350;
+  display: block /* ブロックレベルの::after擬似要素を作る */;
+  width: 0 /* 通常時には見えないように横幅を 0 にする */;
+  margin: 6px auto 0 /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */;
+  border-bottom: 1px solid #6c3a24;
   transition: width 0.3s ease-in-out;
 /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
 /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
 }
 .nav-category a:hover::after {
-  width: 100%; /* リンクにホバーしたときの ::after 擬似要素の横幅を指定 */
+  width: 100% /* リンクにホバーしたときの ::after 擬似要素の横幅を指定 */;
 }
 .nav-article {
   margin-top: 5px;
@@ -223,7 +223,6 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 /* --------------------------------
  * index page only
  * -------------------------------- */
-@charset "UTF-8";
 .index-content .item-m {
   width: 364px /* item * 2 + 間の隙間4 */;
 }
@@ -336,7 +335,6 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 /* --------------------------------
  * article page only
  * -------------------------------- */
-@charset "UTF-8";
 .article-content .item-article {
   width: 100% /* びよーんと伸び縮みしたい */;
   margin-left: 4px /* ヘッダーとの隙間をあける */;
@@ -437,16 +435,20 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   margin: 16px 0;
   padding-left: 40px;
 }
-.article-content .text li {
+.article-content .text ul li,
+.article-content .text ol li {
   list-style-type: disc;
 }
-.article-content .text li li {
+.article-content .text ul li li,
+.article-content .text ol li li {
   list-style-type: circle;
 }
-.article-content .text li li li {
+.article-content .text ul li li li,
+.article-content .text ol li li li {
   list-style-type: square;
 }
-.article-content .text li li li li {
+.article-content .text ul li li li li,
+.article-content .text ol li li li li {
   list-style-type: disc;
 }
 .article-content .text .arabic li {
@@ -456,37 +458,35 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   list-style-type: disc;
 }
 .article-content .text a:hover {
-  opacity: 0.5; /* ハイライトのような効果 */
-  transition: all 0.3s;
+  opacity: 0.5 /* ハイライトのような効果 */;
+  transition: all 0.3s /* 0.3sec かけて変化する */;
+}
+.article-content .text .code-block,
+.article-content .text .literal-block {
+  overflow: auto /* スクロールバー: はみ出したら出す */;
+  white-space: pre-wrap /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */;
+  margin: 1.6rem 0 1.6rem;
+  line-height: 1.3;
+  max-height: 600px;
 }
 .article-content .text .code-block {
-  overflow: auto; /* スクロールバー: はみ出したら出す */
-  white-space: pre-wrap; /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
-  line-height: 1.3;
-  font-size: 2rem;
-  margin: 1.6rem 0 1.6rem;
   padding: 0 32px;
-  background: #364549;
+  font-size: 2rem;
+  background-color: #364549;
   color: #f8f8f2;
-  max-height: 600px;
 }
 .article-content .text .literal-block {
-  overflow: auto; /* スクロールバー: はみ出したら出す */
-  white-space: pre-wrap; /* 連続する空白はそのまま残されます。行の折り返しは、改行文字や <br> 要素のあるときか、行ボックスを埋めるのに必要なときに行います。 */
-  line-height: 1.3;
+  padding: 1em 32px;
   font-size: inherit;
   font-family: inherit;
-  margin: 1.6rem 0 1.6rem;
-  padding: 1em 32px;
   border-radius: 2px;
-  background-color: #fef4f4;
+  background-color: #fdf5e6;
   color: #777;
-  max-height: 600px;
 }
 .article-content .text .docutils {
   padding: 1px 3px;
   border-radius: 2px;
-  background-color: #fef4f4;
+  background-color: #fdf5e6;
   color: #777;
 }
 .article-content .text cite {
@@ -498,24 +498,51 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 .article-content .text .figure img {
   max-width: 100%;
 }
-.article-content .field-list {
+.article-content dl {
   display: flex;
   flex-wrap: wrap;
   border: 1px solid #bbb;
   border-top: none;
 }
-.article-content dt {
+.article-content dl dt {
   padding: 2px 5px;
-  width: 30%;
+  flex-basis: 30%;
   border-top: 1px solid #bbb;
   font-weight: bold;
-  background-color: #f0f8ff /*cce7ff*/ /*3498db*/ /*#3db1ff*/;
+  background-color: #fef4f4;
 }
-.article-content dd {
+.article-content dl dd {
   padding: 2px 5px;
-  width: 70%;
+  flex-basis: 70%;
   border-left: 1px solid #bbb;
   border-top: 1px solid #bbb;
+}
+.article-content dl dt:hover,
+.article-content dl dd:hover {
+  opacity: 0.7; /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
+  background-color: #efbaa8;
+  transition: all 0.3s;
+}
+.article-content table {
+  border: 1px solid #bbb;
+}
+.article-content table caption {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.article-content table th {
+  border: 1px solid #bbb;
+  background-color: #fef4f4;
+  padding: 2px 5px;
+}
+.article-content table td {
+  border: 1px solid #bbb;
+  padding: 2px 5px;
+}
+.article-content table td:hover {
+  opacity: 0.7 /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */;
+  background-color: #efbaa8;
+  transition: all 0.3s;
 }
 .article-content .highlight .hll {
   background-color: #49483e;
