@@ -39,55 +39,55 @@
 
 1. Docker イメージをダウンロード
 
-  .. code-block:: console
+    .. code-block:: console
 
-    FumienoMacBook-Pro:docker-work fumi23$ docker image pull gihyodocker/echo:latest
-    latest: Pulling from gihyodocker/echo
-    723254a2c089: Pull complete
-    abe15a44e12f: Pull complete
-    409a28e3cc3d: Pull complete
-    503166935590: Pull complete
-    abe52c89597f: Pull complete
-    ce145c5cf4da: Pull complete
-    96e333289084: Pull complete
-    39cd5f38ffb8: Pull complete
-    22860d04f4f1: Pull complete
-    7528760e0a03: Pull complete
-    Digest: sha256:4520b6a66d2659dea2f8be5245eafd5434c954485c6c1ac882c56927fe4cec84
-    Status: Downloaded newer image for gihyodocker/echo:latest
+      FumienoMacBook-Pro:docker-work fumi23$ docker image pull gihyodocker/echo:latest
+      latest: Pulling from gihyodocker/echo
+      723254a2c089: Pull complete
+      abe15a44e12f: Pull complete
+      409a28e3cc3d: Pull complete
+      503166935590: Pull complete
+      abe52c89597f: Pull complete
+      ce145c5cf4da: Pull complete
+      96e333289084: Pull complete
+      39cd5f38ffb8: Pull complete
+      22860d04f4f1: Pull complete
+      7528760e0a03: Pull complete
+      Digest: sha256:4520b6a66d2659dea2f8be5245eafd5434c954485c6c1ac882c56927fe4cec84
+      Status: Downloaded newer image for gihyodocker/echo:latest
 
 
 2. Docker イメージを実行
 
-  .. code-block:: console
+    .. code-block:: console
 
-    FumienoMacBook-Pro:docker-work fumi23$ docker container run -t -p 9000:8080 gihyodocker/echo:latest
-    2018/10/01 13:53:03 start server
+      FumienoMacBook-Pro:docker-work fumi23$ docker container run -t -p 9000:8080 gihyodocker/echo:latest
+      2018/10/01 13:53:03 start server
 
-  - ポートフォワーディング設定をしている
+    - ポートフォワーディング設定をしている
 
-    - Docker 実行環境の 9000 ポート経由で HTTP リクエストを受けられるようになっている
+      - Docker 実行環境の 9000 ポート経由で HTTP リクエストを受けられるようになっている
 
 3. 別のターミナルからアクセスしてみる
 
-  .. code-block:: console
+    .. code-block:: console
 
-    FumienoMacBook-Pro:~ fumi23$ curl http://localhost:9000
-    Hello Docker!!
+      FumienoMacBook-Pro:~ fumi23$ curl http://localhost:9000
+      Hello Docker!!
 
 
-  .. code-block:: console
+    .. code-block:: console
 
-    FumienoMacBook-Pro:docker-work fumi23$ docker container run -t -p 9000:8080 gihyodocker/echo:latest
-    2018/10/01 13:53:03 start server
-    2018/10/01 13:56:44 received request
+      FumienoMacBook-Pro:docker-work fumi23$ docker container run -t -p 9000:8080 gihyodocker/echo:latest
+      2018/10/01 13:53:03 start server
+      2018/10/01 13:56:44 received request
 
 
 4. 停止する
 
-  .. code-block:: console
+    .. code-block:: console
 
-    $ docker stop $(docker container ls -q)
+      $ docker stop $(docker container ls -q)
 
 
 2.1.2 簡単なアプリケーションと Docker イメージをつくる
@@ -471,3 +471,149 @@ Docker Hub にイメージを push する
       f18abb5d7b45: Preparing
       f18abb5d7b45: Pushed
       latest: digest: sha256:834be6348517746b53f3d44c56b580a0cea74161b86426cc006b1c066c48e047 size: 2417
+
+
+2.3 Docker コンテナの操作
+=========================
+Docker コンテナは外から見ると仮想環境、ファイルシステムとアプリケーションが同梱されている箱のようなもの。
+
+2.3.1 Docker コンテナのライフサイクル
+-------------------------------------
+Docker コンテナは、以下の3つの状態のいずれかに分類される。
+
+.. list-table::
+  :widths: auto
+  :stub-columns: 1
+
+  * - 実行中
+    - ``$ docker container run`` で起動した状態。
+  * - 停止
+    - 停止しても、ディスクにコンテナ終了時の状態は保持される。停止したコンテナは再実行可能。
+  * - 破棄
+    - - 停止したコンテナは明示的に破棄しない限りディスクに残り続ける。どんどんたまる。
+      - 完全に不要なコンテナは破棄するほうが望ましい。
+      - 一度破棄したコンテナを再び開始することはできない。
+
+
+2.3.2 docker container run --- コンテナの作成と実行
+----------------------------------------------------
+Docker イメージからコンテナを作成、実行するコマンド。
+
+.. code-block:: console
+
+  $ docker container run [options] イメージ名[:タグ名] [コマンド] [コマンド引数...]
+
+.. code-block:: console
+
+  $ docker container run [options] イメージID [コマンド] [コマンド引数...]
+
+.. note::
+
+  コンテナをバックグラウンドで実行 → HTTP リクエストしてみる → 停める
+
+  .. code-block:: console
+
+    $ docker container run -d -p 9001:8080 example/echo:latest
+    $ curl http://localhost:9001/
+    $ docker container stop $(docker container ls --filter "ancestor=example/echo" -q)
+
+
+docker container run 時に引数を与える
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker image pull alpine:3.7
+  # docker container run -it alpine:3.7  # シェルに入る
+  $ docker container run -it alpine:3.7 uname -a
+
+名前付きコンテナ
+^^^^^^^^^^^^^^^^
+
+``NAMES`` は適当な単語で作られた名前が自動でつけられる。
+
+.. code-block:: console
+
+  $ docker container ls
+  CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+  77699bc8d7cd        example/echo:latest   "go run /echo/main.go"   4 seconds ago       Up 2 seconds        0.0.0.0:9001->8080/tcp   modest_saha
+
+コンテナに好きな名前をつけられる。
+
+.. code-block:: console
+
+  $ docker container run --name [好きなコンテナ名] [イメージ名]:[タグ]
+
+.. code-block:: console
+
+  $ docker container run -t -d --name gihyo-echo example/echo:latest
+  4864fcaf10802340449f50364891cc48b99e90538f04d8e601c5c0397ff11917
+  $ docker container ls
+  CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+  4864fcaf1080        example/echo:latest   "go run /echo/main.go"   3 seconds ago       Up 2 seconds                                 gihyo-echo
+  77699bc8d7cd        example/echo:latest   "go run /echo/main.go"   4 minutes ago       Up 4 minutes        0.0.0.0:9001->8080/tcp   modest_saha
+
+- 開発時は便利だが、本番環境ではあまり使わない
+- 同名のコンテナを新たに実行するには既存の同名コンテナを削除する必要があるため
+
+
+コマンド実行時の頻出オプション
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+:-i: docker 起動後にコンテナ側の標準入力をつなぎっぱなしにする。シェルに入ってコマンド実行ができる。
+:-t: 擬似端末を有効にする。
+:-it: -i と -t はセットで使うことが多い。
+:--rm: コンテナ終了時にコンテナを破棄する。
+:-v: ホストとコンテナ間でディレクトリ、ファイルを共有する
+
+
+2.3.3 docker container ls --- コンテナの一覧
+--------------------------------------------
+実行中及び終了したコンテナの一覧を表示するコマンド
+
+.. code-block:: console
+
+  $ docker container ls [options]
+
+オプションなしで実行すると、実行中のコンテナ一覧が表示される
+
+.. code-block:: console
+
+  $ docker container run -t -d -p 8080 --name fumi23 example/echo:latest
+  81e3a724ae7c730eea14b86edf354c9aad4bced96e272d1fce238760080a23b6
+  $ docker container run -t -d -p 8080 --name fumi45 example/echo:latest
+  db029554bc5fc2e23a724892bef867c613ae5dba861e50de48914bcde23ebaf1
+  $ docker container ls
+  CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+  db029554bc5f        example/echo:latest   "go run /echo/main.go"   21 seconds ago      Up 21 seconds       0.0.0.0:32769->8080/tcp   fumi45
+  81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   44 seconds ago      Up 43 seconds       0.0.0.0:32768->8080/tcp   fumi23
+
+
+.. list-table:: 一覧の表示項目
+  :widths: auto
+  :header-rows: 1
+
+  * - 項目
+    - 内容
+  * - CONTAINER ID
+    - コンテナに付与される一意の ID
+  * - IMAGE
+    - コンテナ作成に使用された Docker イメージ
+  * - COMMAND
+    - コンテナで実行されているアプリケーションのプロセス
+  * - CREATED
+    - コンテナが作成されてから経過した時間
+  * - STATUS
+    - Up (実行中), Exited(終了) といったコンテナの実行状態
+  * - PORTS
+    - ホストのポートとコンテナポートの紐づけ (ポートフォワーディング)
+  * - NAMES
+    - コンテナにつけられた名前
+
+コンテナIDだけを抽出する
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker container ls -q
+  db029554bc5f
+  81e3a724ae7c
