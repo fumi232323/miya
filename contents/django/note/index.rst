@@ -146,9 +146,15 @@ FormView
 
 as_view
 -------
-- as_view は view関数を生成して返している
+https://github.com/django/django/blob/master/django/views/generic/base.py#L49
+
+- as_view は view 関数を生成して返している
 - 実際の処理は self.dispatch で クラスベースビューに処理を委譲してるんだと思います
-- ソースコード URL: https://github.com/django/django/blob/master/django/views/generic/base.py#L49
+- urls.py で as_view せずに、 views.py で as_view した Class-based view をグローバル変数に代入するのは、
+
+  - 同じ view を複数のurlに設定したいとき
+  - モジュールの import が1回しか発生しないのはモジュール毎の話じゃなくプロセス全体 ( Django で言うと ``runserver...`` した単位) の話
+  - url ごとに同じ View を何回も生成するんだったら、同じでよいでしょう (シングルトン) 、ということ
 
 
 get_context_data
