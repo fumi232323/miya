@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-10-29
+   :date: 2018-11-06
    :title: CSS のメモ
    :category: css
    :tags:
@@ -7,12 +7,17 @@
    :draft: false
 
 
-================
+=========
 CSS メモ
-================
+=========
 
 
-CSSの優先順位 がわかりやすい
+Masonry 風デザインの CSS がいろいろのっていておもしろい
+========================================================
+https://coliss.com/articles/build-websites/operation/css/layout-for-responsive.html
+
+
+CSSの優先順位がわかりやすい
 =============================
 https://www.slideshare.net/yumi-uniq-ishizaki/css-13918388?ref=https://nelog.jp/specificity-calculator
 
