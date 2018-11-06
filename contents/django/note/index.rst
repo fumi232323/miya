@@ -137,6 +137,10 @@ Class-based views
   関数形式の view はコンテキスト、テンプレート、フォーム、全部変えしてあげないといけなかった。つまり全部関数内に書く必要があった。
   必要なものを切り離して属性として定義できるようにしたのが genericview (class based view)。
 
+リファレンス
+------------
+https://docs.djangoproject.com/ja/2.1/topics/class-based-views/
+
 
 FormView
 --------
