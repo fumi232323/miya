@@ -26,7 +26,6 @@ tox
 リファレンス
 ------------
 - https://tox.readthedocs.io/en/latest/config.html
-- https://docs.pytest.org/en/latest/reference.html#configuration-options
 
 
 インストール
@@ -186,8 +185,9 @@ pytest-pythonpath
 - http://note.crohaco.net/2016/python-tox/
 - http://note.crohaco.net/2016/python-pytest/
 - https://tox.readthedocs.io/en/latest/config.html#conf-basepython
-- https://docs.python.org/ja/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
+- https://docs.pytest.org/en/latest/reference.html#configuration-options
 - https://pypi.org/project/pytest-pythonpath/
+- https://docs.python.org/ja/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
 - https://docs.python.org/ja/3/using/cmdline.html#envvar-PYTHONPATH
 
 
