@@ -59,7 +59,7 @@ Django をインタラクティブモードで実行する
 使い方
 ^^^^^^^
 
-.. code-block:: console
+.. code-block:: bash
 
   # こうとか
   $ DJANGO_SETTINGS_MODULE=settings._ python manage.py shell
@@ -70,7 +70,7 @@ Django をインタラクティブモードで実行する
 使用例
 ^^^^^^^
 
-.. code-block:: console
+.. code-block:: python
 
   (venv) [vagrant@localhost apps]$ python manage.py shell --settings=settings._
   Python 2.7.7 (default, Dec 11 2017, 18:45:38)
@@ -107,7 +107,7 @@ System check framework を使って、Django プロジェクトの一般的な�
 
 - 使い方 (python2)
 
-  .. code-block:: python
+  .. code-block:: bash
 
     $ DJANGO_SETTINGS_MODULE=settings.local python -Wd manage.py check
 

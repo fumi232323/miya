@@ -66,7 +66,7 @@ Git の絵
 ---------
 - リモートブランチをチェックアウト
 
-  .. code-block:: console
+  .. code-block:: bash
 
     $ git checkout -b <branch-you-want-to-checkout> origin/<branch-you-want-to-checkout>
 
@@ -173,7 +173,7 @@ git log
 1. ``.git`` を消す
 2. force push する
 
-    .. code-block:: console
+    .. code-block:: bash
 
       $ git add *
       $ git commit -m 'initialize
