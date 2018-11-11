@@ -286,7 +286,7 @@ Docker のコンテナオーケストレーションシステム
   * - 仮想ディスクサイズの設定
     - Disk
     - - Docker for Mac を実行している仮想ディスクのサイズを調整できる
-      - macOS の場合、仮想ディスクのパスは、 ~/Library/Containers/com.docker.docker/Data/vms/0/Docker.qcow2
+      - macOS の場合、仮想ディスクのパスは、 ``~/Library/Containers/com.docker.docker/Data/vms/0/Docker.qcow2``
 
   * - CPU/メモリの割り当て
     - Advanced
