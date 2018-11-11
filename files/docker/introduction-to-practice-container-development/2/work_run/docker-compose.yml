@@ -1,0 +1,12 @@
+# ===========================================================
+# $ docker container run -d -p 9000:8080 example/echo:latest
+# と同等の振る舞いを docker-compose で定義する
+# ===========================================================
+# docker-compose.yml ファイルフォーマットのバージョンを宣言
+version: "3"
+services:
+  echo:  # コンテナの名前の定義
+    # 実行するコンテナの定義
+    image: example/echo:latest  # 使用する Docker イメージ
+    ports:                      # ポートフォワーディングを指定
+      - 9000:8080
