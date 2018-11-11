@@ -457,6 +457,9 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 .article-content .text .arabic li li {
   list-style-type: disc;
 }
+.article-content .text a {
+  word-wrap: break-word;
+}
 .article-content .text a:hover {
   opacity: 0.5 /* ハイライトのような効果 */;
   transition: all 0.3s /* 0.3sec かけて変化する */;
@@ -517,7 +520,6 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   border-left: 1px solid #bbb;
   border-top: 1px solid #bbb;
 }
-.article-content dl dt:hover,
 .article-content dl dd:hover {
   opacity: 0.7; /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
   background-color: #efbaa8;
@@ -540,10 +542,14 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   border: 1px solid #bbb;
   padding: 2px 5px;
 }
-.article-content table td:hover {
-  opacity: 0.7 /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */;
+.article-content table tr:hover {
   background-color: #efbaa8;
   transition: all 0.3s;
+}
+.article-content table td:hover {
+  opacity: 0.7 /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */;
+  transition: all 0.3s;
+  color: #fff;
 }
 .article-content .admonition {
   background-color: #fdf5e6;

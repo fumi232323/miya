@@ -118,6 +118,9 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
     li
       list-style-type disc
 
+  a
+    word-wrap break-word
+
   a:hover
     opacity 0.5           /* ハイライトのような効果 */
     transition all 0.3s   /* 0.3sec かけて変化する */
@@ -160,28 +163,32 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
     max-width 100%
 
 /* --------------------------------
+ * table の線の色 (共通)
+ * -------------------------------- */
+table-border-color = #bbb
+
+/* --------------------------------
  * field-list
  * -------------------------------- */
   dl
     display flex
     flex-wrap wrap
-    border 1px solid #bbb
+    border 1px solid table-border-color
     border-top none
 
     dt
       padding 2px 5px
       flex-basis 30%
-      border-top 1px solid #bbb
+      border-top 1px solid table-border-color
       font-weight bold
       background-color #fef4f4
 
     dd
       padding 2px 5px
       flex-basis 70%
-      border-left 1px solid #bbb
-      border-top 1px solid #bbb
+      border-left 1px solid table-border-color
+      border-top 1px solid table-border-color
 
-    dt:hover,
     dd:hover
       opacity: 0.7;  /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
       background-color #EFBAA8
@@ -192,7 +199,7 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
  * -------------------------------- */
   table
     margin-top 2.0rem
-    border 1px solid #bbb
+    border 1px solid table-border-color
 
     caption
       font-weight bold
@@ -203,14 +210,21 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
       background-color #fef4f4
 
     th, td
-      border 1px solid #bbb
+      border 1px solid table-border-color
       padding 2px 5px
 
-    td:hover
-      opacity 0.7  /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
+    tr:hover
       background-color #EFBAA8
       transition all 0.3s
 
+    td:hover
+      opacity 0.7  /* 不透明度を少し下げ透過させる。すこし光ったように見えるらしい。 */
+      transition all 0.3s
+      color #FFFFFF
+
+/* --------------------------------
+ * .. note::
+ * -------------------------------- */
   .admonition
     background-color #FDF5E6
     color #6C3A24
