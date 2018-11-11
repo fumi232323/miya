@@ -99,7 +99,42 @@ Go 言語で簡単な Web サーバーを書き、 Docker コンテナ嬢で動�
 用意するもの
 ^^^^^^^^^^^^^
 - main.go
+
+  .. code-block:: go
+
+    package main
+
+    import (
+        "fmt"
+        "log"
+        "net/http"
+    )
+
+    func main() {
+        http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+            log.Println("received request")
+            fmt.Fprintf(w, "Hello Docker!!")
+        })
+
+        log.Println("start server")
+        server := &http.Server{Addr: ":8080"}
+        if err := server.ListenAndServe(); err != nil {
+            log.Println(err)
+        }
+    }
+
+
 - Dockerfile
+
+  .. code-block:: python
+
+    FROM golang:1.9
+
+    RUN mkdir /echo
+    COPY main.go /echo
+
+    CMD ["go", "run", "/echo/main.go"]
+
 
 Dockerfileの説明
 ^^^^^^^^^^^^^^^^^
@@ -617,3 +652,460 @@ docker container run 時に引数を与える
   $ docker container ls -q
   db029554bc5f
   81e3a724ae7c
+
+
+filter を使う
+^^^^^^^^^^^^^
+特定の条件に一致するものだけを抽出する
+
+.. code-block:: console
+
+  $ docker container ls --filter "filter名=値"
+
+- コンテナ名で抽出する
+
+  .. code-block:: console
+
+    $ docker container ls --filter "name=fumi45"
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    db029554bc5f        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32769->8080/tcp   fumi45
+
+- イメージ名で抽出する
+
+  .. code-block:: console
+
+    $ docker container ls --filter "ancestor=example/echo"
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    db029554bc5f        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32769->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+
+
+終了したコンテナを取得する
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+終了したコンテナも含めたコンテナの一覧を取得する
+
+  .. code-block:: console
+
+    $ docker container ls -a
+    CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                    PORTS                     NAMES
+    db029554bc5f        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 days                 0.0.0.0:32769->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 days                 0.0.0.0:32768->8080/tcp   fumi23
+    4864fcaf1080        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               gihyo-echo
+    77699bc8d7cd        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               modest_saha
+    ...
+
+
+2.3.4 docker container stop --- コンテナの停止
+----------------------------------------------
+実行しているコンテナを終了する
+
+.. code-block:: console
+
+  $ docker container stop コンテナIDまたはコンテナ名
+
+- コンテナ名 ``fumi45`` のコンテナを終了する。
+
+  .. code-block:: console
+
+    $ docker container ls
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    db029554bc5f        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32769->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+    $ docker container stop fumi45
+    fumi45
+    $ docker container ls
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+
+
+2.3.5 docker container restart --- コンテナの再起動
+---------------------------------------------------
+一度停止したコンテナは破棄しない限り、再実行できる。
+
+.. code-block:: console
+
+  $ docker container restart コンテナIDまたはコンテナ名
+
+- さっき停止した fumi45 を再実行する
+
+  .. code-block:: console
+
+    $ docker container restart fumi45
+    fumi45
+    $ docker container ls
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    db029554bc5f        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 3 seconds        0.0.0.0:32770->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+
+
+2.3.6 docker container rm --- コンテナの破棄
+--------------------------------------------
+停止したコンテナをディスクから完全に破棄する。 (破棄しない限りはどんどん溜まる)
+
+.. code-block:: console
+
+  $ docker container rm コンテナIDまたはコンテナ名
+
+
+- コンテナID ``4864fcaf1080`` のコンテナを破棄する。
+
+  .. code-block:: console
+
+    $ docker container ls -a
+    CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                    PORTS                     NAMES
+    db029554bc5f        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 days                 0.0.0.0:32769->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 days                 0.0.0.0:32768->8080/tcp   fumi23
+    4864fcaf1080        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               gihyo-echo
+    77699bc8d7cd        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               modest_saha
+    $ docker container rm 4864fcaf1080
+    4864fcaf1080
+    $ docker container ls -a
+    CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                    PORTS                     NAMES
+    db029554bc5f        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 minutes              0.0.0.0:32770->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 days                 0.0.0.0:32768->8080/tcp   fumi23
+    77699bc8d7cd        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               modest_saha
+
+- 実行中のコンテナを停止・削除する。
+
+  .. code-block:: console
+
+    $ docker container ls
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    db029554bc5f        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 8 minutes        0.0.0.0:32770->8080/tcp   fumi45
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+    $ docker container rm -f db029554bc5f
+    db029554bc5f
+    $ docker container ls
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+
+
+停止の際にコンテナを破棄する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker container run --rm
+
+- コマンドラインツールとして利用するときなどに便利
+- 停止したあとディスクに保持し続ける必要がないときに利用する
+- 例)
+
+  .. code-block:: console
+
+    $ echo '{"version": 100}' | docker container run -i --rm gihyodocker/jq:1.5 '.version'
+    100
+
+
+2.3.7 docker container logs --- 標準出力の取得
+-----------------------------------------------
+実行している特定のコンテナの標準出力を表示する。
+
+.. code-block:: console
+
+  $ docker container logs [options] コンテナIDまたはコンテナ名
+
+- 標準出力されているものだけが表示される。
+- コンテナ内でアプリケーションがファイルに出力したようなログは表示されない
+
+
+2.3.8 docker container exec --- 実行中コンテナでのコマンド実行
+--------------------------------------------------------------
+実行中の Docker コンテナの中で、任意のコマンドを実行できる。
+
+.. code-block:: console
+
+  $ docker container exec [options] コンテナIDまたはコンテナ名 コンテナ内で実行するコマンド
+
+
+- 実行中のコンテナ ``fumi23`` 内で ``pwd`` コマンドを実行する。
+
+  .. code-block:: console
+
+    $ docker container exec fumi23 pwd
+    /go
+
+- コンテナをシェル経由で操作する。
+
+  .. code-block:: console
+
+    $ docker container exec -it fumi23 sh
+    # pwd
+    /go
+    # exit
+
+
+  - 本番環境ではやらないほうがよい
+
+
+2.3.9 docker container cp --- ファイルのコピー
+----------------------------------------------
+コンテナ間、コンテナ・ホスト間でファイルをコピーできる。
+
+.. code-block:: console
+
+  $ docker container cp [options] コンテナIDまたはコンテナ名:コンテナ内のコピー元 ホストのコピー先
+
+.. code-block:: console
+
+  $ docker container cp [options] ホストのコピー元 コンテナIDまたはコンテナ名:コンテナ内のコピー先
+
+- 実行中のコンテナ ``fumi23`` からホストのカレントディレクトリに ``main.go`` をコピーする。
+
+  .. code-block:: console
+
+    $ docker container cp fumi23:/echo/main.go .
+
+- ホストのカレントディレクトリから、実行中のコンテナ ``fumi23`` に ``dummy.txt`` をコピーする。
+
+  .. code-block:: console
+
+    $ docker container cp dummy.txt fumi23:tmp
+    $ docker container exec fumi23 ls /tmp | grep dummy
+    dummy.txt
+
+.. note::
+
+  - コンテナ内で生成されたファイルをホストにコピーしてきて確認するようなデバッグ用途で使ったりする。
+  - 破棄されていない終了したコンテナに対しても実行できる。
+
+
+2.4 運用管理向けコマンド
+=========================
+
+2.4.1 prune --- 破棄
+--------------------
+停止しているコンテナを一括で削除する。
+
+.. code-block:: console
+
+  $ docker container prune [options]
+
+
+- 途中で 確認を求められるので ``y`` と回答する。
+
+  .. code-block:: console
+
+    $ docker container ls -a
+    CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS                    PORTS                     NAMES
+    81e3a724ae7c        example/echo:latest       "go run /echo/main.go"   5 days ago          Up 5 days                 0.0.0.0:32768->8080/tcp   fumi23
+    77699bc8d7cd        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               modest_saha
+    9a5c3a822e39        example/echo:latest       "go run /echo/main.go"   5 days ago          Exited (2) 5 days ago                               inspiring_goldstine
+    f4e8a963eae4        example/echo:latest       "go run /echo/main.go"   5 days ago          Created                                             affectionate_curie
+    b113261a42b8        example/echo:latest       "go run /echo/main.go"   6 days ago          Exited (2) 5 days ago                               ecstatic_tesla
+    449ccdc8c99e        example/echo:latest       "go run /echo/main.go"   6 days ago          Exited (2) 6 days ago                               determined_zhukovsky
+    a11a7535307a        example/echo:latest       "go run /echo/main.go"   6 days ago          Exited (2) 6 days ago                               vibrant_borg
+    b8c42ba791e7        294c33d2b845              "go run /echo/main.go"   6 days ago          Exited (2) 6 days ago                               admiring_lalande
+    9cd48659badb        gihyodocker/echo:latest   "go run /echo/main.go"   7 days ago          Exited (2) 7 days ago                               dreamy_saha
+    fe9ad59901bb        gihyodocker/echo:latest   "go run /echo/main.go"   5 weeks ago         Exited (255) 7 days ago   0.0.0.0:9000->8080/tcp    vigilant_snyder
+    $ docker container prune
+    WARNING! This will remove all stopped containers.
+    Are you sure you want to continue? [y/N] y
+    Deleted Containers:
+    77699bc8d7cd6992526da9171db5d10b511f46f4b12b8d68706825fddf8b7a18
+    9a5c3a822e39ee5f811f21634c38cd4918a35e2e1ca0f680d170576fe98e7f33
+    f4e8a963eae40f539e92b95b14236af8e614977d20bd80d11e0f870e6bfcdb0c
+    b113261a42b8fb110cd1984904dccfe859067abd078637ff37804ad5f00c3ff5
+    449ccdc8c99e72ecd791b036417632ec3e7944f1e7ab14c5b96d7e4caec0e58b
+    a11a7535307a23a8121c7ac241e4df40f125a3187f556451e9014aa4f710046f
+    b8c42ba791e7f266451bddc6d74b1eb196bf3b55d072bc8ff2f64a7f9c096648
+    9cd48659badb6c5e8add684becbc91bae8fbeb6a928ae93618d8ff9fe3d36a6d
+    fe9ad59901bbdd5dbad274eddc2def85fc49361a6299a7ae02f7693944c928ef
+
+    Total reclaimed space: 29.41MB
+    $ docker container ls -a
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+    81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   5 days ago          Up 5 days           0.0.0.0:32768->8080/tcp   fumi23
+
+
+Docker イメージを一括削除する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Docker イメージも一括で削除できる。
+
+.. code-block:: console
+
+  $ docker image prune [options]
+
+- 途中で 確認を求められるので ``y`` と回答する。
+
+  .. code-block:: console
+
+    $ docker image ls
+    REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
+    example/echo                     0.1.0               ed899b24590f        6 days ago          750MB
+    example/echo                     latest              ed899b24590f        6 days ago          750MB
+    fumi23/echo                      latest              ed899b24590f        6 days ago          750MB
+    <none>                           <none>              294c33d2b845        7 days ago          750MB
+    jenkins                          latest              cd14cecfdb3a        3 months ago        696MB
+    golang                           1.9                 ef89ef5c42a9        3 months ago        750MB
+    gihyodocker/jq                   1.5                 fb12c33cec33        10 months ago       5.31MB
+    gihyodocker/echo                 latest              3dbbae6eb30d        10 months ago       733MB
+    $ docker image prune
+    WARNING! This will remove all dangling images.
+    Are you sure you want to continue? [y/N] y
+    Deleted Images:
+    deleted: sha256:294c33d2b8454edba3e291fff2e2e477b287df30c13734a72fd8018cc4b4be9b
+    deleted: sha256:73db87b05d43898a40665c4a8614bb383fc6bf050a37601e29da0fdb3f71e724
+    deleted: sha256:8b7b14181869de8ccf721f5fc57b37b9d9ff533dc4c67201ff7b78862a67553c
+
+    Total reclaimed space: 395B
+    $ docker image ls
+    REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
+    example/echo                     0.1.0               ed899b24590f        6 days ago          750MB
+    example/echo                     latest              ed899b24590f        6 days ago          750MB
+    fumi23/echo                      latest              ed899b24590f        6 days ago          750MB
+    jenkins                          latest              cd14cecfdb3a        3 months ago        696MB
+    golang                           1.9                 ef89ef5c42a9        3 months ago        750MB
+    gihyodocker/jq                   1.5                 fb12c33cec33        10 months ago       5.31MB
+    gihyodocker/echo                 latest              3dbbae6eb30d        10 months ago       733MB
+
+
+  - 残っているイメージは、 Docker が自動で判断して残しているもの。実行中のコンテナのイメージであるなど理由がある。
+
+
+Docker リソースを一括削除する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+利用されていない Docker コンテナやイメージ、ボリューム、ネットワークといった全ての Docker リソースを一括で削除する。
+
+.. code-block:: console
+
+  $ docker system prune [options]
+
+
+2.4.2 docker container stats --- 利用状況の取得
+-----------------------------------------------
+コンテナ単位でシステムリソースの利用状況を取得する。
+
+.. code-block:: console
+
+  $ docker container stats [options] [表示するコンテナID...]
+
+- 実行例
+
+.. code-block:: console
+
+  $ docker container stats
+  CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+  81e3a724ae7c        fumi23              0.00%               8.012MiB / 1.952GiB   0.40%               19.1kB / 0B         1.21MB / 8.19kB     17
+
+
+2.5 Docker Compose でマルチコンテナを実行する
+=============================================
+- Docker コンテナ = 単一のアプリケーションと言い換えることができる
+- 仮想サーバとっは対象とする粒度が異なる
+- 複数存在するコンテナ同士が通信し、かつ、コンテナがコンテナの依存関係を持つはず
+
+  - コンテナの挙動を制御するための設定ファイルや環境変数の与え方
+  - コンテナ同士の依存関係
+  - ポートフォワーディング
+
+
+2.5.1 docker-compose によるコンテナの実行
+-----------------------------------------
+Compose: yaml 形式の設定ファイルで、複数のコンテナ実行を一括で管理できる。
+
+- Docker コマンドで行なっていたコンテナの実行構成を設定ファイルで管理できるようになる
+
+
+使えるかどうか確認する
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker-compose version
+  docker-compose version 1.22.0, build f46880f
+  docker-py version: 3.4.1
+  CPython version: 3.6.4
+  OpenSSL version: OpenSSL 1.0.2o  27 Mar 2018
+
+
+docker-compose でコンテナを実行する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. docker-compose.yml を用意する。
+
+    .. code-block:: yaml
+
+      # ===========================================================
+      # $ docker container run -d -p 9000:8080 example/echo:latest
+      # と同等の振る舞いを docker-compose で定義する
+      # ===========================================================
+      # docker-compose.yml ファイルフォーマットのバージョンを宣言
+      version: "3"
+      services:
+        echo:  # コンテナの名前の定義
+          # ここから下は実行するコンテナの定義
+          image: example/echo:latest  # 使用する Docker イメージ
+          ports:                      # ポートフォワーディングを指定
+            - 9000:8080
+
+
+2. docker-compose.yml を作成したディレクトリで実行する。
+
+    .. code-block:: bash
+
+      # コンテナ群を実行する
+      $ docker-compose up -d
+      Creating work_echo_1 ... done
+
+      # 実行中のコンテナを一覧表示する
+      $ docker container ls
+      CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+      6287a2890ccb        example/echo:latest   "go run /echo/main.go"   8 seconds ago       Up 8 seconds        0.0.0.0:9000->8080/tcp    work_echo_1
+      81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   6 days ago          Up 6 days           0.0.0.0:32768->8080/tcp   fumi23
+
+      # コンテナを停止・削除する
+      $ docker-compose down
+      Stopping work_echo_1 ... done
+      Removing work_echo_1 ... done
+      Removing network work_default
+
+
+docker-compose で Docker イメージをビルドして、そのまま実行する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. docker-compose.yml を用意する。
+
+    .. code-block:: yaml
+
+      # ===========================================================
+      # docker-compose で、イメージのビルドと実行を一緒にやる
+      # ===========================================================
+      version: "3"
+      services:
+        echo:  # コンテナの名前の定義
+          # ここ↓から実行するコンテナの定義
+          build: .                    # Dockerfile が存在するディレクトリの相対パスを指定する
+          ports:                      # ポートフォワーディングを指定する
+            - 9000:8080
+
+
+2. docker-compose.yml があるディレクトリで実行する。
+
+    .. code-block:: bash
+
+      # コンテナ群を実行する
+      # --build: up 時に Docker イメージを必ずビルドするオプション
+      $ docker-compose up -d --build
+      Creating network "echo_default" with the default driver
+      Building echo
+      Step 1/4 : FROM golang:1.9
+       ---> ef89ef5c42a9
+      Step 2/4 : RUN mkdir /echo
+       ---> Using cache
+       ---> 7caf124fb4d3
+      Step 3/4 : COPY main.go /echo
+       ---> 15b6deaeb7ce
+      Step 4/4 : CMD ["go", "run", "/echo/main.go"]
+       ---> Running in a9b3b311fdc9
+      Removing intermediate container a9b3b311fdc9
+       ---> 291b78994229
+      Successfully built 291b78994229
+      Successfully tagged echo_echo:latest
+      Creating echo_echo_1 ... done
+
+      # 起動したことを確認する
+      $ docker container ls
+      CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
+      6f0571015a21        echo_echo             "go run /echo/main.go"   39 seconds ago      Up 38 seconds       0.0.0.0:9000->8080/tcp    echo_echo_1
+      81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   6 days ago          Up 6 days           0.0.0.0:32768->8080/tcp   fumi23
