@@ -12,6 +12,9 @@ Python テストのメモ
 ===================
 
 
+.. contents:: 目次
+
+
 tox
 ====
 `これをテストに使いたいとは限らないのでもうテスト用に環境分けちゃおうぜ的なツール`
@@ -275,6 +278,10 @@ Tips
 pytest
 ======
 
+リファレンス
+------------
+https://docs.pytest.org/en/latest/
+
 例外のテストはこれ
 ------------------
 https://docs.pytest.org/en/latest/reference.html#pytest-raises
@@ -303,6 +310,26 @@ https://docs.pytest.org/en/latest/fixture.html
 ::
 
   Test functions can receive fixture objects by naming them as an input argument. For each argument name, a fixture function with that name provides the fixture object. Fixture functions are registered by marking them with @pytest.fixture.
+
+
+testfixtures
+============
+
+リファレンス
+------------
+https://testfixtures.readthedocs.io/en/latest/index.html
+
+
+date と datetime を mock できる
+--------------------------------
+
+- https://testfixtures.readthedocs.io/en/latest/datetime.html
+- https://testfixtures.readthedocs.io/en/latest/api.html#testfixtures.test_date
+- https://testfixtures.readthedocs.io/en/latest/api.html#testfixtures.test_datetime
+
+  - ``test_datetime`` は、 ``datetime.datetime.now()`` にしか効果を及ぼさないので注意!!
+  - ``datetime.datetime.today()`` には何の効果もない
+
 
 
 あれこれ
