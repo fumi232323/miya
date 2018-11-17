@@ -406,6 +406,9 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   font-size: 1.6rem;
   font-family: 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", serif;
 }
+.article-content .text .toc-backref {
+  color: #333;
+}
 .article-content .text h1,
 .article-content .text h2,
 .article-content .text h3,
@@ -417,7 +420,8 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   margin-top: 2.2em;
   margin-bottom: 2.4rem;
 }
-.article-content .text h1 {
+.article-content .text h1,
+.article-content .text .topic-title {
   font-size: 2.8rem;
   border-bottom: 1px solid #aaa;
   padding-bottom: 0.1em;
