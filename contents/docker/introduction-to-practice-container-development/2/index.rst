@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-11-04
-   :title: Docker/Kubernetes 実践コンテナ開発入門 - 2. Docker コンテナのデプロイ
+   :title: Docker/Kubernetes 実践コンテナ開発入門 --- 2. Docker コンテナのデプロイ
    :category: docker
    :tags:
    :canonical_url: /docker/introduction-to-practice-container-development/2/
@@ -11,6 +11,7 @@
 2. Docker コンテナのデプロイ
 ============================
 
+.. contents::
 
 2.1 コンテナでアプリケーションを実行する
 ========================================

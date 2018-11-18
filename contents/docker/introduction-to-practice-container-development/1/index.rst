@@ -1,6 +1,6 @@
 .. article::
    :date: 2018-09-30
-   :title: Docker/Kubernetes 実践コンテナ開発入門 - 1. Docker の基礎
+   :title: Docker/Kubernetes 実践コンテナ開発入門 --- 1. Docker の基礎
    :category: docker
    :tags:
    :canonical_url: /docker/introduction-to-practice-container-development/1/
@@ -11,6 +11,7 @@
 1. Docker の基礎
 ================
 
+.. contents::
 
 1.1 Docker とは
 ===============
