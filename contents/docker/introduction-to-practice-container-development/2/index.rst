@@ -230,7 +230,7 @@ Docker イメージを作成するためのコマンド
 
   - 終了は、 ``Ctrl + C`` (やってみたけど終わらないな...)
 
-- バックグランドでコンテナを実行させる
+- ``-d``: バックグランドでコンテナを実行させる
 
   .. code-block:: console
 
@@ -1109,3 +1109,193 @@ docker-compose で Docker イメージをビルドして、そのまま実行す
       CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                     NAMES
       6f0571015a21        echo_echo             "go run /echo/main.go"   39 seconds ago      Up 38 seconds       0.0.0.0:9000->8080/tcp    echo_echo_1
       81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   6 days ago          Up 6 days           0.0.0.0:32768->8080/tcp   fumi23
+
+
+2.6 Compose による複数コンテナの実行
+====================================
+
+2.6.1 Jenkins コンテナを実行する
+--------------------------------
+
+1. ``docker-compose.yml``
+
+    .. code-block:: yaml
+
+      # ================================
+      # 2.6.1 Jenkins コンテナを実行する
+      # ================================
+      version: "3"
+      services:
+        master:  # コンテナの名前
+          # 実行するコンテナの定義
+          # ======================
+          container_name: master
+          image: jenkins:latest      # Docker Hub に登録されている Jenkins の公式イメージを利用する
+          ports:                      # ポートフォワーディングを指定する
+            - 9000:8080
+          volumes:                    # ホスト・コンテナ間でファイルを共有する仕組み
+            - ./jenkins_home:/var/jenkins_home    # ホストの `./jenkins_home` に、Jenkins コンテナの `/var/jenkins_home` をマウント
+
+2. Compose で実行する。
+
+    .. code-block:: bash
+
+      # docker-compose.yml のあるディレクトリで実行する
+      $ docker-compose up
+
+3. ``http://localhost:9000/`` にアクセスして Jenkins の初期設定をする。
+
+
+2.6.2 Master Jenkins の SSH 鍵を作る
+------------------------------------
+
+.. code-block:: bash
+
+  $ docker container exec -it master ssh-keygen -t rsa -C ""
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/var/jenkins_home/.ssh/id_rsa):
+  Created directory '/var/jenkins_home/.ssh'.
+  Enter passphrase (empty for no passphrase):
+  Enter same passphrase again:
+  Your identification has been saved in /var/jenkins_home/.ssh/id_rsa.
+  Your public key has been saved in /var/jenkins_home/.ssh/id_rsa.pub.
+  The key fingerprint is:
+  SHA256:Ee3KESkiYjH4QoZBZqPie9PH5rZ9GsVBfUaUAuXwXaY
+  The key's randomart image is:
+  +---[RSA 2048]----+
+  |=O.     .o ++.oo+|
+  |B++ . . o.o +o.*.|
+  |*o . . ..o . oE. |
+  |+ .     ..o .    |
+  | o     .So o     |
+  |  . . . o .      |
+  | . o . + .       |
+  |  . . +.. ..     |
+  |      .o.oo      |
+  +----[SHA256]-----+
+
+
+2.6.3 Jenkins Slave コンテナを作る
+----------------------------------
+
+1. ``docker-compose.yml``
+
+    .. code-block:: yaml
+
+      # ===================================
+      # 2.6.3 Jenkins Slave コンテナを作る
+      # ===================================
+      version: "3"
+      services:
+        # Master コンテナ
+        master:
+          container_name: master
+          image: jenkins:latest       # Docker Hub に登録されている Jenkins の公式イメージを利用する
+          ports:                      # ポートフォワーディングを指定する
+            - 9000:8080
+          volumes:                    # ホスト・コンテナ間でファイルを共有する仕組み
+            - ./jenkins_home:/var/jenkins_home    # ホストの `./jenkins_home` に、Jenkins コンテナの `/var/jenkins_home` をマウント
+          links:
+            - slave01                 # これで、 master から slave01 で名前解決できるようになる
+          # pw: bb91ef8ec2e74cc3a99802a79a84df6b
+
+        # Slave コンテナ
+        slave01:
+          container_name: slave01
+          image: jenkinsci/ssh-slave    # SSH 接続する Slave 用途の Docker イメージを利用する
+          environment:
+            - JENKINS_SLAVE_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCd2Nn7oT9F9JoWCWuTyjkmADAMrNZzZGCBZjT118QD3518CsaTlLmE8ikqloO9rCi58Vgi9nBhSJ0SGGG+Vx8mBZlG5V/ucq3TlbHq9Epdr8mJAaJ44F3CWNso97WIBzDEdtCAYQPRO1kEjlGBOr2JAAkYPyNEDe9o2Ta02FzqLu4WpqmqopgS6xsDWqj3BfQoJ+MCLeej865zSETyFojz8BbYH03LMhzBUeb6Yfa9LtIJgpp0KMab9p3hKlV5Es6jIVhYlVBw2NokWkOaq7KjlwTj0pmUGYIBNpgg+POpkaMt42dVNiqYxvbEzz9ZaejM3T/DIORIhKtYnnANwN4b
+            # ↑これで Master からの SSH 接続が許可された状態になる
+            # Slave コンテナの `~/.ssh/authorized_keys ` ファイルに Master コンテナの SSH 公開鍵が追加される。
+
+
+2. Compose で実行する。
+
+    .. code-block:: console
+
+      $ docker-compose up -d
+      Creating slave01 ... done
+      Creating master  ... done
+      $ docker-compose ps
+       Name                Command               State                 Ports
+      ------------------------------------------------------------------------------------
+      master    /bin/tini -- /usr/local/bi ...   Up      50000/tcp, 0.0.0.0:9000->8080/tcp
+      slave01   setup-sshd                       Up      22/tcp
+      (venv) FumienoMacBook-Pro:2.6.1 fumi23$ docker container ls -a
+      CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS                    PORTS                               NAMES
+      91ede878960a        jenkins:latest        "/bin/tini -- /usr/l…"   42 minutes ago      Up 42 minutes             50000/tcp, 0.0.0.0:9000->8080/tcp   master
+      5fc916903044        jenkinsci/ssh-slave   "setup-sshd"             42 minutes ago      Up 42 minutes             22/tcp                              slave01
+      6f0571015a21        echo_echo             "go run /echo/main.go"   6 days ago          Exited (2) 15 hours ago                                       echo_echo_1
+      81e3a724ae7c        example/echo:latest   "go run /echo/main.go"   12 days ago         Exited (2) 15 hours ago                                       fumi23
+      $ docker container exec master ls /usr/share/jenkins
+      jenkins.war
+      ref
+
+3. Jenkins のバージョンが古く、SSH Slaves plugin が使えなかったので、 Docker コンテナ内の Jenkins をバージョンアップする。
+
+    .. code-block:: console
+
+      $ docker container exec -u 0 -it master bash
+      root@91ede878960a:/# wget http://updates.jenkins-ci.org/download/war/2.138.3/jenkins.war
+      --2018-11-18 06:21:47--  http://updates.jenkins-ci.org/download/war/2.138.3/jenkins.war
+      Resolving updates.jenkins-ci.org (updates.jenkins-ci.org)... 52.202.51.185
+      Connecting to updates.jenkins-ci.org (updates.jenkins-ci.org)|52.202.51.185|:80... connected.
+      HTTP request sent, awaiting response... 302 Found
+      Location: http://mirrors.jenkins-ci.org/war-stable/2.138.3/jenkins.war [following]
+      --2018-11-18 06:21:47--  http://mirrors.jenkins-ci.org/war-stable/2.138.3/jenkins.war
+      Resolving mirrors.jenkins-ci.org (mirrors.jenkins-ci.org)... 52.202.51.185
+      Reusing existing connection to updates.jenkins-ci.org:80.
+      HTTP request sent, awaiting response... 302 Found
+      Location: http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable/2.138.3/jenkins.war [following]
+      --2018-11-18 06:21:48--  http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable/2.138.3/jenkins.war
+      Resolving ftp.yz.yamagata-u.ac.jp (ftp.yz.yamagata-u.ac.jp)... 133.24.248.18, 133.24.248.16, 133.24.248.19, ...
+      Connecting to ftp.yz.yamagata-u.ac.jp (ftp.yz.yamagata-u.ac.jp)|133.24.248.18|:80... connected.
+      HTTP request sent, awaiting response... 200 OK
+      Length: 75733340 (72M)
+      Saving to: ‘jenkins.war’
+
+      jenkins.war                                        100%[===============================================================================================================>]  72.22M  3.97MB/s    in 14s
+
+      2018-11-18 06:22:01 (5.30 MB/s) - ‘jenkins.war’ saved [75733340/75733340]
+
+      root@91ede878960a:/# ls -la
+      total 74032
+      drwxr-xr-x   1 root root     4096 Nov 18 06:21 .
+      drwxr-xr-x   1 root root     4096 Nov 18 06:21 ..
+      -rwxr-xr-x   1 root root        0 Nov 18 05:03 .dockerenv
+      drwxr-xr-x   1 root root     4096 Jul 17 16:20 bin
+      drwxr-xr-x   2 root root     4096 Jun 26 12:03 boot
+      drwxr-xr-x   5 root root      340 Nov 18 05:03 dev
+      lrwxrwxrwx   1 root root       33 Jul 17 06:16 docker-java-home -> /usr/lib/jvm/java-8-openjdk-amd64
+      drwxr-xr-x   1 root root     4096 Nov 18 05:03 etc
+      drwxr-xr-x   2 root root     4096 Jun 26 12:03 home
+      -rw-r--r--   1 root root 75733340 Nov  9 01:03 jenkins.war
+      drwxr-xr-x   1 root root     4096 Jul 16 00:00 lib
+      drwxr-xr-x   2 root root     4096 Jul 16 00:00 lib64
+      drwxr-xr-x   2 root root     4096 Jul 16 00:00 media
+      drwxr-xr-x   2 root root     4096 Jul 16 00:00 mnt
+      drwxr-xr-x   2 root root     4096 Jul 16 00:00 opt
+      dr-xr-xr-x 187 root root        0 Nov 18 05:03 proc
+      drwx------   2 root root     4096 Jul 16 00:00 root
+      drwxr-xr-x   3 root root     4096 Jul 16 00:00 run
+      drwxr-xr-x   1 root root     4096 Jul 17 03:13 sbin
+      drwxr-xr-x   2 root root     4096 Jul 16 00:00 srv
+      dr-xr-xr-x  13 root root        0 Nov 18 05:03 sys
+      drwxrwxrwt   1 root root     4096 Nov 18 05:04 tmp
+      drwxr-xr-x   1 root root     4096 Jul 16 00:00 usr
+      drwxr-xr-x   1 root root     4096 Jul 17 16:20 var
+      root@91ede878960a:/# mv ./jenkins.war /usr/share/jenkins
+      root@91ede878960a:/# chown jenkins:jenkins /usr/share/jenkins/jenkins.war
+      root@91ede878960a:/# exit
+      exit
+      $ docker-compose restart
+      Restarting master  ... done
+      Restarting slave01 ... done
+
+4. ``slave01`` ノードを追加して、 SSH の設定をする。
+
+
+参考サイト
+^^^^^^^^^^
+ありがとうございました!!
+- https://medium.com/@jimkang/how-to-start-a-new-jenkins-container-and-update-jenkins-with-docker-cf628aa495e9

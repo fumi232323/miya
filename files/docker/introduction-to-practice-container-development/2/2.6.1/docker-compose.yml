@@ -1,0 +1,25 @@
+# ===================================
+# 2.6.3 Jenkins Slave コンテナを作る
+# ===================================
+version: "3"
+services:
+  # Master コンテナ
+  master:
+    container_name: master
+    image: jenkins:latest       # Docker Hub に登録されている Jenkins の公式イメージを利用する
+    ports:                      # ポートフォワーディングを指定する
+      - 9000:8080
+    volumes:                    # ホスト・コンテナ間でファイルを共有する仕組み
+      - ./jenkins_home:/var/jenkins_home    # ホストの `./jenkins_home` に、Jenkins コンテナの `/var/jenkins_home` をマウント
+    links:
+      - slave01                 # これで、 master から slave01 で名前解決できるようになる
+    # pw: bb91ef8ec2e74cc3a99802a79a84df6b
+
+  # Slave コンテナ
+  slave01:
+    container_name: slave01
+    image: jenkinsci/ssh-slave    # SSH 接続する Slave 用途の Docker イメージを利用する
+    environment:
+      - JENKINS_SLAVE_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCd2Nn7oT9F9JoWCWuTyjkmADAMrNZzZGCBZjT118QD3518CsaTlLmE8ikqloO9rCi58Vgi9nBhSJ0SGGG+Vx8mBZlG5V/ucq3TlbHq9Epdr8mJAaJ44F3CWNso97WIBzDEdtCAYQPRO1kEjlGBOr2JAAkYPyNEDe9o2Ta02FzqLu4WpqmqopgS6xsDWqj3BfQoJ+MCLeej865zSETyFojz8BbYH03LMhzBUeb6Yfa9LtIJgpp0KMab9p3hKlV5Es6jIVhYlVBw2NokWkOaq7KjlwTj0pmUGYIBNpgg+POpkaMt42dVNiqYxvbEzz9ZaejM3T/DIORIhKtYnnANwN4b
+      # ↑これで Master からの SSH 接続が許可された状態になる
+      # Slave コンテナの `~/.ssh/authorized_keys ` ファイルに Master コンテナの SSH 公開鍵が追加される。
