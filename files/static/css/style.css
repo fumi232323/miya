@@ -434,6 +434,9 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 .article-content .text h3 {
   font-size: 2rem;
 }
+.article-content .text h4 {
+  font-size: 1.8rem;
+}
 .article-content .text ul,
 .article-content .text ol {
   margin: 16px 0;
