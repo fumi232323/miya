@@ -12,7 +12,15 @@ Python テストのメモ
 ===================
 
 
-.. contents:: 目次
+.. raw:: html
+
+  <details><summary>目次</summary>
+
+.. contents::
+
+.. raw:: html
+
+  </details>
 
 
 pytest

@@ -406,8 +406,12 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   font-size: 1.6rem;
   font-family: 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", serif;
 }
+.article-content .text .topic-title {
+  display: none;
+}
 .article-content .text .toc-backref {
   color: #333;
+  display: block;
 }
 .article-content .text h1,
 .article-content .text h2,
@@ -421,7 +425,7 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
   margin-bottom: 2.4rem;
 }
 .article-content .text h1,
-.article-content .text .topic-title {
+.article-content .text summary {
   font-size: 2.8rem;
   border-bottom: 1px solid #aaa;
   padding-bottom: 0.1em;
@@ -467,7 +471,8 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 .article-content .text a {
   word-wrap: break-word;
 }
-.article-content .text a:hover {
+.article-content .text a:hover,
+.article-content .text summary:hover {
   opacity: 0.5 /* ハイライトのような効果 */;
   transition: all 0.3s /* 0.3sec かけて変化する */;
 }

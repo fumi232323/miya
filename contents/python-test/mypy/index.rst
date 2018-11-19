@@ -12,7 +12,16 @@ mypy
 ====
 
 
+.. raw:: html
+
+  <details>
+    <summary>目次</summary>
+
 .. contents::
+
+.. raw:: html
+
+  </details>
 
 
 リファレンス

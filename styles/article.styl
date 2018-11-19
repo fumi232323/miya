@@ -77,8 +77,12 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
   font-size 1.6rem
   font-family title-text-fonts
 
+  .topic-title
+    display none
+
   .toc-backref
     color #333333
+    display block
 
   h1, h2, h3, h4, h5, h6
     font-weight 700
@@ -86,7 +90,7 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
     margin-top 2.2em
     margin-bottom 2.4rem
 
-  h1, .topic-title
+  h1, summary
     font-size 2.8rem
     border-bottom 1px solid #aaaaaa
     padding-bottom 0.1em
@@ -110,7 +114,7 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
       list-style-type disc
 
       li
-        list-style-type: circle;
+        list-style-type circle
 
         li
           list-style-type square
@@ -127,7 +131,7 @@ title-text-fonts = 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", s
   a
     word-wrap break-word
 
-  a:hover
+  a:hover, summary:hover
     opacity 0.5           /* ハイライトのような効果 */
     transition all 0.3s   /* 0.3sec かけて変化する */
 

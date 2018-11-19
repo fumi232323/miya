@@ -11,7 +11,16 @@
 1. Docker の基礎
 ================
 
+.. raw:: html
+
+  <details>
+    <summary>目次</summary>
+
 .. contents::
+
+.. raw:: html
+
+  </details>
 
 1.1 Docker とは
 ===============
