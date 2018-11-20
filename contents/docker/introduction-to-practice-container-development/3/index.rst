@@ -11,7 +11,17 @@
 3. 実用的なコンテナの構築とデプロイ
 ===================================
 
+.. raw:: html
+
+  <details>
+    <summary>目次</summary>
+
 .. contents::
+
+.. raw:: html
+
+  </details>
+
 
 3.1 アプリケーションとコンテナの粒度
 ====================================
@@ -41,7 +51,7 @@
 
 3. Dockerfile を作る
 
-    .. code-block:: ini
+    .. code-block:: docker
 
       # ubuntu:16.04 イメージをベースにイメージをビルドする
       FROM ubuntu:16.04
@@ -310,15 +320,219 @@ Docker コンテナ内のディレクトリをディスクに永続化するた�
 Data Volume の作成
 ^^^^^^^^^^^^^^^^^^
 
-.. code-block:: sh
+.. code-block:: console
 
   $ docker container run [options] -v ホスト側ディレクトリ:コンテナ側ディレクトリ リポジトリ名[:タグ] [コマンド] [コマンド引数]
 
 
 - コンテナの中で画像ファイルを作成する。
 
-.. code-block:: sh
+  .. code-block:: console
 
-  $ docker container run -v ${PWD}:/workspace gihyodocker/imagemagick:latest convert -size 100x100 xc:#000000 /workspace/gihyo.jpg
+    $ docker container run -v ${PWD}:/workspace gihyodocker/imagemagick:latest convert -size 100x100 xc:#000000 /workspace/gihyo.jpg
+    Unable to find image 'gihyodocker/imagemagick:latest' locally
+    latest: Pulling from gihyodocker/imagemagick
+    ff3a5c916c92: Pull complete
+    9a79e6da4633: Pull complete
+    d46751c713a4: Pull complete
+    Digest: sha256:883299973ff2e6183ddc7e042d5b44e5c0bbe24b746ab382fba558a42284cb02
+    Status: Downloaded newer image for gihyodocker/imagemagick:latest
 
 
+  - Data Volume を通じて、イメージを更新することなく、ホスト側で編集したファイルをコンテナに共有できる
+  - Data Volume を設定していると、初回のコンテナ作成時にホスト側の指定したパスで共有されて、コンテナ停止・廃棄後も残る
+  - ホストの特定のパスに依存しているし、ホスト側の Data Volume への誤操作によってアプリケーションに副作用が起きることもあるので、ポータビリティの面では課題のある手法であることも覚えておきましょう
+
+
+3.4.2 Data Volume コンテナ
+--------------------------
+- コンテナのデータ永続化手法として推奨されている
+- Data Volume コンテナによって Data Volume への操作がカプセル化されるため、ホストをあまり意識せずに Data Volume を利用できる
+- コンテナ内のアプリケーションとデータの密結合が緩和される
+- アプリケーションコンテナと Data Valume コンテナの付け替えや移行をスムーズに行うことができる
+
+  - コンテナ間でディレクトリを共有する
+  - データだけを持つコンテナ
+  - Data Volume コンテナの Volume は Docker の管理領域であるホスト側の ``/var/lib/docker/valumes/`` 以下に配置されている
+  - Docker の管理下にあるディレクトリのみに影響する
+  - コンテナに与える影響を最小限に抑えられる
+  - Data Volume コンテナは Volume への仲介役としての役割を持つ
+  - Volume を必要とするコンテナは、ホスト側のその場所を知る必要はなく、ディレクトリを提供してくれる Data Volume コンテナのみ知っていればよい
+
+
+MySQL のデータを Data Volume コンテナに保持する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Data Volume コンテナの Dockerfile を用意する
+
+    .. code-block:: docker
+
+      # 最小限のOSの機能を備えた非常に軽量なOS。しばしばベースのDockerイメージとして利用される
+      FROM busybox
+
+      VOLUME /var/lib/mysql
+
+      CMD ["bin/true"]
+
+
+2. Data Volume コンテナのイメージをビルドする
+
+    .. code-block:: bash
+
+      # Dockerfile のあるディレクトリで実行する
+      $ docker image build -t example/mysql-data:latest .
+      Sending build context to Docker daemon  2.048kB
+      Step 1/3 : FROM busybox
+      latest: Pulling from library/busybox
+      90e01955edcd: Pull complete
+      Digest: sha256:2a03a6059f21e150ae84b0973863609494aad70f0a80eaeb64bddd8d92465812
+      Status: Downloaded newer image for busybox:latest
+       ---> 59788edf1f3e
+      Step 2/3 : VOLUME /var/lib/mysql
+       ---> Running in 1ab0898c94a2
+      Removing intermediate container 1ab0898c94a2
+       ---> 1f5d663c0ce1
+      Step 3/3 : CMD ["bin/true"]
+       ---> Running in 1fddf68af7c2
+      Removing intermediate container 1fddf68af7c2
+       ---> e4bdb5df5b5d
+      Successfully built e4bdb5df5b5d
+      Successfully tagged example/mysql-data:latest
+
+
+3. Data Volume コンテナを実行する (コンテナは廃棄されない限りディスクに保持される)
+
+    .. code-block:: console
+
+      $ docker container run -d --name mysql-data example/mysql-data:latest
+      edaab85b9b7e3505c93d8d8947ef2b868cd620765a439bbb77a93c92cfa96373
+
+4. MySQL コンテナを実行する
+
+    .. code-block:: console
+
+      $ docker container run -d --rm --name mysql \
+        -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" \
+        -e "MYSQL_DATABASE=volume_test" \
+        -e "MYSQL_USER=example" \
+        -e "MYSQL_PASSWORD=example" \
+        --volumes-from mysql-data \
+        mysql:5.7
+
+      Unable to find image 'mysql:5.7' locally
+      5.7: Pulling from library/mysql
+      a5a6f2f73cd8: Pulling fs layer
+      936836019e67: Pulling fs layer
+      283fa4c95fb4: Pull complete
+      1f212fb371f9: Pull complete
+      e2ae0d063e89: Pull complete
+      5ed0ae805b65: Pull complete
+      0283dc49ef4e: Pull complete
+      a7905d9fbbea: Pull complete
+      cd2a65837235: Pull complete
+      5f906b8da5fe: Pull complete
+      e81e51815567: Pull complete
+      Digest: sha256:c23e9bfe66eeffc990cf6bce4bb0e9c5c85eb908170f3b3dde3e9a12c5a91689
+      Status: Downloaded newer image for mysql:5.7
+      f702db74f9156b20595fe04d3df09b2f0008bf707bb9b2c32db593fd33941342
+
+
+5. 実行中の mysql コンテナに root アカウントでログイン (パスワードは空)
+
+    .. code-block:: console
+
+      $ docker container exec -it mysql mysql -u root -p volume_test
+
+      Enter password:
+      Welcome to the MySQL monitor.  Commands end with ; or \g.
+      Your MySQL connection id is 2
+      Server version: 5.7.24 MySQL Community Server (GPL)
+
+      Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+      Oracle is a registered trademark of Oracle Corporation and/or its
+      affiliates. Other names may be trademarks of their respective
+      owners.
+
+      Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+      mysql> CREATE TABLE user(
+          ->   id int PRIMARY KEY AUTO_INCREMENT,
+          ->   name VARCHAR(255)
+          -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+      Query OK, 0 rows affected (0.01 sec)
+
+      mysql> INSERT INTO user (name) VALUES ('gihyo'), ('docker'), ('Solomon Hykes');
+      Query OK, 3 rows affected (0.01 sec)
+      Records: 3  Duplicates: 0  Warnings: 0
+
+
+6. mysql コンテナを停止する ( --rm オプションをつけて実行したため、停止すると廃棄される)
+
+    .. code-block:: console
+
+      $ docker container stop mysql
+      mysql
+
+
+7. 再度、新しい mysql コンテナを実行する。
+
+    .. code-block:: console
+
+      $ docker container run -d --rm --name mysql \
+        -e "MYSQL_ALLOW_EMPTY_PASSWORD=yes" \
+        -e "MYSQL_DATABASE=volume_test" \
+        -e "MYSQL_USER=example" \
+        -e "MYSQL_PASSWORD=example" \
+        --volumes-from mysql-data \
+        mysql:5.7
+
+      f180d4063914b43b7d522324eb5abf5640b67d6342cb353b04ea77f85d347dcb
+
+
+8. 実行中の mysql コンテナに root アカウントでログイン (パスワードは空) すると、先ほどのデータが残っている!!
+
+    .. code-block:: console
+
+      $ docker container exec -it mysql mysql -u root -p volume_test
+
+      Enter password:
+      Reading table information for completion of table and column names
+      You can turn off this feature to get a quicker startup with -A
+
+      Welcome to the MySQL monitor.  Commands end with ; or \g.
+      Your MySQL connection id is 2
+      Server version: 5.7.24 MySQL Community Server (GPL)
+
+      Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+      Oracle is a registered trademark of Oracle Corporation and/or its
+      affiliates. Other names may be trademarks of their respective
+      owners.
+
+      Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+      mysql> SELECT * FROM user;
+      +----+---------------+
+      | id | name          |
+      +----+---------------+
+      |  1 | gihyo         |
+      |  2 | docker        |
+      |  3 | Solomon Hykes |
+      +----+---------------+
+      3 rows in set (0.00 sec)
+
+
+データのエクスポートとリストア
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Data Volume は同一 Docker ホスト内でのみ有効
+- 他の Docker ホストで使いたいときは、 Data Volume コンテナからデータをファイルとしてホストにエクスポートする
+
+  .. code-block:: console
+
+    $ docker container run -v `${PWD}`:/tmp \
+      --volumes-from mysql-data \
+      busybox \
+      tar cvzf /tmp/mysql-backup.tar.gz /var/lib/mysql
+
+  - これ (できなかったけど) はちょっと不便なので、Volume Plugins がいろいろある
