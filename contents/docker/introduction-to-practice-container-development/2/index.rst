@@ -137,7 +137,7 @@ Go 言語で簡単な Web サーバーを書き、 Docker コンテナ嬢で動�
 
 - Dockerfile
 
-  .. code-block:: python
+  .. code-block:: docker
 
     FROM golang:1.9
 
