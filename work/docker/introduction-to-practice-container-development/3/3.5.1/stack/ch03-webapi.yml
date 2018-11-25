@@ -1,0 +1,27 @@
+version: "3"
+services:
+  nginx:
+    image: gihyodocker/nginx-proxy:latest
+    deploy:
+      replicas: 3                  # レプリカ数
+      placement:                   # コンテナの配置戦略
+        constraints: [node.role != manager]  # manager 以外のノードにコンテナを配置する
+    environment:
+      SERVICE_PORTS: 80            # HAProxy が Service を見つけ出すため
+      BACKEND_HOST: echo_api:8080  # リクエストの転送先
+    depends_on:
+      - api
+    networks:
+      - ch03
+  api:
+    image: registry:5000/example/echo:latest
+    deploy:
+      replicas: 3                  # レプリカ数
+      placement:                   # コンテナの配置戦略
+        constraints: [node.role != manager]  # manager 以外のノードにコンテナを配置する
+    networks:
+      - ch03
+
+networks:
+  ch03:
+    external: true

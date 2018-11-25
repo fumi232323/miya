@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  haproxy:
+    image: dockercloud/haproxy
+    networks:
+      - ch03
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: global                           # 特定のコンテナをクラスタ上の全ノードに配置できる設定
+      placement:
+        constraints:
+          - node.role == manager  # manager ノードだけに配置する
+    ports:
+      - "80:80"                          # ポートフォワード
+      - 1936:1936  # for stats page (basic auth. stats:stats)
+
+networks:
+  ch03:
+    external: true

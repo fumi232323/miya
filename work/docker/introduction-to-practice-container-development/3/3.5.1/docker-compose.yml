@@ -1,0 +1,67 @@
+version: "3"
+services:
+  registry:  # Docker レジストリ役のコンテナ
+    container_name: registry
+    image: registry:2.6
+    ports:
+      - 5000:5000
+    volumes:
+      - "./registry-data:/var/lib/registry"  # 永続化のため、ホストにマウント
+
+  manager:  # Swarm クラスタ全体を制御する役割
+    container_name: manager
+    image: docker:18.05.0-ce-dind
+    privileged: true
+    tty: true
+    ports:
+      - 8000:80
+      - 9000:9000
+    depends_on:
+      - registry
+    expose:
+      - 3375
+    command: "--insecure-registry registry:5000"  # HTTP でも利用できるようにしている
+    volumes:
+      - "./stack:/stack"
+
+  worker01:  # ノードの役割
+    container_name: worker01
+    image: docker:18.05.0-ce-dind
+    privileged: true
+    tty: true
+    depends_on:
+      - manager
+      - registry
+    expose:
+      - 7946
+      - 7946/udp
+      - 4789/udp
+    command: "--insecure-registry registry:5000"
+
+  worker02:  # ノードの役割
+    container_name: worker02
+    image: docker:18.05.0-ce-dind
+    privileged: true
+    tty: true
+    depends_on:
+      - manager
+      - registry
+    expose:
+      - 7946
+      - 7946/udp
+      - 4789/udp
+    command: "--insecure-registry registry:5000"
+
+  worker03:  # ノードの役割
+    container_name: worker03
+    image: docker:18.05.0-ce-dind
+    privileged: true
+    tty: true
+    depends_on:
+      - manager
+      - registry
+    expose:
+      - 7946
+      - 7946/udp
+      - 4789/udp
+    command: "--insecure-registry registry:5000"

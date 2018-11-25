@@ -3,3 +3,4 @@ outputs
 _depends.pickle
 waiting
 work/docker/introduction-to-practice-container-development/2/2.6.1/jenkins_home
+work/docker/introduction-to-practice-container-development/3/3.5.1/registry-data

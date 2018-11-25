@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-11-18
+   :date: 2018-11-25
    :title: Docker/Kubernetes 実践コンテナ開発入門 --- 3. 実用的なコンテナの構築とデプロイ
    :category: docker
    :tags:
@@ -536,3 +536,580 @@ MySQL のデータを Data Volume コンテナに保持する
       tar cvzf /tmp/mysql-backup.tar.gz /var/lib/mysql
 
   - これ (できなかったけど) はちょっと不便なので、Volume Plugins がいろいろある
+
+
+3.5 コンテナ配置戦略
+====================
+多くのリクエストをさばく必要のある実用的なシステムでは複数のコンテナを複数のホストに配置させる必要がある
+
+- コンテナをどのように配置すべきか
+- 複数の Docker ホストをどのように制御すべきか
+
+
+3.5.1 Docker Swarm
+------------------
+Docker Swarm:
+
+- 複数の Docker ホストを束ねてクラスタ化するためのツール
+- コンテナオーケストレーションシステムのひとつ
+- 複数のッホストを意識せずにクラスタを透過的に操作できる
+
+
+.. list-table:: Docker でのコンテナオーケストレーションに関わる名称
+  :widths: auto
+  :header-rows: 1
+
+  * - 名称
+    - 役割
+    - 対応するコマンド
+  * - Compose
+    - 複数コンテナを使う Docker アプリケーションの管理 (主にシングルホスト)
+    - docker-compose
+  * - Swarm
+    - クラスタの構築や管理を担う (主にマルチホスト)
+    - docker swarm
+  * - Service
+    - Swarm前提、クラスタ内の Service (1つ以上のコンテナの集まり) を管理する
+    - docker service
+  * - Stack
+    - Swarm前提、複数の Service をまとめたアプリケーション全体の管理
+    - docker stack
+
+複数の Docker ホストを用意し、 Swarm クラスタを構築する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Docker in Docker (dind):
+
+- Docker ホストとして機能する Docker コンテナを複数個立てられる
+- Docker ホストをコンテナで入れ子にできる
+
+
+1. ``docker-compose.yml`` を作成する。
+
+    .. code-block:: yaml
+
+        version: "3"
+        services:
+          registry:  # Docker レジストリ役のコンテナ
+            container_name: registry
+            image: registry:2.6
+            ports:
+              - 5000:5000
+            volumes:
+              - "./registry-data:/var/lib/registry"  # 永続化のため、ホストにマウント
+
+          manager:  # Swarm クラスタ全体を制御する役割
+            container_name: manager
+            image: docker:18.05.0-ce-dind
+            privileged: true
+            tty: true
+            ports:
+              - 8000:80
+              - 9000:9000
+            depends_on:
+              - registry
+            expose:
+              - 3375
+            command: "--insecure-registry registry:5000"  # HTTP でも利用できるようにしている
+            volumes:
+              - "./stack:/stack"
+
+          worker01:  # ノードの役割
+            container_name: worker01
+            image: docker:18.05.0-ce-dind
+            privileged: true
+            tty: true
+            depends_on:
+              - manager
+              - registry
+            expose:
+              - 7946
+              - 7946/udp
+              - 4789/udp
+            command: "--insecure-registry registry:5000"
+
+          worker02:  # ノードの役割
+            container_name: worker02
+            image: docker:18.05.0-ce-dind
+            privileged: true
+            tty: true
+            depends_on:
+              - manager
+              - registry
+            expose:
+              - 7946
+              - 7946/udp
+              - 4789/udp
+            command: "--insecure-registry registry:5000"
+
+          worker03:  # ノードの役割
+            container_name: worker03
+            image: docker:18.05.0-ce-dind
+            privileged: true
+            tty: true
+            depends_on:
+              - manager
+              - registry
+            expose:
+              - 7946
+              - 7946/udp
+              - 4789/udp
+            command: "--insecure-registry registry:5000"
+
+
+2. Compose を実行する。
+
+    .. code-block:: bash
+
+      $ docker-compose up -d
+      ...
+      Creating registry ... done
+      Creating manager  ... done
+      Creating worker03 ... done
+      Creating worker01 ... done
+      Creating worker02 ... done
+
+      # 実行中のコンテナを確認する
+      $ docker container ls
+      CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                                              NAMES
+      cfffba103c8c        docker:18.05.0-ce-dind   "dockerd-entrypoint.…"   5 seconds ago       Up 4 seconds        2375/tcp, 4789/udp, 7946/tcp, 7946/udp                             worker03
+      272227e51007        docker:18.05.0-ce-dind   "dockerd-entrypoint.…"   5 seconds ago       Up 4 seconds        2375/tcp, 4789/udp, 7946/tcp, 7946/udp                             worker02
+      7190447651de        docker:18.05.0-ce-dind   "dockerd-entrypoint.…"   5 seconds ago       Up 4 seconds        2375/tcp, 4789/udp, 7946/tcp, 7946/udp                             worker01
+      a7e4b99c1ee7        docker:18.05.0-ce-dind   "dockerd-entrypoint.…"   6 seconds ago       Up 5 seconds        2375/tcp, 3375/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:8000->80/tcp   manager
+      3c0a564dbbac        registry:2.6             "/entrypoint.sh /etc…"   7 seconds ago       Up 6 seconds        0.0.0.0:5000->5000/tcp                                             registry
+
+3. manager コンテナを、 Swarm の manager に設定する。
+
+    .. code-block:: bash
+
+      $ docker container exec -it manager docker swarm init
+      # JOIN トークンが発行される
+      # Docker ホストを Swarm クラスタの worker として登録するには、この JOIN トークンが必要
+      Swarm initialized: current node (7f20ikf4s04lp9abasnvm8euz) is now a manager.
+
+      To add a worker to this swarm, run the following command:
+
+          docker swarm join --token SWMTKN-1-55tobs2vcs0odcbd40q5m42y9obs08wgm4200q9udctpv25gu6-4oy23esi800n14wwoddl7ma4n 172.27.0.3:2377
+
+      To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+4. JOIN トークンを利用して、3つのノードを Swarm クラスタに worker として登録する。
+
+    .. code-block:: bash
+
+      # manager と全ての worker コンテナは Compose で作成されたデフォルトネットワーク上で実行されているので、お互いをコンテナ名で名前解決できる
+      $ docker container exec -it worker01 docker swarm join \
+        --token SWMTKN-1-55tobs2vcs0odcbd40q5m42y9obs08wgm4200q9udctpv25gu6-4oy23esi800n14wwoddl7ma4n manager:2377
+      This node joined a swarm as a worker.
+      $ docker container exec -it worker02 docker swarm join \
+        --token SWMTKN-1-55tobs2vcs0odcbd40q5m42y9obs08wgm4200q9udctpv25gu6-4oy23esi800n14wwoddl7ma4n manager:2377
+      This node joined a swarm as a worker.
+      $ docker container exec -it worker03 docker swarm join \
+        --token SWMTKN-1-55tobs2vcs0odcbd40q5m42y9obs08wgm4200q9udctpv25gu6-4oy23esi800n14wwoddl7ma4n manager:2377
+      This node joined a swarm as a worker.
+
+      # ノードが追加されたか確認する。
+      $ docker container exec -it manager docker node ls
+      ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+      u8crbubyz85jmnpou9zgnc1wf     272227e51007        Ready               Active                                  18.05.0-ce
+      ww80hcmlzbga1cprtz0cmmuu2     7190447651de        Ready               Active                                  18.05.0-ce
+      7f20ikf4s04lp9abasnvm8euz *   a7e4b99c1ee7        Ready               Active              Leader              18.05.0-ce
+      j91gerxg4um0r05wukdfoqwo1     cfffba103c8c        Ready               Active                                  18.05.0-ce
+
+
+Docker レジストリにイメージを Push する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Docker イメージにタグをつける
+
+    .. code-block:: bash
+
+      # docker image tag example/echo:latest [レジストリのホスト/]リポジトリ名[:タグ]
+      # レジストリのホスト = イメージの push 先および pull 先のレジストリ
+      $ docker image tag example/echo:latest localhost:5000/example/echo:latest
+
+
+2. ホストから、 registry コンテナにイメージを push する
+
+    .. code-block:: bash
+
+      # 2章で作ったイメージを push する
+      $ docker image push localhost:5000/example/echo:latest
+      The push refers to repository [localhost:5000/example/echo]
+      b2aff6d696c0: Preparing
+      f18abb5d7b45: Preparing
+      186d94bd2c62: Preparing
+      b2aff6d696c0: Pushed
+      e7dc337030ba: Pushed
+      920961b94eb3: Pushed
+      fa0c3f992cbd: Pushed
+      ce6466f43b11: Pushed
+      719d45669b35: Pushed
+      3b10514a95be: Pushed
+      latest: digest: sha256:834be6348517746b53f3d44c56b580a0cea74161b86426cc006b1c066c48e047 size: 2417
+
+
+3. worker01 コンテナ上で registry コンテナから Docker イメージを pull する。
+
+    .. code-block:: bash
+
+      # worker01 から registry で名前解決できる
+      $ docker container exec -it worker01 docker image pull registry:5000/example/echo:latest
+
+      # イメージを pull できたか確認する。
+      $ docker container exec -it worker01 docker image ls
+
+
+3.5.2 Service
+-------------
+
+- Service にレプリカ数の制御を指示すると、自動でコンテナを複製し、複数のノードにまたがって適切に配置してくれる。
+- スケールアウトが容易
+- ``docker container run`` の代わりにこれ
+
+
+Service を作成する。
+
+.. code-block:: console
+
+  $ docker container exec -it manager \
+    docker service create --replicas 1 --publish 8000:8000 --name echo registry:5000/example/echo:latest
+
+Service の一覧を表示する。
+
+.. code-block:: console
+
+  $ docker container exec -it manager docker service ls
+  ID                  NAME                MODE                REPLICAS            IMAGE                               PORTS
+  uurtfoiovt5t        echo                replicated          1/1                 registry:5000/example/echo:latest   *:8000->8000/tcp
+
+
+該当サービスのコンテナ数を増減できる。
+
+.. code-block:: console
+
+  $ docker container exec -it manager docker service scale echo=6
+  echo scaled to 6
+  overall progress: 6 out of 6 tasks
+  1/6: running   [==================================================>]
+  2/6: running   [==================================================>]
+  3/6: running   [==================================================>]
+  4/6: running   [==================================================>]
+  5/6: running   [==================================================>]
+  6/6: running   [==================================================>]
+  verify: Service converged
+
+Swarm クラスタ上で実行されているコンテナを確認する。
+
+.. code-block:: bash
+
+  $ docker container exec -it manager docker service ps echo | grep Running
+  # Service によって Swarm クラスタのノードに分散して配置されていることがわかる
+  q5rd4bezklf2        echo.1              registry:5000/example/echo:latest   a7e4b99c1ee7        Running             Running 8 minutes ago
+  cgt98m1d4395        echo.2              registry:5000/example/echo:latest   cfffba103c8c        Running             Running about a minute ago
+  u5120nxk830w        echo.3              registry:5000/example/echo:latest   7190447651de        Running             Running 2 minutes ago
+  9ejgtkum844u        echo.4              registry:5000/example/echo:latest   272227e51007        Running             Running about a minute ago
+  mqkivzbb5j3e        echo.5              registry:5000/example/echo:latest   272227e51007        Running             Running about a minute ago
+  7xdlngpoid1i        echo.6              registry:5000/example/echo:latest   a7e4b99c1ee7        Running             Running 2 minutes ago
+
+
+デプロイした service は ``docker service rm`` サービス名 で削除できる。
+
+.. code-block:: console
+
+  $ docker container exec -it manager docker service rm echo
+  echo
+  $ docker container exec -it manager docker service ls
+  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+
+
+3.5.3 Stack
+-----------
+Stack: 複数の Service をグルーピングした単位であり、アプリケーションの全体の構成を定義する。
+
+- Service は１つのアプリケーションイメージしか扱うことができないが、複数の Service が強調して動作することで成立するアプリケーションも多くある
+- これを解決する上位概念が Stack
+- Stack は複数の Service を扱うことができる
+- Stack が扱うアプリケーションの粒度は Compose と同等
+- Stack はいわば Swarm 上でスケールイン・スケールアウトや constraint が可能になった Compose という位置付け
+- Stack によってデプロイされる Service 群は overlay ネットワークに所属する
+- overlay ネットワークとは複数の Docker ホストにデプロイされているコンテナ群を同じネットワークに配置させることができる技術
+- overlay ネットワークによって、 Docker ホスト間を越えたコンテナ間通信が可能となる
+
+
+1. overlay ネットワークを作成する。
+
+    .. code-block:: bash
+
+      # ch03 という名前にする
+      $ docker container exec -it manager docker network create --driver=overlay --attachable ch03
+      ts9rcnez3tl5oi4z9p0qbc030
+
+2. Stack を作成する。
+
+    .. code-block:: yaml
+
+        version: "3"
+        services:
+          nginx:
+            image: gihyodocker/nginx-proxy:latest
+            deploy:
+              replicas: 3                  # レプリカ数
+              placement:                   # コンテナの配置戦略
+                constraints: [node.role != manager]  # manager 以外のノードにコンテナを配置する
+            environment:
+              BACKEND_HOST: echo_api:8080  # リクエストの転送先
+            depends_on:
+              - api
+            networks:
+              - ch03
+          api:
+            image: registry:5000/example/echo:latest
+            deploy:
+              replicas: 3                  # レプリカ数
+              placement:                   # コンテナの配置戦略
+                constraints: [node.role != manager]  # manager 以外のノードにコンテナを配置する
+            networks:
+              - ch03
+
+        networks:
+          ch03:
+            external: true
+
+
+    .. list-table:: docker stack のサブコマンド
+      :widths: auto
+      :header-rows: 1
+
+      * - stack サブコマンド
+        - 内容
+      * - deploy
+        - 新規に Stack をデプロイ、または更新する
+      * - ls
+        - デプロイされている Stack の一覧を表示する
+      * - ps
+        - Stack によってデプロイされているコンテナの一覧を表示する
+      * - rm
+        - デプロイされている Stack を削除する
+      * - services
+        - Stack 内の Service 一覧を表示する
+
+
+Stack をデプロイする
+^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker stack deploy [options] stack名
+
+- ``-c``: Stack 定義ファイルへのパス
+
+
+3. stack を echo という Stack 名でデプロイする。
+
+    .. code-block:: bash
+
+      # stack ディレクトリは manager コンテナの /stack にマウントされている
+      $ docker container exec -it manager docker stack deploy -c /stack/ch03-webapi.yml echo
+      Creating service echo_nginx
+      Creating service echo_api
+
+
+デプロイされた Stack を確認する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker stack services [options] Stack名
+
+4. echo スタックの Service 一覧を表示する。
+
+    .. code-block:: console
+
+      $ docker container exec -it manager docker stack services echo
+      ID                  NAME                MODE                REPLICAS            IMAGE                               PORTS
+      lbomogfj0q65        echo_nginx          replicated          3/3                 gihyodocker/nginx-proxy:latest
+      wh6ddqk6q4zj        echo_api            replicated          3/3                 registry:5000/example/echo:latest
+
+
+Stack でデプロイされたコンテナを確認する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
+
+  $ docker stack ps [options] Stack名
+
+
+5. echo スタックでデプロイされたコンテナの一覧を表示する。
+
+    .. code-block:: console
+
+      $ docker container exec -it manager docker stack ps echo
+
+
+visualizer で配置されているコンテナを可視化する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. ``visualizer.yml`` を作成する。
+
+    .. code-block:: yaml
+
+      version: "3"
+
+      services:
+        app:
+          image: dockersamples/visualizer
+          ports:
+            - "9000:8080"                          # ポートフォワード (manager <=> visualizer)
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+          deploy:
+            mode: global                           # 特定のコンテナをクラスタ上の全ノードに配置できる設定
+            placement:
+              constraints: [node.role == manager]  # manager ノードだけに配置する
+
+
+2. Stack としてデプロイする。
+
+    .. code-block:: console
+
+      $ docker container exec -it manager docker stack deploy -c /stack/visualizer.yml visualizer
+      Creating network visualizer_default
+      Creating service visualizer_app
+
+
+3. http://localhost:9000/
+
+    .. figure :: visualizer.png
+
+
+Stack の削除
+^^^^^^^^^^^^^
+
+デプロイした Stack を Service ごと削除する。
+
+.. code-block:: console
+
+  $ docker container exec -it manager docker stack rm echo
+  Removing service echo_api
+  Removing service echo_nginx
+
+
+3.5.4 Service を Swarm クラスタ外から利用する
+----------------------------------------------
+複数のコンテナが複数のノードに分散して配置されている Service にホストからアクセスする。
+
+- Service クラスタ外からのトラフィックを、目的の Service に転送するためのプロキシサーバーを置く
+
+  - ``HAProxy``:
+
+    - プロキシサーバー
+    - 外部から Service へアクセスするための橋渡し (ingress) をする
+    - Service が配置されているノードへのロードバランシングをする
+
+
+Swarm クラスタ外から echo_nginx の Service にアクセスする
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. ``ch03-ingress.yml`` を作成する。
+
+    .. code-block:: yaml
+
+      version: "3"
+
+      services:
+        haproxy:
+          image: dockercloud/haproxy
+          networks:
+            - ch03
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+          deploy:
+            mode: global                           # 特定のコンテナをクラスタ上の全ノードに配置できる設定
+            placement:
+              constraints:
+                - node.role == manager  # manager ノードだけに配置する
+          ports:
+            - "80:80"                          # ポートフォワード
+            - 1936:1936  # for stats page (basic auth. stats:stats)
+
+      networks:
+        ch03:
+          external: true
+
+2. ``ch03-webapi.yml`` の、 nginx の環境変数に ``SERVICE_PORTS`` を追加する。
+
+    .. code-block:: yaml
+
+      version: "3"
+      services:
+        nginx:
+          image: gihyodocker/nginx-proxy:latest
+          deploy:
+            replicas: 3                  # レプリカ数
+            placement:                   # コンテナの配置戦略
+              constraints: [node.role != manager]  # manager 以外のノードにコンテナを配置する
+          environment:
+            SERVICE_PORTS: 80            # HAProxy が Service を見つけ出すため
+            BACKEND_HOST: echo_api:8080  # リクエストの転送先
+          depends_on:
+            - api
+          networks:
+            - ch03
+        api:
+          image: registry:5000/example/echo:latest
+          deploy:
+            replicas: 3                  # レプリカ数
+            placement:                   # コンテナの配置戦略
+              constraints: [node.role != manager]  # manager 以外のノードにコンテナを配置する
+          networks:
+            - ch03
+
+      networks:
+        ch03:
+          external: true
+
+
+3. ``ch03-webapi.yml`` を echo Stack としてデプロイする。
+
+    .. code-block:: console
+
+      $ docker container exec -it manager docker stack deploy -c /stack/ch03-webapi.yml echo
+      Creating service echo_nginx
+      Creating service echo_api
+
+
+4. ``ch03-ingress.yml`` を ingress Stack としてデプロイする。
+
+    .. code-block:: console
+
+      $ docker container exec -it manager docker stack deploy -c /stack/ch03-ingress.yml ingress
+      Creating service ingress_haproxy
+
+
+5. Service の配置を確認する。
+
+    .. code-block:: console
+
+      $ docker container exec -it manager docker service ls
+      ID                  NAME                MODE                REPLICAS            IMAGE                               PORTS
+      11wu48dvb9s0        echo_api            replicated          3/3                 registry:5000/example/echo:latest
+      pyov2dftee9g        echo_nginx          replicated          3/3                 gihyodocker/nginx-proxy:latest
+      nxxu04tsdqql        ingress_haproxy     global              1/1                 dockercloud/haproxy:latest          *:80->80/tcp, *:1936->1936/tcp
+      sqoaqpzkr2g5        visualizer_app      global              1/1                 dockersamples/visualizer:latest     *:9000->8080/tcp
+
+
+6. echo_nginx にアクセスできるようになる。
+
+    .. code-block:: console
+
+      $ curl http://localhost:8000/
+      Hello Docker!!
+
+
+Docker Swarm まとめ
+-------------------
+- Service はレプリカ数 (コンテナの数) を制御することで容易にコンテナを複製でき、複数のノードに配置できるため、スケールアウトへの親和性が高い
+- Service によって管理される複数のレプリカは Service 名で名前解決でき、かつ、 Service へのトラフィックはレプリカへ分散される。
+- Swarm クラスタ外から Swarm の Service を利用するには、 Service にトラフィックを分散するためのプロキシを用意する。
+- Stack は、複数の Service をグルーピングでき、複数の Service で形成されるアプリケーションのデプロイに役立つ。
