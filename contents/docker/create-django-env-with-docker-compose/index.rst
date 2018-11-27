@@ -12,6 +12,18 @@ Docker Compose で Django 環境をつくる
 =====================================
 
 
+.. raw:: html
+
+  <details>
+    <summary>目次</summary>
+
+.. contents::
+
+.. raw:: html
+
+  </details>
+
+
 ガイド
 ======
 - `Quickstart: Compose and Django <https://docs.docker.com/compose/django/>`_
@@ -163,7 +175,22 @@ https://docs.docker.com/docker-for-mac/install/
       WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 
 
-5. Docker コンテナ (db と web) を実行する
+5. ``settings.py`` に DATABASE を定義する。
+
+    .. code-block:: python
+
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'postgres',
+                'USER': 'postgres',
+                'HOST': 'db',
+                'PORT': 5432,
+            }
+        }
+
+
+6. Docker コンテナ (db と web) を実行する
 
     .. code-block:: bash
 
@@ -248,14 +275,14 @@ https://docs.docker.com/docker-for-mac/install/
       web_1  | Quit the server with CONTROL-C.
 
 
-6. アクセスする。
+7. アクセスする。
 
     http://localhost:3236/
 
   .. figure :: hello-django.png
 
 
-7. 実行中の コンテナを list する。
+8. 実行中の コンテナを list する。
 
     .. code-block:: bash
 
@@ -265,7 +292,7 @@ https://docs.docker.com/docker-for-mac/install/
       2994f0092cd4        postgres            "docker-entrypoint.s…"   41 minutes ago      Up 41 minutes       5432/tcp                 fff_db_1
 
 
-8. 安全に shutdown する。
+9. 安全に shutdown する。
 
     .. code-block:: bash
 
