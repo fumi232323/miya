@@ -1,5 +1,5 @@
 .. article::
-   :title: Docker Compose で Django 環境をつくる
+   :title: Docker Compose で Django/PostgreSQL 環境をつくる
    :date: 2018-11-26
    :category: docker
    :tags:
@@ -7,9 +7,9 @@
    :draft: false
 
 
-=====================================
-Docker Compose で Django 環境をつくる
-=====================================
+================================================
+Docker Compose で Django/PostgreSQL 環境をつくる
+================================================
 
 
 .. raw:: html
