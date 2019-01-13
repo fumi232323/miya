@@ -220,6 +220,30 @@ Docker Compose で Django/MySQL 環境をつくる
     と書いてあるので、言に従い自分用設定は ``/etc/mysql/conf.d/`` に記述した。
 
 
+ディレクトリ構成
+----------------
+
+.. code-block:: shell
+
+  $ tree fu
+
+  fu
+  ├── Dockerfile-mysql
+  ├── Dockerfile-web
+  ├── docker-compose.yml
+  ├── fu
+  │   ├── __init__.py
+  │   ├── urls.py
+  │   └── wsgi.py
+  ├── manage.py
+  ├── mysql
+  │   └── conf.d
+  │       └── mysql.cnf
+  ├── requirements.txt
+  └── settings
+      └── _.py
+
+
 使い方メモ
 ==========
 
