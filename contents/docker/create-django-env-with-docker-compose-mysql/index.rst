@@ -71,7 +71,7 @@ Docker Compose で Django/MySQL 環境をつくる
       $ docker-compose --pull=true run web django-admin.py startproject fu .
 
     - ``--pull=true`` : FROM に指定したベースイメージがローカルにすでに存在していても、改めて Docker Hub に取得しにいく
-
+    - ↑今やったら使えなかった。最新イメージを再取得するには、どうすればいいんだろう。
 
 2. settings に MySQL の設定を書き足す
 
