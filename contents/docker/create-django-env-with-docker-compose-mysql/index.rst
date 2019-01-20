@@ -61,10 +61,11 @@ Docker Compose で Django/MySQL 環境をつくる
 環境構築
 ========
 
+
 最初の1回だけ実行
 -----------------
 
-1. web のほうの docker image をビルドして、 startproject する。
+1. web・db の docker image をビルド -> web で startproject する。
 
     .. code-block:: bash
 
@@ -88,7 +89,7 @@ Docker Compose で Django/MySQL 環境をつくる
           }
       }
 
-3. docker-compose up して mysql コンテナ用のイメージをビルド、 mysql・web コンテナを起動する
+3. docker-compose up して、 web・db コンテナを起動する
 
     .. code-block:: bash
 
@@ -109,6 +110,8 @@ Docker Compose で Django/MySQL 環境をつくる
 
       $ docker-compose down
 
+
+.. _config-files:
 
 設定ファイル
 ------------
