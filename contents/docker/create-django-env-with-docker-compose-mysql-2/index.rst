@@ -421,6 +421,13 @@ settings は環境ごとに分けたいので、 ``apps`` 配下に settings デ
 
 - Django から MySQL に接続する際は、 ``caching_sha2_password`` に対応していない ``mysqlclient`` を使っているようなので、それでも接続できるように、
 - ``default-authentication-plugin=mysql_native_password`` の指定が必要 (なんだと思う)
+- 後から該当ユーザーの ``default-authentication-plugin`` を変更するにはこう↓
+
+  .. code-block:: shell
+
+    ALTER USER 'fufu'
+      IDENTIFIED WITH mysql_native_password
+      BY 'fufu';
 
 
 **※2**: skip-host-cache, skip-name-resolve について
