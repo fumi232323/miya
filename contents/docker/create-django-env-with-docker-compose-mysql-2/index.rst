@@ -131,7 +131,7 @@ Docker Compose で Django/MySQL 環境をつくる
     default-character-set=utf8mb4
 
 
-- あとの設定ファイルは :jinja:`{{ content.link_to("../create-django-env-with-docker-compose-mysql/index.rst", fragment='config-files') }}` と同じ
+- あとの設定ファイルは :jinja:`{{ content.link_to("../create-django-env-with-docker-compose-mysql/index.rst") }}` と同じ
 
 
 2. 最初の1回だけ実行
