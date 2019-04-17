@@ -200,15 +200,27 @@ mysql-connector-python のインストール
   :header-rows: 1
   :stub-columns: 1
 
-  * - 項目
+  * -
     - mysqlclient
     - PyMySQL
     - mysql-connector-python
-  * - 準備
-    - ただの Python3 だけでは済まない
+  * - 準備 ※1
+    - ただの Python3 だけでは済まない、 ``python3-dev`` をインストールする必要がある
+
+        - ``python3`` パッケージ (実態は ``python3.7`` とか) は実行に必要なものだけが入る
+        - ``Python.h`` などのヘッダファイルや ``python3.7.a`` などのスタティックリンクライブラリは入っていない
+        - これらは、 ``python3-dev`` (``python3.7-dev``) でインストールされる。実行に必要がないため別れている。
+        - mysqlclient は C拡張を含んでるのでビルドする必要がある
+        - ビルドには ``Python.h`` などのヘッダファイルが必要
+        - 昨今は C拡張であってもビルド済の wheel が pypi にあがってたりしてインストール時にビルドが必要ないものも増えているが、 mysqlclient は SSL のリンクの都合上 wheel を提供していないよう
+
     - ただの Python3 だけで済む
+
+      - PyMySQL は C拡張を含まずピュア Python なのでビルドする必要がない
+      - この場合 SSL はpythonをインストールしたときにリンクしたものを使う
+
     - ただの Python3 だけで済む
-  * - [Note] Aborted connection ※1
+  * - [Note] Aborted connection ※2
     - ``log_warnings = 2`` でも出ない
     - ``log_warnings = 2`` だと出る, 1 だと出ない
     - ``log_warnings = 2`` だと出る, 1 だと出ない
@@ -225,9 +237,18 @@ mysql-connector-python のインストール
       - Django もこれをおすすめしていたので、できればこれが良いが、インストールのところがどうしてもひっかかる。
     - install が手軽でよい。 ``Aborted connection`` はあまり気にしなくて良さそうでもあるし、 SQLA さんも二番目におすすめしている (空想) のでこれがいいかなあ。
     - install が手軽でよい。ほかはとくになし。
+  * - aodag さんに教えてもらったことメモ
+    -
+    - **sqlalchemy で使うなら pymysql 使っとけ（断言）**
+    -
 
 
-※1. [Note] Aborted connection ...
+※ 1.
+------
+``python3-dev`` が必要 or 不要な理由も aodag さんに教えていただきました。ありがとうございました。
+
+
+※ 2. [Note] Aborted connection ...
 ------------------------------------
 - `B.6.2.10 Communication Errors and Aborted Connections <https://dev.mysql.com/doc/refman/5.7/en/communication-errors.html>`_
 
