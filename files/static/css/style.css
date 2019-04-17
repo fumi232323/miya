@@ -217,6 +217,10 @@ a:active {
 .item-test .title::before {
   border-color: #dd9b9d;
 }
+.item-sqlalchemy,
+.item-sqlalchemy .title::before {
+  border-color: #f5dfa6;
+}
 /* 色は、16.癒しを感じる柔らかなイメージから選び中
 http://www.hp-stylelink.com/news/2013/07/20130708.php
 */
