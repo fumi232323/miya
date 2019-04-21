@@ -1,5 +1,5 @@
 .. article::
-   :date: 2018-10-11
+   :date: 2019-04-20
    :title: Python のメモ
    :category: python
    :tags:
@@ -13,11 +13,29 @@ Python のメモ
 
 
 リファレンス
-=============
+------------
 - `頭文字別索引: <https://docs.python.org/ja/3/genindex.html>`_
 - `Pythonモジュール索引 <https://docs.python.org/ja/3/py-modindex.html>`_
 - `組み込み関数 <https://docs.python.org/ja/3/library/functions.html#built-in-functions>`_
 - `Python 標準ライブラリ <https://docs.python.org/ja/3/library/index.html>`_
+
+
+ローカルに HTTP サーバーを立てる
+--------------------------------
+
+.. code-block:: python
+
+  # ポートを指定 (現在のディレクトリのファイルを提供)
+  $ python -m http.server 8000
+  # バインドするアドレスを指定 (現在のディレクトリのファイルを提供)
+  $ python -m http.server 8000 --bind 127.0.0.1
+  # ファイルを提供するディレクトリを指定
+  $ python -m http.server --directory /tmp/
+
+
+リファレンス
+^^^^^^^^^^^^
+`http.server --- HTTP サーバ <https://docs.python.org/ja/3/library/http.server.html>`_
 
 
 ユーザー定義例外
