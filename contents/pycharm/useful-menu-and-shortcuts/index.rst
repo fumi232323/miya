@@ -20,21 +20,25 @@ PyCharm ショートカットと便利メニュー
 
 ショートカット
 =================================
-- Find in Path: ``Cmd + Shift + F``
-- ファイル名でファイルを探す: ``Cmd + Shift + O``
-- Preferences (設定/環境設定) ダイアログを開く: ``Cmd + ,``
-- 定義ジャンプ: ``Cmd + b``
-- 定義ジャンプから戻る: ``Cmd + [``
-- 利用箇所を検索:
+:Find in Path: ``command + Shift + F``
+:ファイル名でファイルを探す: ``command + Shift + O``
+:Search Everywhere (クイック検索): ``shift shift``
+:行コメント: ``command + /``
+:ブロックコメント: ``command + option + /``
+:ファイルの先頭へジャンプ: ``command + fn + ←``
+:Preferences (設定/環境設定) ダイアログを開く: ``command + ,``
+:定義ジャンプ: ``command + b``
+:定義ジャンプから戻る: ``command + [``
+:利用箇所を検索:
 
   -  関数の定義（defの行）にカーソル合わせて ``Find Usages``
-  - ``Option + fn + F7``
+  - ``option + fn + F7``
 
-- もっと良いやり方を教えてくれる: ``Option + Enter``
-- Search Everywhere (文字列検索？) : ``Shift Shift``
-- アクションを探す: ``Cmd + Shift + A``
-- 行コメント: ``Cmd + /``
-- ブロックコメント: ``Cmd + Option + /``
+:もっと良いやり方を教えてくれる: ``option + enter``
+:アクションを探す: ``command + shift + A``
+:コードの補完: ``control + space``
+:コードの自動整形: ``command + option + L``
+
 
 
 便利メニュー
