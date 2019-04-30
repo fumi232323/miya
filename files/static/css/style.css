@@ -8,7 +8,7 @@ html {
 }
 body {
   padding: 30px;
-  background-color: #fdf5e6;
+  background-color: #ffe4e1;
   color: #333;
   font-size: 1.2rem;
   font-family: Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
@@ -82,7 +82,7 @@ a:active {
  * -------------------------------- */
 .item-header {
   text-align: center;
-  border-color: #6c3a24;
+  border-color: #752100;
 }
 .logo {
   width: 100%;
@@ -111,14 +111,14 @@ a:active {
 }
 .nav-category a {
   display: inline-block /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */;
-  color: #6c3a24;
+  color: #752100;
 }
 .nav-category a::after {
   content: '';
   display: block /* ブロックレベルの::after擬似要素を作る */;
   width: 0 /* 通常時には見えないように横幅を 0 にする */;
   margin: 6px auto 0 /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */;
-  border-bottom: 1px solid #6c3a24;
+  border-bottom: 1px solid #752100;
   transition: width 0.3s ease-in-out;
 /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
 /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
@@ -220,6 +220,10 @@ a:active {
 .item-sqlalchemy,
 .item-sqlalchemy .title::before {
   border-color: #f5dfa6;
+}
+.item-mysql,
+.item-mysql .title::before {
+  border-color: #ebeddf;
 }
 /* 色は、16.癒しを感じる柔らかなイメージから選び中
 http://www.hp-stylelink.com/news/2013/07/20130708.php
@@ -407,7 +411,7 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 .article-content .text {
   margin-top: 6.6rem;
   line-height: 1.9;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-family: 'Vollkorn', "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", serif;
 }
 .article-content .text .topic-title {
@@ -436,11 +440,12 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 }
 .article-content .text h2 {
   font-size: 2.2rem;
-  border-bottom: 1px dotted #aaa;
+  border-bottom: 1px solid #aaa;
   padding-bottom: 0.1em;
 }
 .article-content .text h3 {
   font-size: 2rem;
+  border-bottom: 1px dotted #aaa;
 }
 .article-content .text h4 {
   font-size: 1.8rem;
