@@ -29,6 +29,7 @@ Django: View
 - `Django documentation > クラスベースビュー <https://docs.djangoproject.com/ja/2.2/topics/class-based-views/>`_
 - `Django documentation > ビルトインのクラスベースビュー API <https://docs.djangoproject.com/ja/2.2/ref/class-based-views/>`_
 - `現場で使える Django の教科書 <https://www.amazon.co.jp/dp/B07GK7BWB7/>`_
+- `くろのて > [Django]ジェネリックビューってなんなんだよ <http://note.crohaco.net/2015/django-genericview/>`_
 - crohaco さん、 shimizukawa さん、 tell-k さん
 
 
