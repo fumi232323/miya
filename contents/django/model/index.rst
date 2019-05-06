@@ -150,11 +150,25 @@ on_delete
 - それ以前のバージョンでは、デフォルトで ``CASCADE``
 
 
+UserManager
+-----------
+- `Django documentation > django.contrib.auth > マネージャメソッド <https://docs.djangoproject.com/ja/2.2/ref/contrib/auth/#manager-methods>`_
+- `Django documentation > Django の認証方法のカスタマイズ > 完全な具体例 <https://docs.djangoproject.com/ja/2.2/topics/auth/customizing/#a-full-example>`_
+- https://github.com/django/django/blob/master/django/contrib/auth/models.py#L131
+- こうすると登録できる
+
+    .. code-block:: python
+
+      objects = MyUserManager()
+
+- TODO: これは Model のところじゃなくて、認証のところかもしれない。いったんここに置いておく。
+
+
 Django ORM
 ==========
 
 * 単体のオブジェクトを保存・更新するような行レベルのクエリ操作: モデルオブジェクトのメソッドを利用する
-* データベースのテーブルレベルのクエリ操作: モデルの「モデルマネージャー」 ( ``objects`` ) を利用する
+* データベースのテーブルレベルのクエリ操作: モデルの「モデルマネージャー」 ( ``objects`` ) を経由してクエリセットAPI のメソッドを利用する
 
   * モデルマネージャーは通常、モデルクラスに ``objects`` という名前で保存されている
 
