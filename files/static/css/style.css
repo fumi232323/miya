@@ -435,7 +435,7 @@ http://www.hp-stylelink.com/news/2013/07/20130708.php
 .article-content .text h1,
 .article-content .text summary {
   font-size: 2.8rem;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 2px dotted #aaa;
   padding-bottom: 0.1em;
 }
 .article-content .text h2 {
