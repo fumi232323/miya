@@ -8,7 +8,7 @@ html {
 }
 body {
   padding: 30px;
-  background-color: #ffe4e1;
+  background-color: #f0f8ff;
   color: #333;
   font-size: 1.2rem;
   font-family: Griffy, "Sawarabi Mincho", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
@@ -82,7 +82,7 @@ a:active {
  * -------------------------------- */
 .item-header {
   text-align: center;
-  border-color: #752100;
+  border-color: #191970;
 }
 .logo {
   width: 100%;
@@ -111,14 +111,14 @@ a:active {
 }
 .nav-category a {
   display: inline-block /* a要素の幅をリンクテキストと同じに保ちつつ子要素の%指定を有効にする。 */;
-  color: #752100;
+  color: #191970;
 }
 .nav-category a::after {
   content: '';
   display: block /* ブロックレベルの::after擬似要素を作る */;
   width: 0 /* 通常時には見えないように横幅を 0 にする */;
   margin: 6px auto 0 /* リンクテキストとの間隔をあける。左右に auto を指定して中央寄せにする */;
-  border-bottom: 1px solid #752100;
+  border-bottom: 1px solid #191970;
   transition: width 0.3s ease-in-out;
 /* ホバーしたときに横幅の変化がアニメーションするよう、 transition プロパティに width を指定。 */
 /* ease-in-out: タイミング関数のキーワード。線が伸びる始まりと終わりで伸びる速度を緩めることができる。 */
